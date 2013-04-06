@@ -1,0 +1,6 @@
+#h1 Hello
+-if user_signed_in?
+  =current_user.name
+%a{:href => "/auth/facebook"} Thru Facebook
+%a{:href => "/auth/linkedin"} Thru LinkedIn
+%a{:href => "/auth/twitter"} Thru Twitter

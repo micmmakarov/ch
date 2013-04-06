@@ -20,11 +20,13 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem "haml-rails"
 gem 'jquery-rails'
 gem "angular-rails"
 gem 'devise'
 gem 'omniauth'
 gem "omniauth-facebook"
+gem "omniauth-twitter"
 gem 'omniauth-linkedin'
 
 
