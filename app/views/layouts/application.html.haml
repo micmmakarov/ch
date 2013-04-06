@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title Kucheka
+    = stylesheet_link_tag    'http://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700'
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    -#%link{:href => "http://fonts.googleapis.com/css?family=Delius+Swash+Caps", :rel => "stylesheet", :type => "text/css"}
+    = csrf_meta_tags
+  %body{'ng-app' => 'Kucheka'}
+    .navbar
+      .navbar-inner
+        %h2 Kucheka
+        .navbar-userinfo.pull-right
+          -if user_signed_in?
+            =current_user.name
+
+    %div{'ng-controller' => "KuchekaCtrl"}
+      = yield
