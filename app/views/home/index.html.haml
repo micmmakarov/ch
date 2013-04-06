@@ -1,6 +1,18 @@
-#h1 Hello
--if user_signed_in?
-  =current_user.name
-%a{:href => "/auth/facebook"} Thru Facebook
-%a{:href => "/auth/linkedin"} Thru LinkedIn
-%a{:href => "/auth/twitter"} Thru Twitter
+%header#overview.jumbotron.subhead
+  .container
+    %h1 Kucheka
+    %p.lead Get the Laughs You Deserve
+
+%div.container
+  .row
+    .span1
+    .span10
+      %h3 Get started!
+      %ul.row
+        %li.span3
+          %a{:href => "/auth/facebook"} Connect via Facebook
+        %li.span3
+          %a{:href => "/auth/linkedin"} Connect via LinkedIn
+        %li.span3
+          %a{:href => "/auth/twitter"} Connect via Twitter
+    .span1

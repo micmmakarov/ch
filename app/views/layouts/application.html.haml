@@ -6,15 +6,18 @@
     = render "shared/preload_data"
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
-    -#%link{:href => "http://fonts.googleapis.com/css?family=Delius+Swash+Caps", :rel => "stylesheet", :type => "text/css"}
     = csrf_meta_tags
   %body{'ng-app' => 'Kucheka'}
     .navbar
       .navbar-inner
-        %h2 Kucheka
-        .navbar-userinfo.pull-right
-          -if user_signed_in?
-            =current_user.name
+        %h2.brand
+          %a{:href => "#"}
+            Kucheka
+        %ul.nav.pull-right
+          %li.navbar-userinfo
+            %a{:href => '#'}
+              -if user_signed_in?
+                =current_user.name
 
     %div{'ng-controller' => "KuchekaCtrl"}
       = yield
