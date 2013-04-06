@@ -22,7 +22,18 @@ end
 
 gem 'jquery-rails'
 gem "angular-rails"
+gem 'devise'
+gem 'omniauth'
+gem "omniauth-facebook"
+gem 'omniauth-linkedin'
 
+
+gem 'pry'
+gem 'pry-nav'
+
+group :production do
+  gem 'pg'
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
