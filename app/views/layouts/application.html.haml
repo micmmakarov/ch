@@ -15,6 +15,9 @@
           Kucheka
         %ul.nav.pull-right
           %li
+            %form.navbar-search
+              %input{:type => "text", :class => "search-query", :placeholder => "Search"}
+          %li
             %a{:href => '/about', 'ng-class' => "{active:isActive('/about')}"} About
           %li.navbar-userinfo
             %a{:href => '#'}
