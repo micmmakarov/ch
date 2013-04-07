@@ -19,10 +19,11 @@
               %input{:type => "text", :class => "search-query", :placeholder => "Search"}
           %li
             %a{:href => '/about', 'ng-class' => "{active:isActive('/about')}"} About
-          %li.navbar-userinfo
-            %a{:href => '/profile'}
-              -if user_signed_in?
+          -if user_signed_in?
+            %li.navbar-userinfo
+              %a{:href => '/profile'}
                 =current_user.name
+                %i.icon-pencil.icon-white
 
     %div{'ng-controller' => "KuchekaCtrl"}
       = yield
