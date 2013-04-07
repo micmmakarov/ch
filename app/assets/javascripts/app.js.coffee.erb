@@ -5,6 +5,11 @@ Kucheka.controller "KuchekaCtrl", KuchekaCtrl = ($scope, $http, $resource, $rout
   $scope.isActive = (route) ->
     route is $location.path()
 
+Kucheka.controller "KuchekaUserCtrl", KuchekaUserCtrl = ($scope, $http, $resource, $routeParams, $location) ->
+  
+  $scope.name = "Vasily"
+  $scope.bio = "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec id elit non mi porta gravida at eget metus."
+
 Kucheka.config ($routeProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
   $routeProvider.when("/",
@@ -13,6 +18,6 @@ Kucheka.config ($routeProvider, $locationProvider) ->
   ).when("/about",
     templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
   ).when("/:user_name",
-      templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
-      controller: "KuchekaCtrl"
+      templateUrl: "<%= asset_path 'angular/partials/profile.tpl.html' %>"
+      controller: "KuchekaUserCtrl"
   ).otherwise redirectTo: "/"
