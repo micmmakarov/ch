@@ -21,12 +21,9 @@ Kucheka.controller "KuchekaUserCtrl", KuchekaUserCtrl = ($scope, $http, $resourc
   user = User.get(
     id: 1
   , ->
-    #user.abc = true
-    #user.$update()
+    $scope.user = user
   )
 
-  $scope.name = user.name
-  $scope.bio = "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec id elit non mi porta gravida at eget metus."
 
 Kucheka.config ($routeProvider, $locationProvider) ->
     $locationProvider.html5Mode(true)

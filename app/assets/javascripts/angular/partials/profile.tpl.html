@@ -1,13 +1,13 @@
 <div ng-controller="KuchekaUserCtrl" class="user-profile">
-  <header class="user-hero" style="background-image: url('/assets/bg-comedy-club.jpg')">
+  <header class="user-hero" style="background-image: url('{{user.cover_image_url}}')">
     <div class="container">
       <div class="row">
         <div class="span5">
         </div>
         <div class="span7">
-          <h3>{{name}}</h3>
-          <p class="subhead">{{bio}}</p>
-          <p>{{bio}}</p>
+          <h3>{{user.name}}</h3>
+          <p class="subhead">{{user.bio}}</p>
+          <p>{{user.bio}}</p>
         </div>
       </div>
     </div>
