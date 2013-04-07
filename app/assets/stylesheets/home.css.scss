@@ -31,6 +31,9 @@ figure {
 .navbar {
   .nav {
     margin: 5px 10px 0 0;
+    i {
+      vertical-align: top;
+    }
   }
   .navbar-inner {
     background: #050302;
