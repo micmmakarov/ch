@@ -6,7 +6,11 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    if params[:slug]
+      @user = User.find_by_slug(params[:slug])
+    else
+      @user = User.find(params[:id])
+    end
     render json: @user
   end
 
