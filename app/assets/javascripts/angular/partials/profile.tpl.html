@@ -1,8 +1,25 @@
-<div class="container" ng-controller="KuchekaUserCtrl">
-  <div class="row">
-    <div class="span12">
-      <h3>{{name}}</h3>
-      <p>{{bio}}</p>
+<div ng-controller="KuchekaUserCtrl" class="user-profile">
+  <header class="user-hero" style="background-image: url('/assets/bg-comedy-club.jpg')">
+    <div class="container">
+      <div class="row">
+        <div class="span5">
+        </div>
+        <div class="span7">
+          <h3>{{name}}</h3>
+          <p class="subhead">{{bio}}</p>
+          <p>{{bio}}</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="span10">
+        <p class="next-event"><span>Next Show:</span> Tues, May 11  /  San Francisco  @  Punchline</p>
+      </div>
+      <div class="span2">
+        <a href="#" class="btn btn-large btn-info">Get Tix</a>
+      </div>
     </div>
   </div>
 </div>

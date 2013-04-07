@@ -2,16 +2,31 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$main-blue: #00bff3;
+
 @import "bootstrap";
 @import "bootstrap-responsive";
 
 body {
-  font-family: Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
+  font: 20px Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
+}
+
+.btn-large {
+  font-size: 40px;
+  padding: 18px 25px;
 }
 
 .navbar {
+  .navbar-inner {
+    background: #050302;
+    border-radius: 0;
+    border-bottom: 1px solid #38322a;
+  }
   margin: 0;
   .brand {
+    color: $main-blue;
+    text-shadow: none;
+    font-size: 27px;
   }
 }
 .subhead {
@@ -27,4 +42,46 @@ body {
 }
 .jumbotron {
   background: url('/assets/bg-comedy-club.jpg') center center;
+}
+.user-hero {
+  background-position: center center;
+  color: #fff;
+  padding: 40px 0;
+  h3, p {
+    background: rgba(0,0,0,.85);
+  }
+  h3 {
+    font-size: 68px;
+    color: $main-blue;
+    display: inline-block;
+    line-height: 1;
+    padding: 0 12px 10px;
+  }
+  p {
+    padding: 7px 20px 10px;
+    &.subhead {
+      font-size: 36px;
+      &:before {
+        content: "\201C";
+        margin-left: -8px;
+        color: $main-blue;
+      }
+      &:after {
+        content: "\201D";
+        color: $main-blue;
+      }
+    }
+  }
+}
+.next-event {
+  font-size: 54px;
+  line-height: .9;
+  span {
+    color: $main-blue;
+  }
+}
+.user-profile {
+  .container {
+    padding: 40px 0;
+  }
 }
