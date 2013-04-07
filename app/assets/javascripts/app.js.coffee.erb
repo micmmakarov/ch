@@ -53,9 +53,10 @@ Kucheka.controller "KuchekaProfileCtrl", KuchekaProfileCtrl = ($scope, $http, $r
         , ((FPFile) ->
             window.i = FPFile
             $scope.user.cover_image_url = FPFile.url
-            $(".filepicker-file").val(FPFile.url)
+            $scope.$apply()
 
         ), (FPError) ->
+            alert "error"
             console.log FPError.toString()
 
 
