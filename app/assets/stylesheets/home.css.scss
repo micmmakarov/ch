@@ -13,6 +13,9 @@ body {
 a {
   color: $main-blue;
 }
+figure {
+  margin: 0;
+}
 
 .btn {
   font-size: 22px;
@@ -37,6 +40,9 @@ a {
     font-size: 27px;
   }
 }
+.container > .row {
+  margin-bottom: 20px;
+}
 .subhead {
   color: #fff;
   position: relative;
@@ -45,11 +51,18 @@ a {
     text-shadow: 0 1px 2px rgba(0,0,0,.5);
   }
   h1 {
-    font-size: 60px;
+    font-size: 68px;
+    margin-bottom: 25px;
+  }
+  .lead {
+    font-size: 36px;
   }
 }
 .jumbotron {
-  background: url('/assets/bg-comedy-club.jpg') center center;
+  background: url('/assets/bg-mic.jpg') center center;
+  .subhead {
+    padding: 100px 0;
+  }
 }
 .user-hero {
   background-position: center center;
@@ -92,11 +105,16 @@ a {
   .container.event-info {
     padding: 40px 0;
   }
-  .user-media {
-    background: #222 url('/assets/bg-tile-black.jpg');
-    padding: 40px 0;
-    color: #fff;
-    border-top: 4px #a5a5a5 solid;
+}
+.section-inverse {
+  background: #222 url('/assets/bg-tile-black.jpg');
+  padding: 40px 0;
+  color: #fff;
+  border-top: 4px #a5a5a5 solid;
+  hr {
+    border-top: 0;
+    border-bottom: 8px solid rgba(255,255,255,.5);
+    margin-top: 40px;
   }
 }
 .event-list {
@@ -124,6 +142,21 @@ a {
     margin: 0 0 20px;
     b {
       color: #fff;
+    }
+  }
+}
+.image-list {
+  figure {
+    img {
+      margin-bottom: 10px;
+    }
+    figcaption {
+      position: relative;
+      font-weight: 300;
+      .location {
+        float: right;
+        color: #676767;
+      }
     }
   }
 }
