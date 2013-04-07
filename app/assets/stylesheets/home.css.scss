@@ -160,6 +160,15 @@ figure {
     }
   }
 }
+.user-photo-gallery {
+  img {
+    margin-bottom: 10px;
+  }
+  .img-polaroid {
+    background-color: #353535;
+    border-color: #555;
+  }
+}
 .video-wrapper {
   position: relative;
   padding-bottom: 56.25%; /* 16:9 */
