@@ -147,6 +147,11 @@ figure {
 }
 .image-list {
   figure {
+    a {
+      &:hover {
+        opacity: .8;
+      }
+    }
     img {
       margin-bottom: 10px;
     }
