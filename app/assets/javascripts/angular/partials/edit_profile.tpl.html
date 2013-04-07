@@ -5,7 +5,7 @@
         <button ng-click="pickFile()">Choose a cover image</button>
         <img src="{{user.cover_image_url}}" width="auto" height="100">
         <p>Image: {{user.cover_image_url}}</p>
-        <input type="hidden" ng-model="user.cover_image_url">
+        <input class="filepicker-file" type="hidden" ng-model="user.cover_image_url">
         <textarea ng-model='user.bio'>
         </textarea>
         <input type="submit" value="Save">
