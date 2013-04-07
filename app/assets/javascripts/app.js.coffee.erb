@@ -1,12 +1,13 @@
 Kucheka = angular.module('Kucheka', ['ngResource'])
 filepicker.setKey('AffEtHmTETGO3pTJxeyo7z')
 
-Kucheka.controller "KuchekaCtrl", KuchekaCtrl = ($scope, $http, $resource, $routeParams, $location) ->
+Kucheka.controller "KuchekaCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
 
   $scope.isActive = (route) ->
     route is $location.path()
+  ]
 
-Kucheka.controller "KuchekaUserCtrl", KuchekaUserCtrl = ($scope, $http, $resource, $routeParams, $location) ->
+Kucheka.controller "KuchekaUserCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
   $scope.slug = $routeParams.slug
 
   User = $resource("/api/users/:id",
@@ -24,8 +25,9 @@ Kucheka.controller "KuchekaUserCtrl", KuchekaUserCtrl = ($scope, $http, $resourc
   , ->
     $scope.user = user
   )
+  ]
 
-Kucheka.controller "KuchekaProfileCtrl", KuchekaProfileCtrl = ($scope, $http, $resource, $routeParams, $location) ->
+Kucheka.controller "KuchekaProfileCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
     $scope.slug = $routeParams.slug
     $scope.saveForm = ->
       $scope.user.$update()
@@ -58,10 +60,9 @@ Kucheka.controller "KuchekaProfileCtrl", KuchekaProfileCtrl = ($scope, $http, $r
         ), (FPError) ->
             alert "error"
             console.log FPError.toString()
+  ]
 
-
-
-Kucheka.config ($routeProvider, $locationProvider) ->
+Kucheka.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
     $locationProvider.html5Mode(true)
     $routeProvider.when("/",
         templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
@@ -75,6 +76,4 @@ Kucheka.config ($routeProvider, $locationProvider) ->
         templateUrl: "<%= asset_path 'angular/partials/profile.tpl.html' %>"
         controller: "KuchekaUserCtrl"
     ).otherwise redirectTo: "/"
-
-
-
+  ]
