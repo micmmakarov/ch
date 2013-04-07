@@ -69,6 +69,10 @@ Kucheka.controller "KuchekaProfileCtrl", ["$scope", "$http", "$resource", "$rout
             console.log FPError.toString()
   ]
 
+
+
+
+
 Kucheka.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
     $locationProvider.html5Mode(true)
     $routeProvider.when("/",
@@ -78,6 +82,9 @@ Kucheka.config ["$locationProvider", "$routeProvider", ($locationProvider, $rout
         templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
     ).when("/profile",
         templateUrl: "<%= asset_path 'angular/partials/edit_profile.tpl.html' %>"
+        controller: "KuchekaProfileCtrl"
+    ).when("/my-events",
+        templateUrl: "<%= asset_path 'angular/partials/edit_events.tpl.html' %>"
         controller: "KuchekaProfileCtrl"
     ).when("/:slug",
         templateUrl: "<%= asset_path 'angular/partials/profile.tpl.html' %>"

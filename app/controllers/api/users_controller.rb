@@ -11,7 +11,7 @@ class Api::UsersController < ApplicationController
     else
       @user = User.find(params[:id])
     end
-    render json: @user
+    render json: @user.to_json(include_has)
   end
 
   def update
@@ -37,6 +37,7 @@ class Api::UsersController < ApplicationController
   end
 private
   def include_has
-    {:include => {:hello => {:only => :hi}}}
+    {:include => :events}
+    #=> {:only => :hi}
   end
 end
