@@ -11,5 +11,33 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :users_events
   has_and_belongs_to_many :events, :join_table => :users_events
+  before_save :generate_slug
+
+  def generate_slug
+    if self.slug.blank?
+      binding.pry
+      self.slug = to_slug(name)
+    end
+  end
+
+
+  def to_slug(str)
+    str.gsub! /['`]/,""
+
+    # @ --> at, and & --> and
+    str.gsub! /\s*@\s*/, " at "
+    str.gsub! /\s*&\s*/, " and "
+
+    #replace all non alphanumeric, underscore or periods with underscore
+    str.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '_'
+
+    #convert double underscores to single
+    str.gsub! /_+/,"_"
+
+    #strip off leading/trailing underscore
+    str.gsub! /\A[_\.]+|[_\.]+\z/,""
+
+    str
+  end
 
 end
