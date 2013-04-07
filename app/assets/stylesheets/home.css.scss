@@ -11,9 +11,14 @@ body {
   font: 20px Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
 }
 
+.btn {
+  font-size: 22px;
+  padding: 6px 18px;
+}
 .btn-large {
   font-size: 40px;
   padding: 18px 25px;
+  white-space: nowrap;
 }
 
 .navbar {
@@ -81,7 +86,41 @@ body {
   }
 }
 .user-profile {
-  .container {
+  .container.event-info {
     padding: 40px 0;
+  }
+  .user-media {
+    background: #222;
+    padding: 40px 0;
+    color: #fff;
+    border-top: 4px #a5a5a5 solid;
+  }
+}
+.event-list {
+  margin: 40px 0 0;
+  table {
+    tr {
+      border: 0;
+      border-bottom: 1px dashed #ccc;
+    }
+    td {
+      border: 0;
+      vertical-align: middle;
+      &:nth-child(4) {
+        width: 20%;
+      }
+    }
+  }
+}
+.contact-info {
+  font-weight: 300;
+  li {
+    line-height: 1.1;
+    list-style: none;
+    color: #999;
+    margin: 0 0 20px;
+    b {
+      color: #fff;
+    }
   }
 }
