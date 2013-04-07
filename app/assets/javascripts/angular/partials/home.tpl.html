@@ -5,7 +5,11 @@
   </div>
 </header>
 
-<div class="container">
+<div>
+    <li ng-repeat="user in users">
+        <p>{{user.name}}</p>
+    </li>
+<div class="container" >
   <div class="row image-list">
     <div class="span12">
       <h3>Featured Comedians</h3>
@@ -150,4 +154,6 @@
     </div>
     <div class="span1"></div>
   </div>
+</div>
+
 </div>

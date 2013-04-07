@@ -3,6 +3,19 @@ filepicker.setKey('AffEtHmTETGO3pTJxeyo7z')
 
 Kucheka.controller "KuchekaCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
 
+  User = $resource("/api/users/:id",
+    id: "@id"
+  ,
+    index:
+      method: 'GET'
+      isArray:true
+  )
+  users = User.index(
+    a:5
+  , ->
+    $scope.users = users
+  )
+
   $scope.isActive = (route) ->
     route is $location.path()
   ]
