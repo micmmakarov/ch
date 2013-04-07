@@ -1,15 +1,15 @@
 Kucheka = angular.module('Kucheka', ['ngResource'])
 
-Kucheka.controller "KuchekaCtrl", KuchekaCtrl = ($scope, $resource, $routeParams, $location) ->
+Kucheka.controller "KuchekaCtrl", KuchekaCtrl = ($scope, $http, $resource, $routeParams, $location) ->
   
   $scope.isActive = (route) ->
     route is $location.path()
 
-Kucheka.config ["$routeProvider", ($routeProvider) ->
+Kucheka.config ($routeProvider, $locationProvider) ->
+  $locationProvider.html5Mode(true)
   $routeProvider.when("/",
-    templateUrl: "<%= asset_path 'angular/partials/home.tpl.html.haml' %>"
+    templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
     controller: "KuchekaCtrl"
   ).when("/about",
     templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
   ).otherwise redirectTo: "/"
-]

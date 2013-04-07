@@ -10,10 +10,11 @@
   %body{'ng-app' => 'Kucheka'}
     .navbar
       .navbar-inner
-        %h2.brand
-          %a{:href => "#"}
-            Kucheka
+        %a.brand{:href => "/", 'ng-class' => "{active:isActive('/')}"}
+          Kucheka
         %ul.nav.pull-right
+          %li
+            %a{:href => '/about', 'ng-class' => "{active:isActive('/about')}"} About
           %li.navbar-userinfo
             %a{:href => '#'}
               -if user_signed_in?
