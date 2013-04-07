@@ -1,3 +1,5 @@
+Kucheka = angular.module('Kucheka', ['ngResource'])
+
 Kucheka.controller "KuchekaUserCtrl", KuchekaUserCtrl = ($scope, $http, $resource, $routeParams, $location) ->
   $scope.slug = $routeParams.slug
 

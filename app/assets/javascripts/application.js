@@ -3,7 +3,7 @@
 //= require angular.min
 //= require angular-resource
 //? require angle-up
-//= require ./app
 //= require_tree ./angular/controllers
 //= require_tree ./angular
+//= require ./app
 //= require_tree .
