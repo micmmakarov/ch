@@ -1,4 +1,4 @@
-Kucheka = angular.module('Kucheka', ['ngResource'])
+Kucheka = angular.module('Kucheka', ['ngResource', 'rails'])
 filepicker.setKey('AffEtHmTETGO3pTJxeyo7z')
 
 Kucheka.controller "KuchekaCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
@@ -41,30 +41,20 @@ Kucheka.controller "KuchekaUserCtrl", ["$scope", "$http", "$resource", "$routePa
   )
   ]
 
-Kucheka.controller "KuchekaProfileCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
+Kucheka.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
+  railsResourceFactory
+    url: "/api/users"
+    name: "user"
+]
+
+Kucheka.controller "KuchekaProfileCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", "User", ($scope, $http, $resource, $routeParams, $location, User) ->
     $scope.slug = $routeParams.slug
     $scope.saveForm = ->
       window.u = $scope.user
-      $scope.user.$update()
+      $scope.user.update()
 
-    User = $resource("/api/users/:id",
-      id: "@id"
-    ,
-      index:
-        method: 'GET'
-        isArray:true
-    )
-
-    User.prototype.$update = ->
-      user = @
-      $http.put("/api/users/#{user.id}", {user: user}).then (response) ->
-        console.log response
-
-    user = User.get(
-        id: current_user.id
-    , ->
-        $scope.user = user
-    )
+    User.get(id: current_user.id).then (result) ->
+      $scope.user = result
 
     $scope.pickFile = =>
         filepicker.pick

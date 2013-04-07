@@ -27,6 +27,7 @@ end
 gem "haml-rails"
 gem 'jquery-rails'
 gem "angularjs-rails"
+gem "angularjs-rails-resource"
 gem 'devise'
 gem 'omniauth'
 gem "omniauth-facebook"
