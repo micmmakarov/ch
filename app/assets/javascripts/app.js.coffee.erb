@@ -50,12 +50,15 @@ Kucheka.controller "KuchekaProfileCtrl", ["$scope", "$http", "$resource", "$rout
     User = $resource("/api/users/:id",
       id: "@id"
     ,
-      update:
-        method: 'PUT'
       index:
         method: 'GET'
         isArray:true
     )
+
+    User.prototype.$update = ->
+      user = @
+      $http.put("/api/users/#{user.id}", {user: user}).then (response) ->
+        console.log response
 
     user = User.get(
         id: current_user.id

@@ -26,14 +26,13 @@ end
 
 gem "haml-rails"
 gem 'jquery-rails'
-gem "angular-rails"
+gem "angularjs-rails"
 gem 'devise'
 gem 'omniauth'
 gem "omniauth-facebook"
 gem "omniauth-twitter"
 gem 'omniauth-linkedin'
 gem 'filepicker-rails'
-gem 'angularjs-rails-resource'
 
 gem 'pry'
 gem 'pry-nav'

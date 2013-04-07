@@ -1,9 +1,7 @@
 //= require jquery
 //= require jquery_ujs
-//= require angular.min
+//= require angular
 //= require angular-resource
-//? require angle-up
-//? require_tree ./angular/controllers
 //= require app
 //= require_tree ./angular
 //= require_tree .
