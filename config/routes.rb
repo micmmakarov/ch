@@ -9,11 +9,12 @@ Comedyhack::Application.routes.draw do
       resource :images
       resource :videos
     end
+    resources :users
     resource :images
     resource :videos
   end
 
 
   root :to => "home#index"
-  match '*path' => "home#index"
+  get '*path' => "home#index"
 end
