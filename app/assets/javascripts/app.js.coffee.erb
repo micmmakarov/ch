@@ -30,6 +30,7 @@ Kucheka.controller "KuchekaUserCtrl", ["$scope", "$http", "$resource", "$routePa
 Kucheka.controller "KuchekaProfileCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
     $scope.slug = $routeParams.slug
     $scope.saveForm = ->
+      window.u = $scope.user
       $scope.user.$update()
 
     User = $resource("/api/users/:id",
