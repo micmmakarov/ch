@@ -20,7 +20,7 @@
           %li
             %a{:href => '/about', 'ng-class' => "{active:isActive('/about')}"} About
           %li.navbar-userinfo
-            %a{:href => '#'}
+            %a{:href => '/profile'}
               -if user_signed_in?
                 =current_user.name
 
