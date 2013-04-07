@@ -1,4 +1,5 @@
-class Api::UsersController < ApplicationController
+class UsersController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
     @users = User.all
@@ -10,10 +11,18 @@ class Api::UsersController < ApplicationController
     render json: @user
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def new
+
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      render json: @user.to_json
+      render json: user.to_json
     else
       head :no_content
     end
@@ -28,7 +37,7 @@ class Api::UsersController < ApplicationController
   def destroy
 
   end
-private
+  private
   def include_has
     {:include => {:hello => {:only => :hi}}}
   end

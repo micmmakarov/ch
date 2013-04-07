@@ -14,7 +14,7 @@ Comedyhack::Application.routes.draw do
     resource :videos
   end
 
-
+  resource :users
   root :to => "home#index"
   get '*path' => "home#index"
 end

@@ -1,4 +1,5 @@
 Kucheka = angular.module('Kucheka', ['ngResource'])
+filepicker.setKey('AffEtHmTETGO3pTJxeyo7z')
 
 Kucheka.controller "KuchekaCtrl", KuchekaCtrl = ($scope, $http, $resource, $routeParams, $location) ->
 
@@ -24,6 +25,39 @@ Kucheka.controller "KuchekaUserCtrl", KuchekaUserCtrl = ($scope, $http, $resourc
     $scope.user = user
   )
 
+Kucheka.controller "KuchekaProfileCtrl", KuchekaProfileCtrl = ($scope, $http, $resource, $routeParams, $location) ->
+    $scope.slug = $routeParams.slug
+    $scope.saveForm = ->
+      $scope.user.$update()
+
+    User = $resource("/api/users/:id",
+      id: "@id"
+    ,
+      update:
+        method: 'PUT'
+      index:
+        method: 'GET'
+        isArray:true
+    )
+
+    user = User.get(
+        id: current_user.id
+    , ->
+        $scope.user = user
+    )
+
+    $scope.pickFile = =>
+        filepicker.pick
+            mimetypes: ["image/*", "text/plain"]
+            services: ["COMPUTER", "FACEBOOK", "GMAIL"]
+        , ((FPFile) ->
+            window.i = FPFile
+            $scope.user.cover_image_url = FPFile.url
+
+        ), (FPError) ->
+            console.log FPError.toString()
+
+
 
 Kucheka.config ($routeProvider, $locationProvider) ->
     $locationProvider.html5Mode(true)
@@ -32,6 +66,9 @@ Kucheka.config ($routeProvider, $locationProvider) ->
         controller: "KuchekaCtrl"
     ).when("/about",
         templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
+    ).when("/profile",
+        templateUrl: "<%= asset_path 'angular/partials/edit_profile.tpl.html' %>"
+        controller: "KuchekaProfileCtrl"
     ).when("/:slug",
         templateUrl: "<%= asset_path 'angular/partials/profile.tpl.html' %>"
         controller: "KuchekaUserCtrl"
