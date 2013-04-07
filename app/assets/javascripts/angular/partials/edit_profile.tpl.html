@@ -1,18 +1,38 @@
 <div ng-controller="KuchekaProfileCtrl">
-    Hello, {{user.name}}!
-    <form ng-submit="saveForm()">
-        <input type="text" ng-model="user.name">
-        <input type="text" ng-model="user.slug" >
-        <button ng-click="pickFile()">Choose a cover image</button>
-        <img src="{{user.cover_image_url}}" width="auto" height="100">
-        <p>Image: {{user.cover_image_url}}</p>
-        <input class="filepicker-file" type="hidden" ng-model="user.cover_image_url">
-        <textarea ng-model='user.bio'>
-        </textarea>
-        <input type="text" ng-model="user.website" placeholder="Your website">
-        <input type="text" ng-model="user.facebook" placeholder="Facebook">
-        <input type="text" ng-model="user.twitter" placeholder="Twitter">
-        <input type="text" ng-model="user.location" placeholder="Location/hometown/city">
-        <input type="submit" value="Save">
-    </form>
+  
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <h3>Hello, {{user.name}}!</h3>
+      </div>
+      <form ng-submit="saveForm()">
+        <div class="span12">
+          <input type="text" ng-model="user.name">
+          <input type="text" ng-model="user.slug" >
+        </div>
+        <div class="span12">
+          <button ng-click="pickFile()" class="btn">Choose a cover image</button>
+          <img src="{{user.cover_image_url}}" width="auto" height="100">
+          <h4>Image Preview: {{user.cover_image_url}}</h4>
+          <input class="filepicker-file" type="hidden" ng-model="user.cover_image_url">
+        </div>
+        <div class="span12">
+          <hr>
+          <h4>Short Bio:</h4>
+          <textarea ng-model='user.bio'></textarea>
+        </div>
+        <div class="span12">
+          <input type="text" ng-model="user.website" placeholder="Your website">
+          <input type="text" ng-model="user.facebook" placeholder="Facebook">
+          <input type="text" ng-model="user.twitter" placeholder="Twitter">
+        </div>
+        <div class="span12">
+          <input type="text" ng-model="user.location" placeholder="Location/hometown/city">
+        </div>
+        <div class="span12">
+          <input type="submit" class="btn btn-success" value="Save">
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
