@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :users_events
   has_and_belongs_to_many :events, :join_table => :users_events
   before_save :generate_slug
+  has_many :images
 
   def generate_slug
     if self.slug.blank?

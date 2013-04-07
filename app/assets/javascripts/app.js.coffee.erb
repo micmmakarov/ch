@@ -12,4 +12,7 @@ Kucheka.config ($routeProvider, $locationProvider) ->
     controller: "KuchekaCtrl"
   ).when("/about",
     templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
+  ).when("/:user_name",
+      templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
+      controller: "KuchekaCtrl"
   ).otherwise redirectTo: "/"
