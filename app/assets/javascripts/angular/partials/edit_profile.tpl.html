@@ -22,7 +22,11 @@
           <textarea ng-model='user.bio'></textarea>
         </div>
         <div class="span12">
-          <input type="text" ng-model="user.website" placeholder="Your website">
+          <div class="input-prepend">
+            <span class="add-on">http://</span>
+            <input class="span2" type="text" ng-model="user.website" placeholder="your-website.com">
+          </div>
+          
           <input type="text" ng-model="user.facebook" placeholder="Facebook">
           <input type="text" ng-model="user.twitter" placeholder="Twitter">
         </div>
