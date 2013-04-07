@@ -28,6 +28,13 @@ figure {
   white-space: nowrap;
 }
 
+ul.row {
+  li {
+    list-style: none;
+    margin: 0;
+  }
+}
+
 .navbar {
   .nav {
     margin: 5px 10px 0 0;
@@ -70,6 +77,13 @@ figure {
   .subhead {
     padding: 100px 0;
   }
+}
+.connect-fb {
+  background: url('/assets/btn-fb-connect.png') no-repeat;
+  width: 295px;
+  height: 46px;
+  display: inline-block;
+  text-indent: -5000px;
 }
 .user-hero {
   background-position: center center;
