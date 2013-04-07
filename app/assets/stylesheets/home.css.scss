@@ -5,6 +5,10 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+body {
+  font-family: Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
+}
+
 .navbar {
   margin: 0;
   .brand {
