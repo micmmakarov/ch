@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
 
   def generate_slug
     if self.slug.blank?
-      binding.pry
-      self.slug = to_slug(name)
+      s = "#{name}"
+      self.slug = to_slug(s)
     end
   end
 
