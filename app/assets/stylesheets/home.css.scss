@@ -10,6 +10,9 @@ $main-blue: #00bff3;
 body {
   font: 20px Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
 }
+a {
+  color: $main-blue;
+}
 
 .btn {
   font-size: 22px;
@@ -90,7 +93,7 @@ body {
     padding: 40px 0;
   }
   .user-media {
-    background: #222;
+    background: #222 url('/assets/bg-tile-black.jpg');
     padding: 40px 0;
     color: #fff;
     border-top: 4px #a5a5a5 solid;
@@ -123,4 +126,9 @@ body {
       color: #fff;
     }
   }
+}
+
+.footer {
+  background: $main-blue;
+  padding: 20px 0;
 }
