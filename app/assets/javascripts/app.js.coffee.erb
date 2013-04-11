@@ -1,4 +1,5 @@
-ComedyBase = angular.module('ComedyBase', ['ngResource', 'rails', 'ui'])
+ComedyBase = angular.module('ComedyBase', ['ngResource', 'rails', 'ui', 'ui.bootstrap'])
+
 filepicker.setKey('AffEtHmTETGO3pTJxeyo7z')
 
 ComedyBase.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
@@ -85,10 +86,44 @@ ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeP
   )
   ]
 
+   
+ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", "User", ($scope, $http, $resource, $routeParams, $location, User) ->
+    $scope.slug = $routeParams.slug
+
+    $scope.setCurrentEvent = (event) ->
+        $scope.current_event = event
+    $scope.updateEvent = ->
+        delete $scope.current_event
+    $scope.removeCurrentEvnet = ->
+        delete $scope.current_event
+    $scope.saveForm = ->
+        $scope.user.update()
+    User.get(id: current_user.id).then (result) ->
+      $scope.user = result
+    $scope.pickFile = =>
+        filepicker.pick
+            mimetypes: ["image/*", "text/plain"]
+            services: ["COMPUTER", "FACEBOOK", "GMAIL"]
+        , ((FPFile) ->
+            $scope.user.cover_image_url = FPFile.url
+            $scope.$apply()
+
+        ), (FPError) ->
+            alert "error"
+            console.log FPError.toString()
+  ]
+
+
 ComedyBase.controller "TypeaheadCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
     $scope.selected = undefined
     $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
 ]
+
+ComedyBase.controller "TabsDemoCtrl", ($scope) ->
+  $scope.panes = [
+    { title:"Dynamic Title 1", content:"Dynamic content 1" },
+    { title:"Dynamic Title 2", content:"Dynamic content 2" }
+  ]
 
 
 #    $scope.pickFile = =>
