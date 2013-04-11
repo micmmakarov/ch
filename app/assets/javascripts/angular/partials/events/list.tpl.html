@@ -1,6 +1,10 @@
 <div ng-controller="EventsCtrl">
   <input type="text" ng-model="query.title" ng-change="search()" placeholder="Name">
   <input type="text" ng-model="query.city" ng-change="search()" placeholder="City">
+  <input ng-model="date" ui-date>
+  Selected Date: {{ date }}
+  Formatted Date: {{ date | date: 'mediumDate'}}
+  Selected Month: {{ date.getMonth() }}
   <div ng-repeat="event in events">
 
     <h4>{{event.title}}</h4>
@@ -9,5 +13,15 @@
     {{event.city}}
     {{event.state}}
 
+    <h5>{{event.venue.name}}</h5>
+    {{venue.description}}
+    {{venue.address}}
+    {{venue.city}}
+    {{venue.state}}
+
+    <img src="http://maps.googleapis.com/maps/api/staticmap?center={{venue.address}}+{{venue.city}}+{{venue.state}}&zoom=13&size=200x100&maptype=roadmap
+      &markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
+      &markers=color:red%7Ccolor:red%7Clabel:C%7C40.718217,-73.998284&sensor=false">
+    <hr>
   </div>
 </div>

@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require angular
 //= require angular-resource
 //= require angularjs/rails/resource
