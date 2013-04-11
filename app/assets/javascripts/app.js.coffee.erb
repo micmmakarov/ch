@@ -117,25 +117,40 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
             console.log FPError.toString()
   ]
 
-ComedyBase.controller "ComedyBaseTabCtrl", ($scope, $routeParams, $location) ->
+ComedyBase.controller "ComedyBaseTabCtrl", ["$scope", "$routeParams", "$location", ($scope, $routeParams, $location) ->
 
   $scope.location = $location;
 
   #Each time controller is recreated, check tab in url
-  $scope.currentTab = $routeParams.tabId
-
-
-  $scope.$watch('currentTab', (id, oldId) ->
-    # if id isnt oldId
-    if typeof id isnt 'undefined'
-      alert(1);
-      $location.path('/profile/'+id)
+  $scope.currentTabId = $routeParams.tabId
+  window.s = $scope
+  $scope.$watch('panes', (id, oldId) ->
+    angular.forEach($scope.panes, (pane) ->
+      if pane.active == true
+        $scope.currentTab = pane
+        $location.path('/profile/'+$scope.currentTab.tabId)
+    )
+  , true
   )
 
   $scope.panes = [
     { tabId: 'manage-events', title:"Event management", content:"Dynamic content 1" },
+    { tabId: 'manage-venues', title:"Venues management", content:"Dynamic content 2" }
   ]
+  console.log $scope.panes
+  angular.forEach($scope.panes, (pane) ->
+    if pane.tabId == $scope.currentTabId
+      $scope.currentTab.active = false if typeof $scope.currentTab isnt 'undefined'
+      $scope.currentTab = pane
+      $scope.currentTab.active = true
+      $location.path('/profile/'+pane.tabId)
 
+      console.log $scope.currentTab
+  )
+
+  window.p = $scope.panes
+
+]
 
 ComedyBase.controller "TypeaheadCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
     $scope.selected = undefined
