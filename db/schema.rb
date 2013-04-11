@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409012835) do
+ActiveRecord::Schema.define(:version => 20130411033720) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -87,6 +87,9 @@ ActiveRecord::Schema.define(:version => 20130409012835) do
     t.string   "yelp"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "url"
+    t.string   "map_url"
+    t.string   "image_url"
   end
 
   create_table "videos", :force => true do |t|

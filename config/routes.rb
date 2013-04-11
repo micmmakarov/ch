@@ -1,20 +1,18 @@
 Comedyhack::Application.routes.draw do
 
-  resources :venues
-
-
   devise_for :users
 
   match '/auth/:provider/callback' => 'authentications#create'
 
   namespace :api do
+    resources :venues
     resources :users do
-      resource :images
-      resource :videos
+      resources :images
+      resources :videos
     end
     resources :users
-    resource :images
-    resource :videos
+    resources :images
+    resources :videos
   end
 
   resource :users

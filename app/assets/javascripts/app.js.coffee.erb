@@ -6,6 +6,49 @@ ComedyBase.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
         url: "/api/users"
         name: "user"
 ]
+ComedyBase.factory "Venue", ["railsResourceFactory", (railsResourceFactory) ->
+    railsResourceFactory
+        url: "/api/venues"
+        name: "venue"
+]
+
+ComedyBase.factory "debounce", ($timeout, $q) ->
+  (func, wait, immediate) ->
+    timeout = undefined
+    deferred = $q.defer()
+    ->
+      context = this
+      args = arguments_
+      later = ->
+        timeout = null
+        unless immediate
+          deferred.resolve func.apply(context, args)
+          deferred = $q.defer()
+
+      callNow = immediate and not timeout
+      $timeout.cancel timeout  if timeout
+      timeout = $timeout(later, wait)
+      if callNow
+        deferred.resolve func.apply(context, args)
+        deferred = $q.defer()
+      deferred.promise
+
+
+ComedyBase.controller "VenuesCtrl", ["$scope", "$http", "Venue", "$routeParams", "$location", "debounce", ($scope, $http, Venue, $routeParams, $location, debounce) ->
+
+
+
+    $scope.debouncedSearch = -> debounce($scope.search, 3000, false)
+
+    $scope.search = ->
+      venues = Venue.query(query:$scope.query).then( (venues) ->
+        $scope.venues = venues
+      )
+
+    $scope.isActive = (route) ->
+        route is $location.path()
+    ]
+
 
 ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
 
@@ -76,6 +119,9 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
     ).when("/profile",
         templateUrl: "<%= asset_path 'angular/partials/edit_profile.tpl.html' %>"
         controller: "ComedyBaseProfileCtrl"
+    ).when("/venues",
+        templateUrl: "<%= asset_path 'angular/partials/venues/list.tpl.html' %>"
+        controller: "VenuesCtrl"
     ).when("/me/events",
         templateUrl: "<%= asset_path 'angular/partials/events/edit_events.tpl.html' %>"
         controller: "ComedyBaseProfileCtrl"
