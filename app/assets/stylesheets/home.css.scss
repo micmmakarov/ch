@@ -34,6 +34,13 @@ ul.row {
     margin: 0;
   }
 }
+.list-reset {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+  }
+}
 
 .navbar {
   .nav {
@@ -133,6 +140,10 @@ ul.row {
     padding-bottom: 40px;
   }
 }
+.section-connect {
+  border-top: 4px #ddd solid;
+  padding: 10px 0;
+}
 .section-inverse {
   background: #222 url('/assets/bg-tile-black.jpg');
   padding: 40px 0;
@@ -224,6 +235,9 @@ ul.row {
 .green-true {
   background-color: grey;
 }
+
+
+
 /****************************************
 /* Media Query Overrides
 /****************************************/
