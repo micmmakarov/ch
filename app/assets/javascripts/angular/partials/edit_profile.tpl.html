@@ -1,31 +1,14 @@
+
 <div ng-controller="ComedyBaseProfileCtrl">
   
   <div class="container">
     <div class="row">
       <div class="span12">
 
-        <div ng-controller="TabsDemoCtrl">
-          <ul class="nav nav-tabs">
-            <li ng-repeat="pane in panes" class="ng-scope">
-              <a href="" ng-click="select(pane)" class="ng-binding">Static title</a>
-            </li>
-            <li ng-repeat="pane in panes" ng-class="{active:pane.selected}" class="ng-scope active">
-              <a href="" ng-click="select(pane)" class="ng-binding">Dynamic Title 1</a>
-            </li>
-            <li ng-repeat="pane in panes" ng-class="{active:pane.selected}" class="ng-scope">
-              <a href="" ng-click="select(pane)" class="ng-binding">Dynamic Title 2</a>
-            </li>
-          </ul>
-
-<!--             <tabs>
-                <pane heading="Static title">Static content</pane>
-                <pane ng-repeat="pane in panes" heading="{{pane.title}}" active="pane.active">{{pane.content}}</pane>
-            </tabs>
- -->            <div class="row-fluid">
-                <button class="btn" ng-click="panes[0].active = true">Select second tab</button>
-                <button class="btn" ng-click="panes[1].active = true">Select third tab</button>
-            </div>
-        </div>
+        <tabs>
+          <pane heading="Static title">Static content</pane>
+          <pane ng-repeat="pane in panes" heading="{{pane.title}}" active="pane.active">{{pane.content}}</pane>
+        </tabs>
 
         <h3>{{user.name}}'s Settings</h3>
       </div>
