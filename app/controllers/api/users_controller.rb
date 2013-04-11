@@ -15,6 +15,7 @@ class Api::UsersController < ApplicationController
     params[:user].delete :created_at
     params[:user].delete :updated_at
     params[:user].delete :id
+    params[:user].delete :events
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       render json: @user.to_json

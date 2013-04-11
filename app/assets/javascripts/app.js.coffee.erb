@@ -87,7 +87,7 @@ ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeP
   ]
 
    
-ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", "User", ($scope, $http, $resource, $routeParams, $location, User) ->
+ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$routeParams", "$location", ($scope, $http, User, $routeParams, $location) ->
     $scope.slug = $routeParams.slug
 
     $scope.setCurrentEvent = (event) ->
@@ -104,8 +104,10 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "$resource", 
         filepicker.pick
             mimetypes: ["image/*", "text/plain"]
             services: ["COMPUTER", "FACEBOOK", "GMAIL"]
-        , ((FPFile) ->
+        , ((FPFile) =>
             $scope.user.cover_image_url = FPFile.url
+            $scope.user.coverImageUrl = FPFile.url
+            #window.u = $scope.user
             $scope.$apply()
 
         ), (FPError) ->
