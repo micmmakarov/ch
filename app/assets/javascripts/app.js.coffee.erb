@@ -113,7 +113,7 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "$resource", 
             console.log FPError.toString()
 
     $scope.panes = [
-      { title:"Dynamic Title 1", content:"Dynamic content 1" },
+      { title:"Event management", content:"Dynamic content 1" },
       { title:"Dynamic Title 2", content:"Dynamic content 2" }
     ]
   ]
@@ -140,8 +140,9 @@ ComedyBase.controller "TypeaheadCtrl", ["$scope", "$http", "$resource", "$routeP
 
 
 
-
-
+#****************************************
+#* Router
+#****************************************/
 
 ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
     $locationProvider.html5Mode(true)
@@ -176,3 +177,8 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
         controller: "ComedyBaseUserCtrl"
     ).otherwise redirectTo: "/"
   ]
+
+#****************************************
+#* /Router
+#****************************************/
+

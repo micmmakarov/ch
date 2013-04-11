@@ -5,45 +5,49 @@
     <div class="row">
       <div class="span12">
 
+        <h3>{{user.name}}'s Settings</h3>
+
         <tabs>
-          <pane heading="Static title">Static content</pane>
+          <pane heading="Profile page content">
+            <form ng-submit="saveForm()">
+              <div class="span12">
+                <input type="text" ng-model="user.name">
+                <input type="text" ng-model="user.slug" >
+              </div>
+              <div class="span12">
+                <button ng-click="pickFile()" class="btn">Choose a cover image</button>
+                <img src="{{user.cover_image_url}}" width="auto" height="100">
+                <h4>Image Preview: {{user.cover_image_url}}</h4>
+                <input class="filepicker-file" type="hidden" ng-model="user.cover_image_url">
+              </div>
+              <div class="span12">
+                <hr>
+                <h4>Short Bio:</h4>
+                <textarea ng-model='user.bio'></textarea>
+              </div>
+              <div class="span12">
+                <div class="input-prepend">
+                  <span class="add-on">http://</span>
+                  <input class="span2" type="text" ng-model="user.website" placeholder="your-website.com">
+                </div>
+                
+                <input type="text" ng-model="user.facebook" placeholder="Facebook">
+                <input type="text" ng-model="user.twitter" placeholder="Twitter">
+              </div>
+              <div class="span12">
+                <input type="text" ng-model="user.location" placeholder="Home base town/city">
+              </div>
+              <div class="span12">
+                <input type="submit" class="btn btn-success" value="Save">
+              </div>
+            </form>
+          </pane>
           <pane ng-repeat="pane in panes" heading="{{pane.title}}" active="pane.active">{{pane.content}}</pane>
         </tabs>
 
-        <h3>{{user.name}}'s Settings</h3>
+
+
       </div>
-      <form ng-submit="saveForm()">
-        <div class="span12">
-          <input type="text" ng-model="user.name">
-          <input type="text" ng-model="user.slug" >
-        </div>
-        <div class="span12">
-          <button ng-click="pickFile()" class="btn">Choose a cover image</button>
-          <img src="{{user.cover_image_url}}" width="auto" height="100">
-          <h4>Image Preview: {{user.cover_image_url}}</h4>
-          <input class="filepicker-file" type="hidden" ng-model="user.cover_image_url">
-        </div>
-        <div class="span12">
-          <hr>
-          <h4>Short Bio:</h4>
-          <textarea ng-model='user.bio'></textarea>
-        </div>
-        <div class="span12">
-          <div class="input-prepend">
-            <span class="add-on">http://</span>
-            <input class="span2" type="text" ng-model="user.website" placeholder="your-website.com">
-          </div>
-          
-          <input type="text" ng-model="user.facebook" placeholder="Facebook">
-          <input type="text" ng-model="user.twitter" placeholder="Twitter">
-        </div>
-        <div class="span12">
-          <input type="text" ng-model="user.location" placeholder="Home base town/city">
-        </div>
-        <div class="span12">
-          <input type="submit" class="btn btn-success" value="Save">
-        </div>
-      </form>
     </div>
   </div>
 </div>
