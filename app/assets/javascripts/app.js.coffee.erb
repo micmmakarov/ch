@@ -9,16 +9,7 @@ ComedyBase.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
 
 ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
 
-  User = $resource("/api/users/:id",
-    id: "@id"
-  ,
-    index:
-      method: 'GET'
-      isArray:true
-  )
-  users = User.index(
-    a:5
-  , ->
+  users = User.query().then( (users) ->
     $scope.users = users
   )
 
