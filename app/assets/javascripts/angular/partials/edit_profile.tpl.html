@@ -7,44 +7,45 @@
 
         <h3>{{user.name}}'s Settings</h3>
 
-        <tabs>
-          <pane heading="Profile page content">
-            <form ng-submit="saveForm()">
-              <div class="span12">
-                <input type="text" ng-model="user.name">
-                <input type="text" ng-model="user.slug" >
-              </div>
-              <div class="span12">
-                <button ng-click="pickFile()" class="btn">Choose a cover image</button>
-                  <img class ="profile-thumb" src="{{user.coverImageUrl}}" width="auto" height="100">
-                <h4>Image Preview: {{user.cover_image_url}}</h4>
-              </div>
-              <div class="span12">
-                <hr>
-                <h4>Short Bio:</h4>
-                <textarea ng-model='user.bio'></textarea>
-              </div>
-              <div class="span12">
-                <div class="input-prepend">
-                  <span class="add-on">http://</span>
-                  <input class="span2" type="text" ng-model="user.website" placeholder="your-website.com">
+        <div ng-controller="ComedyBaseTabCtrl">
+          <tabs ng-model="currentTab">
+            <pane heading="Profile page content">
+              <form ng-submit="saveForm()">
+                <div class="span12">
+                  <input type="text" ng-model="user.name">
+                  <input type="text" ng-model="user.slug" >
                 </div>
-                
-                <input type="text" ng-model="user.facebook" placeholder="Facebook">
-                <input type="text" ng-model="user.twitter" placeholder="Twitter">
-              </div>
-              <div class="span12">
-                <input type="text" ng-model="user.location" placeholder="Home base town/city">
-              </div>
-              <div class="span12">
-                <input type="submit" class="btn btn-success" value="Save">
-              </div>
-            </form>
-          </pane>
-          <pane ng-repeat="pane in panes" heading="{{pane.title}}" active="pane.active">{{pane.content}}</pane>
-        </tabs>
+                <div class="span12">
+                  <button ng-click="pickFile()" class="btn">Choose a cover image</button>
+                  <img src="{{user.coverImageUrl}}" width="auto" height="100">
+                  <h4>Image Preview: {{user.cover_image_url}}</h4>
+                </div>
+                <div class="span12">
+                  <hr>
+                  <h4>Short Bio:</h4>
+                  <textarea ng-model='user.bio'></textarea>
+                </div>
+                <div class="span12">
+                  <div class="input-prepend">
+                    <span class="add-on">http://</span>
+                    <input class="span2" type="text" ng-model="user.website" placeholder="your-website.com">
+                  </div>
+                  
+                  <input type="text" ng-model="user.facebook" placeholder="Facebook">
+                  <input type="text" ng-model="user.twitter" placeholder="Twitter">
+                </div>
+                <div class="span12">
+                  <input type="text" ng-model="user.location" placeholder="Home base town/city">
+                </div>
+                <div class="span12">
+                  <input type="submit" class="btn btn-success" value="Save">
+                </div>
+              </form>
+            </pane>
+            <pane ng-repeat="pane in panes" heading="{{pane.title}}" active="pane.active">{{pane.content}}</pane>
+          </tabs>
 
-
+        </div>
 
       </div>
     </div>

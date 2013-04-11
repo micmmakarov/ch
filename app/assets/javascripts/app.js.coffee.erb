@@ -70,6 +70,8 @@ ComedyBase.controller "EventsCtrl", ["$scope", "$http", "Event", "$routeParams",
 
 ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
 
+  $scope.$route = $route
+
   users = User.query().then( (users) ->
     $scope.users = users
   )
@@ -113,11 +115,25 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
         ), (FPError) ->
             alert "error"
             console.log FPError.toString()
+  ]
 
-    $scope.panes = [
-      { title:"Event management", content:"Dynamic content 1" },
-      { title:"Dynamic Title 2", content:"Dynamic content 2" }
-    ]
+ComedyBase.controller "ComedyBaseTabCtrl", ($scope, $routeParams, $location) ->
+
+  $scope.location = $location;
+
+  #Each time controller is recreated, check tab in url
+  $scope.currentTab = $routeParams.tabId
+
+
+  $scope.$watch('currentTab', (id, oldId) ->
+    # if id isnt oldId
+    if typeof id isnt 'undefined'
+      alert(1);
+      $location.path('/profile/'+id)
+  )
+
+  $scope.panes = [
+    { tabId: 'manage-events', title:"Event management", content:"Dynamic content 1" },
   ]
 
 
@@ -125,8 +141,6 @@ ComedyBase.controller "TypeaheadCtrl", ["$scope", "$http", "$resource", "$routeP
     $scope.selected = undefined
     $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
 ]
-
-
 
 #    $scope.pickFile = =>
 #        filepicker.pick
@@ -141,10 +155,9 @@ ComedyBase.controller "TypeaheadCtrl", ["$scope", "$http", "$resource", "$routeP
 #            console.log FPError.toString()
 
 
-
 #****************************************
 #* Router
-#****************************************/
+#****************************************
 
 ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
     $locationProvider.html5Mode(true)
@@ -161,6 +174,12 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
         controller: "TypeaheadCtrl"
     ).when("/profile",
         templateUrl: "<%= asset_path 'angular/partials/edit_profile.tpl.html' %>"
+        controller: "ComedyBaseProfileCtrl"
+        activeTab: ""
+    ).when("/profile/:tabId",
+        templateUrl: "<%= asset_path 'angular/partials/edit_profile.tpl.html' %>"
+        # templateUrl: "<%= asset_path 'angular/partials/settings/manage_events.tpl.html' %>"
+        activeTab: ":tabId"
         controller: "ComedyBaseProfileCtrl"
     ).when("/venues",
         templateUrl: "<%= asset_path 'angular/partials/venues/list.tpl.html' %>"
@@ -182,5 +201,5 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
 
 #****************************************
 #* /Router
-#****************************************/
+#****************************************
 
