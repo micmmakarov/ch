@@ -252,3 +252,9 @@ ul.row {
 /****************************************
 /* /Media Query Overrides
 /****************************************/
+
+
+img.profile-thumb  {
+  max-height:200px;
+  overflow: hidden;
+}
