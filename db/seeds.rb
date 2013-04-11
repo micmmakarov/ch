@@ -1,8 +1,3 @@
-5.times do |t|
-  event = Event.create(title: "Hello, World! #{t}")
-  UsersEvents.create(user_id:User.first.id, event_id:event.id)
-end
-
 kells = Venue.find_or_create_by_name("Kells") do |v|
   v.name = 'Kells'
   v.description = 'Irish Restaurant & Bar'
@@ -28,7 +23,7 @@ end
 
 5.times do |t|
   v = Venue.all.sample
-  event = Event.find_or_create_by_title("Comedy Show in #{v.name}") do |e|
+  event = Event.find_or_create_by_title("Comedy Show in #{v.name} #{t}") do |e|
     e.description = "Awesome show and a lot of cool comedians"
     e.start = Time.now + rand(20).days
     e.venue_id = v.id
