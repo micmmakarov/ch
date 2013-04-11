@@ -1,7 +1,15 @@
-class EventsController < ApplicationController
+class Api::EventsController < ApplicationController
   def index
-    @events = Event.all
-    render json: @events
+    query = ActiveSupport::JSON.decode(params[:query])
+    if query.map {|k,v| v}.join.length > 0
+      @events = Event.all
+      query.each do |key, value|
+        @events.select! {|v| v[key].upcase.include? value.upcase}
+      end
+      render json: @events
+    else
+      render json: []
+    end
   end
 
   def show
@@ -10,27 +18,16 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(params[:event])
-    if @event.save
-       render json: @event
-    else
-       render json: @event.errors, status: :unprocessable_entity
-    end
+    @event = Event.create(params[:event])
+    render json: @event
   end
 
-  # PUT /events/1
-  # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
-      if @event.update_attributes(params[:event])
-        render json: @event
-      else
-         render json: @event.errors, status: :unprocessable_entity
-      end
+    @event.update_attributes(params[:event])
+    render json: @event
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.json
   def destroy
     @event = Event.find(params[:id])
     @event.destroy

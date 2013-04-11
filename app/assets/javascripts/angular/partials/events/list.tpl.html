@@ -1,0 +1,13 @@
+<div ng-controller="EventsCtrl">
+  <input type="text" ng-model="query.title" ng-change="search()" placeholder="Name">
+  <input type="text" ng-model="query.city" ng-change="search()" placeholder="City">
+  <div ng-repeat="event in events">
+
+    <h4>{{event.title}}</h4>
+    {{event.description}}
+    {{event.address}}
+    {{event.city}}
+    {{event.state}}
+
+  </div>
+</div>

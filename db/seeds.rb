@@ -24,3 +24,15 @@ br = Venue.find_or_create_by_name("Broadway Comedy Club") do |v|
   v.city = 'New York'
   v.state = 'New York'
 end
+
+
+5.times do |t|
+  v = Venue.all.sample
+  event = Event.find_or_create_by_title("Comedy Show in #{v.name}") do |e|
+    e.description = "Awesome show and a lot of cool comedians"
+    e.start = Time.now + rand(20).days
+    e.venue_id = v.id
+    e.user_id = User.first.id
+  end
+  UsersEvents.create(user_id:User.last.id, event_id:event.id)
+end
