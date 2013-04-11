@@ -1,7 +1,13 @@
-Kucheka = angular.module('Kucheka', ['ngResource', 'rails'])
+ComedyBase = angular.module('ComedyBase', ['ngResource', 'rails', 'ui.bootstrap'])
 filepicker.setKey('AffEtHmTETGO3pTJxeyo7z')
 
-Kucheka.controller "KuchekaCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
+ComedyBase.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
+    railsResourceFactory
+        url: "/api/users"
+        name: "user"
+]
+
+ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
 
   User = $resource("/api/users/:id",
     id: "@id"
@@ -20,42 +26,32 @@ Kucheka.controller "KuchekaCtrl", ["$scope", "$http", "$resource", "$routeParams
     route is $location.path()
   ]
 
-Kucheka.controller "KuchekaUserCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
+ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeParams", "$location", ($scope, $http, User, $routeParams, $location) ->
   $scope.slug = $routeParams.slug
-
-  User = $resource("/api/users/:id",
-    id: "@id"
-  ,
-    update:
-      method: 'PUT'
-    index:
-      method: 'GET'
-      isArray:true
-  )
-
-  user = User.get(
-    id: 7
-    slug: $scope.slug
-  , ->
+  User.get(id: $scope.slug).then( (user) ->
     $scope.user = user
+    window.u = user
   )
   ]
 
-Kucheka.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
-  railsResourceFactory
-    url: "/api/users"
-    name: "user"
+ComedyBase.controller "TypeaheadCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
+    $scope.selected = undefined
+    $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
 ]
 
-Kucheka.controller "KuchekaProfileCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", "User", ($scope, $http, $resource, $routeParams, $location, User) ->
+ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", "User", ($scope, $http, $resource, $routeParams, $location, User) ->
     $scope.slug = $routeParams.slug
-    $scope.saveForm = ->
-      window.u = $scope.user
-      $scope.user.update()
 
+    $scope.setCurrentEvent = (event) ->
+        $scope.current_event = event
+    $scope.updateEvent = ->
+        delete $scope.current_event
+    $scope.removeCurrentEvnet = ->
+        delete $scope.current_event
+    $scope.saveForm = ->
+        $scope.user.update()
     User.get(id: current_user.id).then (result) ->
       $scope.user = result
-
     $scope.pickFile = =>
         filepicker.pick
             mimetypes: ["image/*", "text/plain"]
@@ -73,21 +69,30 @@ Kucheka.controller "KuchekaProfileCtrl", ["$scope", "$http", "$resource", "$rout
 
 
 
-Kucheka.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
+ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
     $locationProvider.html5Mode(true)
     $routeProvider.when("/",
         templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
-        controller: "KuchekaCtrl"
+        controller: "ComedyBaseCtrl"
+    ).when("/#_=_",
+        templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
+        controller: "ComedyBaseCtrl"
     ).when("/about",
         templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
+    ).when("/type",
+        templateUrl: "<%= asset_path 'angular/partials/events/choose_event.tpl.html' %>"
+        controller: "TypeaheadCtrl"
     ).when("/profile",
         templateUrl: "<%= asset_path 'angular/partials/edit_profile.tpl.html' %>"
-        controller: "KuchekaProfileCtrl"
-    ).when("/my-events",
-        templateUrl: "<%= asset_path 'angular/partials/edit_events.tpl.html' %>"
-        controller: "KuchekaProfileCtrl"
+        controller: "ComedyBaseProfileCtrl"
+    ).when("/me/events",
+        templateUrl: "<%= asset_path 'angular/partials/events/edit_events.tpl.html' %>"
+        controller: "ComedyBaseProfileCtrl"
+    ).when("/events/add",
+        templateUrl: "<%= asset_path 'angular/partials/events/choose_event.tpl.html' %>"
+        controller: "ComedyBaseProfileCtrl"
     ).when("/:slug",
         templateUrl: "<%= asset_path 'angular/partials/profile.tpl.html' %>"
-        controller: "KuchekaUserCtrl"
+        controller: "ComedyBaseUserCtrl"
     ).otherwise redirectTo: "/"
   ]

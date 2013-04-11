@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @venue.name
+%p
+  %b Description:
+  = @venue.description
+%p
+  %b Address:
+  = @venue.address
+%p
+  %b City:
+  = @venue.city
+%p
+  %b State:
+  = @venue.state
+%p
+  %b Yelp:
+  = @venue.yelp
+
+= link_to 'Edit', edit_venue_path(@venue)
+\|
+= link_to 'Back', venues_path

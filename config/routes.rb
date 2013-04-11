@@ -1,5 +1,8 @@
 Comedyhack::Application.routes.draw do
 
+  resources :venues
+
+
   devise_for :users
 
   match '/auth/:provider/callback' => 'authentications#create'

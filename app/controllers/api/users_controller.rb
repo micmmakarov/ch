@@ -6,11 +6,8 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    if params[:slug]
-      @user = User.find_by_slug(params[:slug])
-    else
-      @user = User.find(params[:id])
-    end
+    @user = User.find_by_slug(params[:id])
+    @user = User.find(params[:id]) if @user.blank?
     render json: @user.to_json(include_has)
   end
 

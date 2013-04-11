@@ -34,6 +34,7 @@ gem "omniauth-facebook"
 gem "omniauth-twitter"
 gem 'omniauth-linkedin'
 gem 'filepicker-rails'
+gem 'angular-ui-bootstrap-rails'
 
 gem 'pry'
 gem 'pry-nav'

@@ -1,0 +1,11 @@
+<div ng-controller="KuchekaEventCtrl" class="event">
+    Hello
+    <form ng-submit="updateEvent()" ng-hide="!current_event">
+        <input type="text" ng-model="event.title">
+        <input type="text" ng-model="event.description">
+        <input type="text" ng-model="event.start">
+        <input type="text" ng-model="event.venue_id">
+        <input type="submit" value="Save Event" class="btn">
+        <button ng-click="removeCurrentEvent()">Close</button>
+    </form>
+</div>
