@@ -1,8 +1,16 @@
 class Api::EventsController < ApplicationController
   def index
-    query = ActiveSupport::JSON.decode(params[:query])
+    begin
+      query = ActiveSupport::JSON.decode(params[:query])
+    rescue
+      query = params[:query]
+    end
+    @events = Event.all
     if query.map {|k,v| v}.join.length > 0
-      @events = Event.all
+      if query[:venue_id].present?
+        @events.select! {|v| v.venue_id = query[:venue_id]}
+        query.delete :venue_id
+      end
       query.each do |key, value|
         @events.select! {|v| v[key].upcase.include? value.upcase}
       end
@@ -32,9 +40,9 @@ class Api::EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
   end
-private
+  private
   def include_hash
-    {:include => :venue}
+    {:methods => :display_name, :include => :venue}
     #=> {:only => :hi}
   end
 

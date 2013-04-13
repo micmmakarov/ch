@@ -129,17 +129,24 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
     $scope.set_val = (val) ->
       $("#event_venue").select2("destroy")
       $("#event_venue").removeClass("select2-offscreen")
-      #$("#s2id_event_venue").replaceWith("")
       $scope.val = val
       $scope.$apply()
       select_object("#event_venue", "Choose venue", "/api/venues", $scope.set_val, {place_id: val})
     $scope.set_venue = (venue) ->
       $scope.venue = venue
+      $("#event_event").select2("destroy")
+      $("#event_event").removeClass("select2-offscreen")
+      $scope.venue = venue
+      $scope.$apply()
+      select_object("#event_event", "Choose event", "/api/events", $scope.set_event, {venue_id:$scope.venue})
+    $scope.set_event = (event) ->
+      $scope.event = event
+      $scope.$apply()
 
 
     select_object("#event_city", default_city.display_name, '/api/places', $scope.set_val)
     select_object("#event_venue", "Choose venue", "/api/venues", $scope.set_venue, {place_id: $scope.val})
-    select_object("#event_event", "Choose venue", "/api/venues", $scope.set_venue, {place_id: $scope.val})
+    #select_object("#event_event", "Choose event", "/api/events", $scope.set_venue, {venue_id:$scope.venue})
 
 
 

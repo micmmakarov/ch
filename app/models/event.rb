@@ -10,6 +10,9 @@ class Event < ActiveRecord::Base
       self.city = self.venue.city
     end
   end
+  def display_name
+    "#{title} <br /><small>#{start.strftime('%a %B %d, %I:%M %p')}</small>".html_safe
+  end
 
 
 end
