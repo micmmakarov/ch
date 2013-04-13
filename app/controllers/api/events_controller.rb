@@ -40,7 +40,15 @@ class Api::EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
   end
-  private
+
+  def add
+    event = Event.find(params[:id])
+    UsersEvents.create(user_id: current_user.id, event_id:event.id)
+    render json:event.to_json, status:201
+  end
+
+
+private
   def include_hash
     {:methods => :display_name, :include => :venue}
     #=> {:only => :hi}

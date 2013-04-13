@@ -7,9 +7,6 @@
 
         <h3>{{user.name}}'s Settings</h3>
 
-        <div ng-controller="ComedyBaseTabCtrl">
-          <tabs>
-            <pane heading="Profile page content" ng-model="pane[0].content">
               <form ng-submit="saveForm()">
                 <div class="span12">
                   <input type="text" ng-model="user.name">
@@ -41,14 +38,6 @@
                   <input type="submit" class="btn btn-success" value="Save">
                 </div>
               </form>
-            </pane>
-            <pane heading="Some second tab">
-              Hahaha events gonna be here!
-            </pane>
-            <pane ng-repeat="pane in panes" heading="{{pane.title}}" active="pane.active">{{pane.content}}</pane>
-          </tabs>
-
-        </div>
 
       </div>
     </div>

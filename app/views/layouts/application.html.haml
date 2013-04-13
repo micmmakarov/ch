@@ -22,7 +22,7 @@
             %a{:href => '/about', 'ng-class' => "{active:isActive('/about')}"} About
           -if user_signed_in?
             %li.navbar-userinfo
-              %a{:href => '/profile'}
+              %a{:href => '/profile/me'}
                 =current_user.name
                 's Settings
                 %i.icon-pencil.icon-white

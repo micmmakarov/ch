@@ -25,6 +25,7 @@ ComedyBase.factory "Place", ["railsResourceFactory", (railsResourceFactory) ->
     name: "place"
 ]
 
+
 ComedyBase.factory "debounce", ($timeout, $q) ->
   (func, wait, immediate) ->
     timeout = undefined
@@ -123,7 +124,7 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
             console.log FPError.toString()
   ]
 
-  ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "User", "Place", "$routeParams", "$location", ($scope, $http, User, Place, $routeParams, $location) ->
+  ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "User", "Event", "$routeParams", "$location", ($scope, $http, User, Event, $routeParams, $location) ->
     $scope.slug = $routeParams.slug
     $scope.val =  default_city.id
     $scope.set_val = (val) ->
@@ -142,6 +143,15 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
     $scope.set_event = (event) ->
       $scope.event = event
       $scope.$apply()
+    $scope.addEvent = ->
+      $http(
+        method: 'POST'
+        url: "/api/events/#{$scope.event}/add"
+      ).success( (data) ->
+        $location.path( "/#{current_user.slug}" )
+      ).error( (data) ->
+        alert "some error"
+      )
 
 
     select_object("#event_city", default_city.display_name, '/api/places', $scope.set_val)
@@ -170,7 +180,7 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
         controller: "TypeaheadCtrl"
     ).when("/profile/me",
         templateUrl: "<%= asset_path 'angular/partials/settings/edit_profile.tpl.html' %>"
-        controller: "ComedyBaseProfileCtrl"
+        #controller: "ComedyBaseProfileCtrl"
     ).when("/profile/events",
       templateUrl: "<%= asset_path 'angular/partials/settings/manage_events.tpl.html' %>"
     ).when("/venues",
