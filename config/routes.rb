@@ -7,6 +7,7 @@ Comedyhack::Application.routes.draw do
   namespace :api do
     resources :venues
     resources :events
+    resources :places
     resources :users do
       resources :images
       resources :videos

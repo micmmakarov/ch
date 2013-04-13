@@ -2,4 +2,5 @@
   <% if user_signed_in? %>
   window.current_user = <%= current_user.to_json.html_safe %>;
   <% end %>
+  window.default_city = <%= Place.where(:city => "San Francisco")[0].to_json.html_safe %>;
 </script>

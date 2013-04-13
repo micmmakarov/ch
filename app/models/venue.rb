@@ -11,4 +11,8 @@ class Venue < ActiveRecord::Base
     end
   end
 
+  def display_name
+    "#{self.name} (#{self.address})"
+  end
+
 end

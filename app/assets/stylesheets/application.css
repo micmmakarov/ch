@@ -10,6 +10,7 @@
  *
  *= require_tree .
  *= require angular-ui
+ *= require select2
  *= require jquery.ui.datepicker
  *= require_self
  */

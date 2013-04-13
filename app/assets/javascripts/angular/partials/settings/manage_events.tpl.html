@@ -1,3 +1,17 @@
-<h4>Edit events</h4>
-
-Tab content here!
+<div ng-controller="ComedyBaseProfileEventsCtrl">
+  <div>
+    Choose city:
+  <div id="event_city"type="text"></div>
+    Choose venue:
+  <div id="event_venue" type="text"></div>
+  </div>
+  <div>
+  </div>
+  Choose date:
+  <input type="text" ui-date ng-model="event_date" />
+  <div>
+    Choose event:
+    <div id="event_event" type="text"></div>
+  </div>
+  <button>Add event</button>
+</div>
