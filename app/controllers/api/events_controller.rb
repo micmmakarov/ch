@@ -52,9 +52,15 @@ class Api::EventsController < ApplicationController
     render json:event.to_json, status:201
   end
 
+  def delete
+    @event = Event.find(params[:id])
+    @event.destroy
+    render json:{}, status:201
+  end
+
 private
   def include_hash
-    {:methods => :display_name, :include => {:venue => {:include => :place}}}
+    {:methods => :display_name, :include => [{:venue => {:include => :place}}, :users]}
     #=> {:only => :hi}
   end
 

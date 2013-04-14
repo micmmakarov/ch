@@ -9,6 +9,7 @@ Comedyhack::Application.routes.draw do
     resources :events
     resources :places
     post "events/:id/add" => "events#add"
+    post "events/:id/delete" => "events#delete"
     resources :users do
       resources :images
       resources :videos

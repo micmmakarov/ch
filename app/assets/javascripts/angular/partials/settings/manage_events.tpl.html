@@ -9,12 +9,20 @@
 <div ng-controller="ComedyBaseManageEventsCtrl">
   <a class="btn" href="/profile/events/add">Add new event</a>
   <div ng-repeat="event in events">
+    <h1>
+      {{$index}}
+    </h1>
     <h4>{{event.title}}</h4>
     {{event.description}}
     <h5>{{event.venue.name}}</h5>
     {{event.venue.place.state}}
     {{event.venue.place.city}}
     {{event.start}}
+      <div ng-repeat="user in event.users">
+        <img src="{{user.imageUrl}}" />
+        {{user.name}}
+      </div>
+    <a href="#" ng-click="remove_event($index)">Remove event</a>
     <hr>
   </div>
 </div>

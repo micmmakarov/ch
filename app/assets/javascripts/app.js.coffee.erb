@@ -132,6 +132,16 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
     events = Event.query(query:$scope.query).then( (events) ->
       $scope.events = events
     )
+    $scope.remove_event = (indx) ->
+      $http(
+        method: 'POST'
+        url: "/api/events/#{$scope.events[indx].id}/delete"
+      ).success( (data) ->
+        $scope.events.splice(indx, 1);
+      ).error( (data) ->
+        alert "some error"
+      )
+
   ]
 
   ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
@@ -213,10 +223,9 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
     $locationProvider.html5Mode(true)
     $routeProvider.when("/",
         templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
-        controller: "ComedyBaseCtrl"
+        #controller: "ComedyBaseCtrl"
     ).when("/#_=_",
         templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
-        controller: "ComedyBaseCtrl"
     ).when("/about",
         templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
     ).when("/type",
