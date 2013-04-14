@@ -14,6 +14,7 @@ class Api::VenuesController < ApplicationController
       end
       @venues = Venue.all
       query.each do |key, value|
+        binding.pry
         @venues.select! {|v| v[key].upcase.include? value.upcase}
       end
       render json: @venues.to_json(include_hash)

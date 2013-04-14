@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412230431) do
+ActiveRecord::Schema.define(:version => 20130414024126) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20130412230431) do
     t.string   "url"
     t.string   "map_url"
     t.string   "image_url"
+    t.integer  "place_id"
   end
 
   create_table "videos", :force => true do |t|

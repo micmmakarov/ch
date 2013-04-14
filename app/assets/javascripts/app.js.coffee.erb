@@ -124,7 +124,7 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
             console.log FPError.toString()
   ]
 
-  ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "User", "Event", "$routeParams", "$location", ($scope, $http, User, Event, $routeParams, $location) ->
+  ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
     $scope.slug = $routeParams.slug
     $scope.val =  default_city.id
     $scope.city = {}
@@ -156,6 +156,22 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
       ).error( (data) ->
         alert "some error"
       )
+    $scope.create_venue = ->
+      $scope.new_venue.place_id = $scope.val
+      new_venue = new Venue($scope.new_venue)
+      window.v = new_venue
+      new_venue.create().then( (venue) ->
+        $scope.venue = $scope.new_venue.id
+        $("#event_venue").select2("destroy")
+        $("#event_venue").removeClass("select2-offscreen")
+        select_object("#event_venue", venue.name, "/api/venues", $scope.set_venue, {place_id:$scope.val})
+        #$scope.$apply()
+        $scope.set_venue(venue.id)
+        $scope.add_venue = false
+        $scope.new_venue = ""
+      )
+
+
 
 
     select_object("#event_city", default_city.display_name, '/api/places', $scope.set_val)

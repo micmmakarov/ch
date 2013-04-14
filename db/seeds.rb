@@ -27,6 +27,7 @@ kells = Venue.find_or_create_by_name("Kells") do |v|
   v.name = 'Kells'
   v.description = 'Irish Restaurant & Bar'
   v.address = '530 Jackson'
+  v.place_id = Place.find_by_city("San Francisco").id
   v.city = Place.find_by_city("San Francisco").city
   v.state = Place.find_by_city("San Francisco").state
 end
@@ -34,6 +35,7 @@ punchline = Venue.find_or_create_by_name("Punchline") do |v|
   v.name = 'Punchline'
   v.description = 'Punchline Comedy Club'
   v.address = '444 Battery Street'
+  v.place_id = Place.find_by_city("San Francisco").id
   v.city = Place.find_by_city("San Francisco").city
   v.state = Place.find_by_city("San Francisco").state
 end
@@ -41,8 +43,9 @@ br = Venue.find_or_create_by_name("Broadway Comedy Club") do |v|
   v.name = 'Broadway Comedy Club'
   v.description = 'Broadway Comedy Club'
   v.address = '318 West 53rd Street'
-  v.city = Place.find_by_city("San Francisco").city
-  v.state = Place.find_by_city("San Francisco").state
+  v.place_id = Place.find_by_city("New York").id
+  v.city = Place.find_by_city("New York").city
+  v.state = Place.find_by_city("New York").state
 end
 
 

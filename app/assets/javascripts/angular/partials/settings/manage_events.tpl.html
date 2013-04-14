@@ -36,9 +36,9 @@
   </div>
   <div class="add_venue" ng-show="add_venue">
     <input type="edit" ng-model="city.name" disabled>
-    <input type="edit" ng-model="venue.address" placeholder="Street address in {{city.name}}">
-    <input type="edit" ng-model="venue.name" placeholder="Name">
-    <input type="edit" ng-model="venue.description" placeholder="Descriptin">
-    <button ng-click="add_venue">Add venue</button>
+    <input type="edit" ng-model="new_venue.address" placeholder="Street address in {{city.name}}">
+    <input type="edit" ng-model="new_venue.name" placeholder="Name">
+    <input type="edit" ng-model="new_venue.description" placeholder="Descriptin">
+    <button ng-click="create_venue()">Add venue</button>
   </div>
 </div>
