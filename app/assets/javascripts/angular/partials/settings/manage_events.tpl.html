@@ -28,7 +28,7 @@
     <div ng-show="event_date">
       Choose event:
       <div id="event_event" type="text"></div>
-      <a href="#">register a new event(if the event is not on the list)</a>
+      <a ng-click="add_event=!add_event" href="#">register a new event(if the event is not on the list)</a>
     </div>
     <div ng-show="event">
       <button ng-click="addEvent()">Add event</button>
@@ -41,4 +41,13 @@
     <input type="edit" ng-model="new_venue.description" placeholder="Descriptin">
     <button ng-click="create_venue()">Add venue</button>
   </div>
+  <div class="add_event" ng-show="add_event">
+    <input type="edit" ng-model="venue_name" disabled>
+    <input type="edit" ng-model="new_event.title" placeholder="Title of the event">
+    <textarea ng-model="new_event.description" placeholder="Description of the event">
+    </textarea>
+    <input type="edit" ui-date ng-model="event_date">
+    <button ng-click="create_event()">Add event</button>
+  </div>
+
 </div>

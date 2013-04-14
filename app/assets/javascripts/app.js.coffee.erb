@@ -141,6 +141,7 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
       $scope.venue = venue
       $("#event_event").select2("destroy")
       $("#event_event").removeClass("select2-offscreen")
+      $scope.venue_name = $("#s2id_event_venue .select2-choice span").text()
       $scope.venue = venue
       $scope.$apply()
       select_object("#event_event", "Choose event", "/api/events", $scope.set_event, {venue_id:$scope.venue})
@@ -159,16 +160,30 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
     $scope.create_venue = ->
       $scope.new_venue.place_id = $scope.val
       new_venue = new Venue($scope.new_venue)
-      window.v = new_venue
       new_venue.create().then( (venue) ->
         $scope.venue = $scope.new_venue.id
         $("#event_venue").select2("destroy")
         $("#event_venue").removeClass("select2-offscreen")
-        select_object("#event_venue", venue.name, "/api/venues", $scope.set_venue, {place_id:$scope.val})
+        select_object("#event_venue", venue.display_name, "/api/venues", $scope.set_venue, {place_id:$scope.val})
         #$scope.$apply()
         $scope.set_venue(venue.id)
         $scope.add_venue = false
         $scope.new_venue = ""
+      )
+    $scope.create_event = ->
+      $scope.new_event.venue_id = $scope.venue
+      $scope.new_event.start = $scope.event_date
+      new_event = new Event($scope.new_event)
+      new_event.create().then( (event) ->
+        $scope.event = $scope.new_event.id
+        $("#event_event").select2("destroy")
+        $("#event_event").removeClass("select2-offscreen")
+        console.log event
+        select_object("#event_event", event.title, "/api/events", $scope.set_event, {venue_id:$scope.venue})
+        #$scope.$apply()
+        $scope.set_event(event.id)
+        $scope.add_event = false
+        $scope.new_event = ""
       )
 
 
