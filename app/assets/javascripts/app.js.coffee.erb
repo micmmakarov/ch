@@ -106,7 +106,9 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
     $scope.removeCurrentEvnet = ->
         delete $scope.current_event
     $scope.saveForm = ->
-        $scope.user.update()
+        $scope.user.update().then( (user) ->
+          $location.path "/#{user.slug}"
+        )
     User.get(id: current_user.id).then (result) ->
       $scope.user = result
     $scope.pickFile = =>

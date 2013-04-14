@@ -31,6 +31,7 @@ class Api::EventsController < ApplicationController
 
   def create
     @event = Event.create(params[:event])
+    @event.link = @event.venue.link if @event.link.blank?
     render json: @event.to_json(include_hash)
   end
 

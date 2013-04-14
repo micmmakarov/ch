@@ -1,5 +1,5 @@
 class Venue < ActiveRecord::Base
-  attr_accessible :address, :city, :description, :name, :state, :yelp, :place_id
+  attr_accessible :address, :city, :description, :name, :state, :yelp, :place_id, :link
   has_many :events
   before_save :save_city
   belongs_to :place
