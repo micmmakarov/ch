@@ -7,25 +7,38 @@
 </div>
 
 <div ng-controller="ComedyBaseProfileEventsCtrl">
-  <div>
-    Choose city:
-  <div id="event_city"type="text"></div>
-    Choose venue:
-  <div id="event_venue" type="text"></div>
+  <div class="add_event">
+    <div>
+      <div>
+        Choose city:
+        <div id="event_city"type="text"></div>
+      </div>
+      <div>
+        Choose venue:
+        <div id="event_venue" type="text"></div>
+      </div>
+      <a ng-click="add_venue=!add_venue" href="#">{{val}}register a new venue(if the venue is not on the list)</a>
+    </div>
+    <div>
+    </div>
+    <div ng-show="venue">
+    Choose date:
+    <input type="text" ui-date ng-model="event_date">
+    </div>
+    <div ng-show="event_date">
+      Choose event:
+      <div id="event_event" type="text"></div>
+      <a href="#">register a new event(if the event is not on the list)</a>
+    </div>
+    <div ng-show="event">
+      <button ng-click="addEvent()">Add event</button>
+    </div>
   </div>
-  <div>
+  <div class="add_venue" ng-show="add_venue">
+    <input type="edit" ng-model="city.name" disabled>
+    <input type="edit" ng-model="venue.address" placeholder="Street address in {{city.name}}">
+    <input type="edit" ng-model="venue.name" placeholder="Name">
+    <input type="edit" ng-model="venue.description" placeholder="Descriptin">
+    <button ng-click="add_venue">Add venue</button>
   </div>
-  <div ng-show="venue">
-  Choose date:
-  <input type="text" ui-date ng-model="event_date">
-  </div>
-  <div ng-show="event_date">
-    Choose event:
-    <div id="event_event" type="text"></div>
-    <a href="#">register a new event(if the event is not on the list)</a>
-  </div>
-  <div ng-show="event">
-    <button ng-click="addEvent()">Add event</button>
-  </div>
-
 </div>

@@ -127,10 +127,14 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
   ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "User", "Event", "$routeParams", "$location", ($scope, $http, User, Event, $routeParams, $location) ->
     $scope.slug = $routeParams.slug
     $scope.val =  default_city.id
+    $scope.city = {}
+    $scope.city.name = default_city.city
+
     $scope.set_val = (val) ->
       $("#event_venue").select2("destroy")
       $("#event_venue").removeClass("select2-offscreen")
       $scope.val = val
+      $scope.city.name = $("#s2id_event_city .select2-choice span").text()
       $scope.$apply()
       select_object("#event_venue", "Choose venue", "/api/venues", $scope.set_val, {place_id: val})
     $scope.set_venue = (venue) ->
