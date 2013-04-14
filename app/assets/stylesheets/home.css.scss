@@ -16,12 +16,19 @@ a {
 figure {
   margin: 0;
 }
+p {
+  font-weight: 300;
+}
 
 .btn {
   font-size: 22px;
   padding: 6px 18px;
   font-family: Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
   white-space: nowrap;
+}
+.btn-mini {
+  font-size: 17px;
+  padding: 4px 18px;
 }
 .btn-large {
   font-size: 40px;
@@ -43,6 +50,7 @@ ul.row {
 }
 
 .navbar {
+  margin: 0;
   .nav {
     margin: 5px 10px 0 0;
     i {
@@ -54,7 +62,6 @@ ul.row {
     border-radius: 0;
     border-bottom: 1px solid #38322a;
   }
-  margin: 0;
   .brand {
     color: $main-blue;
     text-shadow: none;
@@ -235,6 +242,36 @@ ul.row {
 .green-true {
   background-color: grey;
 }
+/****************************************
+/* Settings
+/****************************************/
+
+.settings-nav {
+  margin: 20px 0;
+  a {
+    padding: 5px 15px 5px 5px;
+  }
+}
+.settings-event-list {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+    margin: 0 0 10px;
+    padding: 0;
+    position: relative;
+    .actions {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}
+
+
+/****************************************
+/* /Settings
+/****************************************/
 
 
 

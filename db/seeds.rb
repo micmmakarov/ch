@@ -51,7 +51,7 @@ end
 
 5.times do |t|
   v = Venue.all.sample
-  event = Event.find_or_create_by_title("Comedy Show in #{v.name} #{t}") do |e|
+  event = Event.find_or_create_by_title("Comedy Show at #{v.name} #{t}") do |e|
     e.description = "Awesome show and a lot of cool comedians"
     e.start = Time.now + rand(20).days
     e.venue_id = v.id
