@@ -8,7 +8,7 @@ class Api::UsersController < ApplicationController
   def show
     @user = User.find_by_slug(params[:id])
     @user = User.find(params[:id]) if @user.blank?
-    render json: @user.to_json(include_has)
+    render json: @user.to_json(include_hash)
   end
 
   def update
@@ -34,8 +34,7 @@ class Api::UsersController < ApplicationController
 
   end
 private
-  def include_has
-    {:include => :events}
-    #=> {:only => :hi}
+  def include_hash
+    {:include => {:events => {:include => {:venue => {:include => :place}}}}}
   end
 end

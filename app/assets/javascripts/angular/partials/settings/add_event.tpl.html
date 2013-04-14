@@ -1,0 +1,53 @@
+<div>
+  <a href="/profile/me">Edit my profile</a>
+  <a href="/profile/events/add">Add Events</a>
+  <a href="/profile/events">Manage Events</a>
+  <a href="#">Manage Photos</a>
+  <a href="#">Manage Videos</a>
+</div>
+
+<div ng-controller="ComedyBaseProfileEventsCtrl">
+  <div class="add_event">
+    <div>
+      <div>
+        Choose city:
+        <div id="event_city"type="text"></div>
+      </div>
+      <div>
+        Choose venue:
+        <div id="event_venue" type="text"></div>
+      </div>
+      <a ng-click="add_venue=!add_venue" href="#">{{val}}register a new venue(if the venue is not on the list)</a>
+    </div>
+    <div>
+    </div>
+    <div ng-show="venue">
+    Choose date:
+    <input type="text" ui-date ng-model="event_date">
+    </div>
+    <div ng-show="event_date">
+      Choose event:
+      <div id="event_event" type="text"></div>
+      <a ng-click="add_event=!add_event" href="#">register a new event(if the event is not on the list)</a>
+    </div>
+    <div ng-show="event">
+      <button ng-click="addEvent()">Add event</button>
+    </div>
+  </div>
+  <div class="add_venue" ng-show="add_venue">
+    <input type="edit" ng-model="city.name" disabled>
+    <input type="edit" ng-model="new_venue.address" placeholder="Street address in {{city.name}}">
+    <input type="edit" ng-model="new_venue.name" placeholder="Name">
+    <input type="edit" ng-model="new_venue.description" placeholder="Descriptin">
+    <button ng-click="create_venue()">Add venue</button>
+  </div>
+  <div class="add_event" ng-show="add_event">
+    <input type="edit" ng-model="venue_name" disabled>
+    <input type="edit" ng-model="new_event.title" placeholder="Title of the event">
+    <textarea ng-model="new_event.description" placeholder="Description of the event">
+    </textarea>
+    <input type="edit" ui-date ng-model="event_date">
+    <button ng-click="create_event()">Add event</button>
+  </div>
+
+</div>

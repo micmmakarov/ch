@@ -7,6 +7,10 @@ class Api::EventsController < ApplicationController
     end
     @events = Event.all
     if query.map {|k,v| v}.join.length > 0
+      if query['user_id'].present?
+        @events = User.find(query['user_id']).events
+        query.delete 'user_id'
+      end
       if query[:venue_id].present?
         @events.select! {|v| v.venue_id = query[:venue_id]}
         query.delete :venue_id
@@ -47,10 +51,9 @@ class Api::EventsController < ApplicationController
     render json:event.to_json, status:201
   end
 
-
 private
   def include_hash
-    {:methods => :display_name, :include => :venue}
+    {:methods => :display_name, :include => {:venue => {:include => :place}}}
     #=> {:only => :hi}
   end
 

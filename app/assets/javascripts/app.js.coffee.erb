@@ -124,8 +124,15 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
             console.log FPError.toString()
   ]
 
+  ComedyBase.controller "ComedyBaseManageEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
+    $scope.query = {}
+    $scope.query.user_id = current_user.id
+    events = Event.query(query:$scope.query).then( (events) ->
+      $scope.events = events
+    )
+  ]
+
   ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
-    $scope.slug = $routeParams.slug
     $scope.val =  default_city.id
     $scope.city = {}
     $scope.city.name = default_city.city
@@ -153,7 +160,7 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
         method: 'POST'
         url: "/api/events/#{$scope.event}/add"
       ).success( (data) ->
-        $location.path( "/#{current_user.slug}" )
+        $location.path( "/profile/events" )
       ).error( (data) ->
         alert "some error"
       )
@@ -215,9 +222,10 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
         controller: "TypeaheadCtrl"
     ).when("/profile/me",
         templateUrl: "<%= asset_path 'angular/partials/settings/edit_profile.tpl.html' %>"
-        #controller: "ComedyBaseProfileCtrl"
     ).when("/profile/events",
       templateUrl: "<%= asset_path 'angular/partials/settings/manage_events.tpl.html' %>"
+    ).when("/profile/events/add",
+      templateUrl: "<%= asset_path 'angular/partials/settings/add_event.tpl.html' %>"
     ).when("/venues",
         templateUrl: "<%= asset_path 'angular/partials/venues/list.tpl.html' %>"
         controller: "VenuesCtrl"

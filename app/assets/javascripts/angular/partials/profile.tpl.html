@@ -25,26 +25,10 @@
       <div class="span2"></div>
       <div class="span8">
         <table class="table">
-          <tr>
-            <td>Sat, May 14</td>
-            <td>San Francisco, CA</td>
-            <td>The Fillmore</td>
-            <td>
-              <a href="#" class="btn btn-info">Get Tix</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Sat, May 20</td>
-            <td>San Francisco, CA</td>
-            <td>The Fillmore</td>
-            <td>
-              <a href="#" class="btn btn-info">Get Tix</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Sat, May 21</td>
-            <td>San Francisco, CA</td>
-            <td>The Fillmore</td>
+          <tr ng-repeat="event in user.events">
+            <td>{{event.start}}</td>
+            <td>{{event.venue.place.city}}, {{event.venue.place.state}}</td>
+            <td>{{event.venue.name}}</td>
             <td>
               <a href="#" class="btn btn-info">Get Tix</a>
             </td>
