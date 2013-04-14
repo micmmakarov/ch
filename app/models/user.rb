@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :events, :join_table => :users_events
   before_save :generate_slug
   has_many :images
+  has_many :videos
 
   def generate_slug
     if self.slug.blank?
@@ -21,6 +22,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def featured_video
+    self.videos.where(:featured => true).last.youtube_id
+  end
 
   def to_slug(str)
     str.gsub! /['`]/,""

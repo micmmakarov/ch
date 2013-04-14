@@ -12,11 +12,16 @@ class Api::UsersController < ApplicationController
   end
 
   def update
+    @user = current_user
     params[:user].delete :created_at
     params[:user].delete :updated_at
     params[:user].delete :id
     params[:user].delete :events
-    @user = User.find(params[:id])
+    if params[:user]['featured_video']
+      @user.videos.create(youtube_id:params[:user]['featured_video'], featured:true)
+      params[:user].delete 'featured_video'
+    end
+    #@user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       render json: @user.to_json
     else
@@ -35,6 +40,6 @@ class Api::UsersController < ApplicationController
   end
 private
   def include_hash
-    {:include => {:events => {:include => {:venue => {:include => :place}}}}}
+    {:include => {:events => {:include => {:venue => {:include => :place}}}}, :methods => :featured_video}
   end
 end

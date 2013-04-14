@@ -109,6 +109,12 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
         $scope.user.update().then( (user) ->
           $location.path "/#{user.slug}"
         )
+    $scope.getVideoId = ->
+      video_id = $scope.video_link.split("v=")[1]
+      ampersandPosition = video_id.indexOf("&")
+      video_id = video_id.substring(0, ampersandPosition)  unless ampersandPosition is -1
+      $scope.user.featuredVideo = video_id
+
     User.get(id: current_user.id).then (result) ->
       $scope.user = result
     $scope.pickFile = =>
@@ -141,7 +147,23 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
       ).error( (data) ->
         alert "some error"
       )
+  ]
 
+  ComedyBase.controller "ComedyBaseManageVideosCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
+    $scope.query = {}
+    $scope.query.user_id = current_user.id
+    events = Event.query(query:$scope.query).then( (events) ->
+      $scope.events = events
+    )
+    $scope.remove_event = (indx) ->
+      $http(
+        method: 'POST'
+        url: "/api/events/#{$scope.events[indx].id}/delete"
+      ).success( (data) ->
+        $scope.events.splice(indx, 1);
+      ).error( (data) ->
+        alert "some error"
+      )
   ]
 
   ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
@@ -235,6 +257,8 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
         templateUrl: "<%= asset_path 'angular/partials/settings/edit_profile.tpl.html' %>"
     ).when("/profile/events",
       templateUrl: "<%= asset_path 'angular/partials/settings/manage_events.tpl.html' %>"
+    ).when("/profile/videos",
+      templateUrl: "<%= asset_path 'angular/partials/settings/manage_videos.tpl.html' %>"
     ).when("/profile/events/add",
       templateUrl: "<%= asset_path 'angular/partials/settings/add_event.tpl.html' %>"
     ).when("/venues",

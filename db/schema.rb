@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414052401) do
+ActiveRecord::Schema.define(:version => 20130414175020) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(:version => 20130414052401) do
     t.integer  "event_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.boolean  "featured"
+    t.string   "youtube_id"
   end
 
 end
