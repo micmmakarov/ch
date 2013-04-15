@@ -1,17 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="span12">
-
       <nav class="settings-nav">
         <a href="/profile/me">Edit your profile</a>
         <a href="/profile/events">Manage Events</a>
-        <a href="#">Manage Photos</a>
-        <a href="#">Manage Videos</a>
       </nav>
+    </div>
+  </div>
+  <div class="row" ng-controller="ComedyBaseProfileEventsCtrl">
+    <div class="span6">
 
       <h3>Add New Event</h3>
 
-      <div ng-controller="ComedyBaseProfileEventsCtrl">
+      <div>
         <div class="add_event container">
           <div>
             <div>
@@ -39,6 +40,10 @@
             <button ng-click="addEvent()">Add event</button>
           </div>
         </div>
+
+      </div>
+      </div>
+      <div class="span6">
         <div class="add_venue" ng-show="add_venue">
           <input type="edit" ng-model="city.name" disabled>
           <input type="edit" ng-model="new_venue.address" placeholder="Street address in {{city.name}}">

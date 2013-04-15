@@ -1,4 +1,4 @@
-<div ng-controller="KuchekaCtrl">
+<div ng-controller="ComedyBaseCtrl">
     <header id="#overview" class="jumbotron subhead">
       <div class="container">
         <h1>Comedy Base</h1>
@@ -11,34 +11,17 @@
         <div class="span12">
           <h3>Featured Comedians</h3>
         </div>
-        <div class="span4">
+
+        <div class="span4" ng-repeat="user in users">
           <figure>
-            <a href="/michael"><img src="/assets/comedian-mm.jpg" class="img-rounded"></a>
+            <a href="/{{user.slug}}"><img src="{{user.coverImageUrl}}" class="img-rounded"></a>
             <figcaption>
-              <span class="name">Michael Makarov</span>
-              <span class="location">San Francisco, CA</span>
+              <span class="name">{{user.name}}</span>
+              <span class="location">{{user.location}}</span>
             </figcaption>
           </figure>
         </div>
 
-        <div class="span4">
-          <figure>
-            <img src="/assets/comedian2.jpg" class="img-rounded">
-            <figcaption>
-              <span class="name">Sara Silverman</span>
-              <span class="location">Los Angeles, CA</span>
-            </figcaption>
-          </figure>
-        </div>
-        <div class="span4">
-          <figure>
-            <img src="/assets/comedian-lck.jpg" class="img-rounded">
-            <figcaption>
-              <span class="name">Louis C.K.</span>
-              <span class="location">New York, NY</span>
-            </figcaption>
-          </figure>
-        </div>
       </div>
     </div>
 

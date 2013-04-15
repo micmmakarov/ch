@@ -75,9 +75,7 @@ ComedyBase.controller "EventsCtrl", ["$scope", "$http", "Event", "$routeParams",
     ]
 
 
-ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "$resource", "$routeParams", "$location", ($scope, $http, $resource, $routeParams, $location) ->
-
-  $scope.$route = $route
+ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "User", "$routeParams", "$location", ($scope, $http, User, $routeParams, $location) ->
 
   users = User.query().then( (users) ->
     $scope.users = users
@@ -245,7 +243,6 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
     $locationProvider.html5Mode(true)
     $routeProvider.when("/",
         templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
-        #controller: "ComedyBaseCtrl"
     ).when("/#_=_",
         templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
     ).when("/about",
@@ -267,12 +264,6 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
     ).when("/events",
       templateUrl: "<%= asset_path 'angular/partials/events/list.tpl.html' %>"
       controller: "EventsCtrl"
-    ).when("/me/events",
-        templateUrl: "<%= asset_path 'angular/partials/events/edit_events.tpl.html' %>"
-        controller: "ComedyBaseProfileCtrl"
-    ).when("/events/add",
-        templateUrl: "<%= asset_path 'angular/partials/events/choose_event.tpl.html' %>"
-        controller: "ComedyBaseProfileCtrl"
     ).when("/:slug",
         templateUrl: "<%= asset_path 'angular/partials/profile.tpl.html' %>"
         controller: "ComedyBaseUserCtrl"

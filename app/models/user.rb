@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
   end
 
   def featured_video
-    self.videos.where(:featured => true).last.youtube_id
+    video = self.videos.where(:featured => true).last
+    video.youtube_id if video.present?
   end
 
   def to_slug(str)
