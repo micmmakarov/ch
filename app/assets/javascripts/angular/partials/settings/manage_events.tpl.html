@@ -15,7 +15,7 @@
             <h3>{{$index}}) {{event.title}}</h3>
             <p>{{event.description}}</p>
             <h4>{{event.venue.name}} in {{event.venue.place.city}}, {{event.venue.place.state}}</h4>
-            {{event.start}}
+            {{event.start|dateFormat}}
 <!--             <div class="pull-right" ng-repeat="user in event.users">
               <img src="{{user.imageUrl}}" />
               {{user.name}}

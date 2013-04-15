@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.datepicker
+//= require moment
 //= require underscore
 //=require select2
 //= require angular

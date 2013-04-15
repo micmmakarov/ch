@@ -25,6 +25,11 @@ ComedyBase.factory "Place", ["railsResourceFactory", (railsResourceFactory) ->
     name: "place"
 ]
 
+ComedyBase.filter "dateFormat", ->
+  (dt) ->
+    date = moment(dt)
+    date.format("dddd, MMM Do")
+
 
 ComedyBase.factory "debounce", ($timeout, $q) ->
   (func, wait, immediate) ->
