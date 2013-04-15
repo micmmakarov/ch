@@ -40,6 +40,6 @@ class Api::UsersController < ApplicationController
   end
 private
   def include_hash
-    {:include => {:events => {:include => {:venue => {:include => :place}}}}, :methods => :featured_video}
+    {:include => {:events => {:include => {:venue => {:include => :place}}}}, :methods => [:featured_video, :next_show]}
   end
 end

@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     video.youtube_id if video.present?
   end
 
+  def next_show
+    self.events.where(:start => Date.today..(Date.today+5.years)).order(:start).last.as_json(:include => {:venue => {:include => :place}})
+  end
+
   def to_slug(str)
     str.gsub! /['`]/,""
 

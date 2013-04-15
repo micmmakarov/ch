@@ -15,10 +15,10 @@
   <div class="container event-info">
     <div class="row">
       <div class="span10">
-        <p class="next-event"><span>Next Show:</span> Tues, May 11  /  San Francisco  @  Punchline</p>
+        <p class="next-event"><span>Next Show:</span> {{user.nextShow.start}}  /  {{user.nextShow.venue.place.city}}  @  {{user.nextShow.venue.name}}</p>
       </div>
       <div class="span2">
-        <a href="#" class="btn btn-large btn-info">Get Tix</a>
+        <a href="#" class="btn btn-large btn-info">More info</a>
       </div>
     </div>
     <div class="row event-list">
@@ -30,7 +30,7 @@
             <td>{{event.venue.place.city}}, {{event.venue.place.state}}</td>
             <td>{{event.venue.name}}</td>
             <td>
-              <a href="{{event.link}}" class="btn btn-info">Go to webpage</a>
+              <a href="{{event.link}}" class="btn btn-info">More info</a>
             </td>
           </tr>
         </table>
