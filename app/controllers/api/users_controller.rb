@@ -16,6 +16,8 @@ class Api::UsersController < ApplicationController
     params[:user].delete :created_at
     params[:user].delete :updated_at
     params[:user].delete :id
+    params[:user].delete :fuck
+    params[:user].delete :featured_video
     params[:user].delete :next_show
     params[:user].delete :events
     if params[:user]['featured_video']
