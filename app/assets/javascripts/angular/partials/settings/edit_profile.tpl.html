@@ -9,44 +9,86 @@
           <a href="/profile/events">Manage Events</a>
         </nav>
 
-        <h3>Your Settings</h3>
+        <h3>Your Profile Settings</h3>
 
-              <form ng-submit="saveForm()">
-                <div class="span12">
-                  <input type="text" ng-model="user.name">
-                  <div class="input-prepend">
-                    <span class="add-on">http://comedybase.net/</span>
-                    <input class="span2" type="text" ng-model="user.slug" placeholder="your link">
-                  </div>
+        <form ng-submit="saveForm()" class="form-style">
+          <div class="span12">
+            <div class="control-group">
+              <label for="inputUsername" class="control-label">Your Name</label>
+              <div class="controls">
+                <input type="text" id="inputUsername" ng-model="user.name">
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="inputUserSlug" class="control-label">Your Web Address</label>
+              <div class="controls">
+                <div class="input-prepend">
+                  <span class="add-on">http://comedybase.net/</span>
+                  <input class="span2" id="inputUserSlug" type="text" ng-model="user.slug" placeholder="your link">
                 </div>
-                <div class="span12">
-                  <hr>
-                  <h4>Short Bio:</h4>
-                  <textarea ng-model='user.bio'></textarea>
-                </div>
-                <div class="span12">
-                  <a class="btn" ng-click="pickFile()" class="btn">Choose a cover image</a>
-                  <img src="{{user.coverImageUrl}}" width="auto" height="100">
-                  <h4>Image Preview: {{user.cover_image_url}}</h4>
-                </div>
-                <div class="span12">
-                  <div class="input-prepend">
-                    <span class="add-on">http://</span>
-                    <input class="span2" type="text" ng-model="user.website" placeholder="your-website.com">
-                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="span12">
+            <hr>
+            <div class="control-group">
+              <label for="inputBio" class="control-label">Short Bio</label>
+              <div class="controls">
+                <textarea id="inputBio" ng-model='user.bio'></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="span12">
+            <div class="control-group">
+              <label for="inputCity" class="control-label">Home City</label>
+              <div class="controls">
+                <input type="text" id="inputCity" ng-model="user.location" placeholder="Home base town/city">
+              </div>
+            </div>
+          </div>
 
-                  <input type="text" ng-model="video_link" ng-change="getVideoId()" placeholder="link to a featured youtube video">
-                  <input disabled type="text" ng-model="user.featuredVideo" placeholder="Youtube code">
-                  <input type="text" ng-model="user.facebook" placeholder="Facebook">
-                  <input type="text" ng-model="user.twitter" placeholder="Twitter">
+          <div class="span12">
+            <hr>
+            <a class="btn" ng-click="pickFile()" class="btn">Add a cover image</a>
+            <img src="{{user.coverImageUrl}}" width="auto" height="100">
+            <h4>Image Preview: {{user.cover_image_url}}</h4>
+          </div>
+          <div class="span12">
+            <hr>
+            <div class="control-group">
+              <label for="inputWebsite" class="control-label">Personal Website</label>
+              <div class="controls">
+                <div class="input-prepend">
+                  <span class="add-on">http://</span>
+                  <input class="span2" id="inputWebsite" type="text" ng-model="user.website" placeholder="your-website.com">
                 </div>
-                <div class="span12">
-                  <input type="text" ng-model="user.location" placeholder="Home base town/city">
-                </div>
-                <div class="span12">
-                  <input type="submit" class="btn btn-success" value="Save">
-                </div>
-              </form>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="inputYTLink" class="control-label">Featured YouTube Video</label>
+              <div class="controls">
+                <input type="text" id="inputYTLink" ng-model="video_link" ng-change="getVideoId()" placeholder="link to a featured youtube video">
+                <input disabled type="text" ng-model="user.featuredVideo" placeholder="Youtube code">
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="inputFacebook" class="control-label">Facebook Page</label>
+              <div class="controls">
+                <input type="text" id="inputFacebook" ng-model="user.facebook" placeholder="Facebook">
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="inputTwitter" class="control-label">Twitter Page</label>
+              <div class="controls">
+                <input type="text" id="inputTwitter" ng-model="user.twitter" placeholder="Twitter">
+              </div>
+            </div>
+          </div>
+
+          <div class="span12">
+            <input type="submit" class="btn btn-success" value="Save">
+          </div>
+        </form>
 
       </div>
     </div>
