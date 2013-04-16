@@ -303,7 +303,17 @@ ul.row {
 .settings-nav {
   margin: 20px 0;
   a {
-    padding: 5px 15px 5px 5px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    &:hover {
+      text-decoration: none;
+    }
+    &.active {
+      color: white;
+      background: $main-blue;
+    }
   }
 }
 
