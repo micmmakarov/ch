@@ -49,9 +49,14 @@
 
           <div class="span12">
             <hr>
-            <a class="btn" ng-click="pickFile()" class="btn">Add a cover image</a>
-            <img src="{{user.coverImageUrl}}/convert?w=400" width="auto" height="100">
-            <h4>Image Preview: {{user.cover_image_url}}</h4>
+            <div class="control-group">
+              <label class="control-label">
+                <a class="btn" ng-click="pickFile()" class="btn">Change cover image</a>
+              </label>
+              <div class="controls">
+                <img src="{{user.coverImageUrl}}/convert?w=400" class="user-hero-img">
+              </div>
+            </div>
           </div>
           <div class="span12">
             <hr>
