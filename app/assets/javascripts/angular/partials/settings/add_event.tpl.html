@@ -12,36 +12,56 @@
 
       <h3>Add New Event</h3>
 
-      <div>
         <div class="add_event container">
           <div>
-            <div>
-              Choose city:
-              <div id="event_city" type="text"></div>
+            <div class="control-group">
+              <label for="event_city" class="control-label">Event city</label>
+              <div class="controls">
+                <div id="event_city" type="text"></div>
+              </div>
             </div>
-            <div>
-              Choose venue:
-              <div id="event_venue" type="text"></div>
+            <div class="control-group">
+              <label for="event_venue" class="control-label">Event venue</label>
+              <div class="controls">
+                <div id="event_venue" type="text"></div>
+              </div>
+              <p><a ng-click="add_venue=!add_venue" href="#">Add a new venue</a> (if the venue is not on the list) {{val}}</p>
             </div>
-            <p><a ng-click="add_venue=!add_venue" href="#">Add a new venue</a> (if the venue is not on the list) {{val}}</p>
           </div>
-          <div>
-          </div>
+
+
           <div ng-show="venue">
-          Choose date:
-          <input type="text" ui-date ng-model="event_date">
+            <div class="control-group">
+              <label for="event_date" class="control-label">Date</label>
+              <div class="controls">
+                <input id="event_date" type="text" ui-date ng-model="event_date">
+              </div>
+            </div>
           </div>
+
+
           <div ng-show="event_date">
-            Choose event:
-            <div id="event_event" type="text"></div>
-            <a ng-click="add_event=!add_event" href="#">register a new event(if the event is not on the list)</a>
+            <div class="control-group">
+              <label for="event_event" class="control-label">Event</label>
+              <div class="controls">
+                <div id="event_event" type="text"></div>
+              </div>
+              <a ng-click="add_event=!add_event" href="#">register a new event(if the event is not on the list)</a>
+            </div>
           </div>
+
+
           <div ng-show="event">
-            <button ng-click="addEvent()">Add event</button>
+            <div class="control-group">
+              <label for="action" class="control-label">Add</label>
+              <div class="controls">
+                <button id="action" ng-click="addEvent()">Add event</button>
+              </div>
+            </div>
           </div>
+
         </div>
 
-      </div>
       </div>
       <div class="span6">
         <div class="add_venue" ng-show="add_venue">
