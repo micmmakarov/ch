@@ -10,12 +10,15 @@ $main-blue: #00bff3;
 body {
   font: 20px Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
 }
+
 a {
   color: $main-blue;
 }
+
 figure {
   margin: 0;
 }
+
 p {
   font-weight: 300;
 }
@@ -26,10 +29,12 @@ p {
   font-family: Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
   white-space: nowrap;
 }
+
 .btn-mini {
   font-size: 17px;
   padding: 4px 18px;
 }
+
 .btn-large {
   font-size: 40px;
   padding: 18px 25px;
@@ -41,6 +46,7 @@ ul.row {
     margin: 0;
   }
 }
+
 .list-reset {
   margin: 0;
   padding: 0;
@@ -68,19 +74,21 @@ ul.row {
     font-size: 27px;
   }
 }
+
 .container {
   padding-left: 20px;
   padding-right: 20px;
-   > .row {
+  > .row {
     margin-bottom: 20px;
   }
 }
+
 .subhead {
   color: #fff;
   position: relative;
   padding: 60px 0;
   h1, p {
-    text-shadow: 0 1px 2px rgba(0,0,0,.5);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
   }
   h1 {
     font-size: 68px;
@@ -90,12 +98,14 @@ ul.row {
     font-size: 36px;
   }
 }
+
 .jumbotron {
   background: url('/assets/bg-mic.jpg') center center;
   .subhead {
     padding: 100px 0;
   }
 }
+
 .connect-fb {
   background: url('/assets/btn-fb-connect.png') no-repeat;
   width: 295px;
@@ -103,13 +113,14 @@ ul.row {
   display: inline-block;
   text-indent: -5000px;
 }
+
 .user-hero {
   background-position: center center;
   background-size: 100%;
   color: #fff;
   padding: 40px 0;
   h3, p {
-    background: rgba(0,0,0,.85);
+    background: rgba(0, 0, 0, .85);
   }
   h3 {
     font-size: 68px;
@@ -134,6 +145,7 @@ ul.row {
     }
   }
 }
+
 .next-event {
   font-size: 54px;
   line-height: .9;
@@ -141,16 +153,19 @@ ul.row {
     color: $main-blue;
   }
 }
+
 .user-profile {
   .container.event-info {
     padding-top: 40px;
     padding-bottom: 40px;
   }
 }
+
 .section-connect {
   border-top: 4px #ddd solid;
   padding: 10px 0;
 }
+
 .section-inverse {
   background: #222 url('/assets/bg-tile-black.jpg');
   padding: 40px 0;
@@ -158,10 +173,11 @@ ul.row {
   border-top: 4px #a5a5a5 solid;
   hr {
     border-top: 0;
-    border-bottom: 8px solid rgba(255,255,255,.5);
+    border-bottom: 8px solid rgba(255, 255, 255, .5);
     margin-top: 40px;
   }
 }
+
 .event-list {
   margin: 40px 0 0;
   table {
@@ -178,6 +194,7 @@ ul.row {
     }
   }
 }
+
 .contact-info {
   font-weight: 300;
   li {
@@ -190,6 +207,7 @@ ul.row {
     }
   }
 }
+
 .image-list {
   figure {
     a {
@@ -210,6 +228,7 @@ ul.row {
     }
   }
 }
+
 .user-photo-gallery {
   img {
     margin-bottom: 10px;
@@ -220,12 +239,14 @@ ul.row {
     box-sizing: border-box;
   }
 }
+
 .video-wrapper {
   position: relative;
   padding-bottom: 56.25%; /* 16:9 */
   padding-top: 25px;
   height: 0;
 }
+
 .video-wrapper iframe {
   position: absolute;
   top: 0;
@@ -264,6 +285,7 @@ ul.row {
   text-align: right;
   font-size: 18px;
 }
+
 .controls {
   margin-left: 180px;
   input {
@@ -273,7 +295,6 @@ ul.row {
 /****************************************
 /* /Forms
 /****************************************/
-
 
 /****************************************
 /* Settings
@@ -285,6 +306,7 @@ ul.row {
     padding: 5px 15px 5px 5px;
   }
 }
+
 .settings-event-list {
   margin: 0;
   padding: 0;
@@ -301,12 +323,9 @@ ul.row {
   }
 }
 
-
 /****************************************
 /* /Settings
 /****************************************/
-
-
 
 /****************************************
 /* Media Query Overrides
@@ -315,7 +334,22 @@ ul.row {
 @media (max-width: 767px) {
   body {
     padding-left: 0;
-    padding-right: 0;    
+    padding-right: 0;
+  }
+  .control-group {
+    label {
+      float: none;
+      text-align: left;
+      width: 90%;
+      padding-left: 5%;
+    }
+    .controls {
+      margin-left: 0px;
+      padding-left: 5%;
+      input, textarea {
+        width: 80%;
+      }
+    }
   }
 }
 
@@ -323,12 +357,11 @@ ul.row {
 /* /Media Query Overrides
 /****************************************/
 
-
-img.profile-thumb  {
-  max-height:200px;
+img.profile-thumb {
+  max-height: 200px;
   overflow: hidden;
 }
 
 .body {
-  min-height:600px;
+  min-height: 600px;
 }
