@@ -13,7 +13,7 @@
     </div>
   </header>
   <div class="container event-info">
-    <div class="row">
+    <div class="row" ng-show="user.nextShow">
       <div class="span10">
         <p class="next-event"><span>Next Show:</span> {{user.nextShow.start|dateFormat}}  /  {{user.nextShow.venue.place.city}}  @  {{user.nextShow.venue.name}}</p>
       </div>
@@ -54,8 +54,8 @@
               <b>Website:</b> <a href="http://{{user.website}}">{{user.website}}</a>
             </li>
             <li>
-              <p ng-show="user.facebook"><b>Facebook</b> <a href="{{user.facebook}}">{{user.facebook|facebook}}</a></p>
-              <p ng-show="user.twitter"><b>Twitter</b> <a href="http://www.twitter.com/{{user.twitter}}">{{user.twitter}}</a>
+              <p ng-show="user.facebook"><b>Facebook: </b> <a href="{{user.facebook}}">{{user.facebook|facebook}}</a></p>
+              <p ng-show="user.twitter"><b>Twitter: </b> <a href="http://www.twitter.com/{{user.twitter}}">{{user.twitter}}</a>
               </p>
             </li>
           </ul>
