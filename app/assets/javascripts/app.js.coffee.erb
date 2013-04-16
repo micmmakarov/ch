@@ -61,6 +61,14 @@ ComedyBase.factory "debounce", ($timeout, $q) ->
       deferred.promise
 
 
+ComedyBase.controller "ComedyBaseNavCtrl", ["$scope", "$http", "Venue", "$routeParams", "$location", "debounce", ($scope, $http, Venue, $routeParams, $location, debounce) ->
+
+  $scope.isActive = (route) ->
+    route is $location.path()
+
+]
+
+
 ComedyBase.controller "VenuesCtrl", ["$scope", "$http", "Venue", "$routeParams", "$location", "debounce", ($scope, $http, Venue, $routeParams, $location, debounce) ->
 
     $scope.debouncedSearch = -> debounce($scope.search, 3000, false)
