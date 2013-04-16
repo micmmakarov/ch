@@ -47,15 +47,15 @@
         </div>
         <div class="span3">
           <ul class="contact-info">
-            <li>
+            <li ng-show="user.contact">
               <b>For Contact/Booking:</b> <a href="mailto:{{user.contact}}">{{user.contact}}</a>
             </li>
-            <li>
+            <li ng-show="user.website">
               <b>Website:</b> <a href="http://{{user.website}}">{{user.website}}</a>
             </li>
             <li>
-              <p><b>Facebook</b> <a href="{{user.facebook}}">{{user.facebook}}</a></p>
-              <p><b>Twitter</b> <a href="http://www.twitter.com/{{user.twitter}}">{{user.twitter}}</a>
+              <p ng-show="user.facebook"><b>Facebook</b> <a href="{{user.facebook}}">{{user.facebook}}</a></p>
+              <p ng-show="user.twitter"><b>Twitter</b> <a href="http://www.twitter.com/{{user.twitter}}">{{user.twitter}}</a>
               </p>
             </li>
           </ul>
