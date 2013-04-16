@@ -30,6 +30,14 @@ ComedyBase.filter "dateFormat", ->
     date = moment(dt)
     date.format("ddd, MMM Do")
 
+ComedyBase.filter "facebook", ->
+  (fb) ->
+    if typeof(fb) == 'string'
+      fb = fb.replace("https://www.facebook.com/","")
+      fb = fb.replace("http://www.facebook.com/","")
+      fb = fb.replace("www.facebook.com/","")
+      fb = fb.replace("facebook.com/","")
+      fb
 
 ComedyBase.factory "debounce", ($timeout, $q) ->
   (func, wait, immediate) ->
