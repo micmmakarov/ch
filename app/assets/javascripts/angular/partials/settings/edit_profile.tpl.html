@@ -14,7 +14,10 @@
               <form ng-submit="saveForm()">
                 <div class="span12">
                   <input type="text" ng-model="user.name">
-                  <input type="text" ng-model="user.slug" >
+                  <div class="input-prepend">
+                    <span class="add-on">http://comedybase.net/</span>
+                    <input class="span2" type="text" ng-model="user.slug" placeholder="your link">
+                  </div>
                 </div>
                 <div class="span12">
                   <a class="btn" ng-click="pickFile()" class="btn">Choose a cover image</a>
