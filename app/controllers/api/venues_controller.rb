@@ -29,13 +29,13 @@ class Api::VenuesController < ApplicationController
 
   def create
     @venue = Venue.create(params[:venue])
-    render json: @venue
+    render json: @venue.to_json(include_hash)
   end
 
   def update
     @venue = Venue.find(params[:id])
     @venue.update_attributes(params[:venue])
-    render json: @venue
+    render json: @venue.to_json(include_hash)
   end
 
   def destroy

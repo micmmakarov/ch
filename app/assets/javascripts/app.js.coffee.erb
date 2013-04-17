@@ -3,14 +3,14 @@ ComedyBase = angular.module('ComedyBase', ['ngResource', 'rails', 'ui', 'ui.boot
 filepicker.setKey('AffEtHmTETGO3pTJxeyo7z')
 
 ComedyBase.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
-    railsResourceFactory
-        url: "/api/users"
-        name: "user"
+  railsResourceFactory
+    url: "/api/users"
+    name: "user"
 ]
 ComedyBase.factory "Venue", ["railsResourceFactory", (railsResourceFactory) ->
-    railsResourceFactory
-        url: "/api/venues"
-        name: "venue"
+  railsResourceFactory
+    url: "/api/venues"
+    name: "venue"
 ]
 
 ComedyBase.factory "Event", ["railsResourceFactory", (railsResourceFactory) ->
@@ -33,13 +33,13 @@ ComedyBase.filter "dateFormat", ->
 ComedyBase.filter "facebook", ->
   (fb) ->
     if typeof(fb) == 'string'
-      fb = fb.replace("https://www.facebook.com/","")
-      fb = fb.replace("http://www.facebook.com/","")
-      fb = fb.replace("www.facebook.com/","")
-      fb = fb.replace("facebook.com/","")
+      fb = fb.replace("https://www.facebook.com/", "")
+      fb = fb.replace("http://www.facebook.com/", "")
+      fb = fb.replace("www.facebook.com/", "")
+      fb = fb.replace("facebook.com/", "")
       fb
 
-ComedyBase.factory "debounce", ($timeout, $q) ->
+ComedyBase.factory "debounce", ["$timeout", "$q", ($timeout, $q) ->
   (func, wait, immediate) ->
     timeout = undefined
     deferred = $q.defer()
@@ -59,10 +59,9 @@ ComedyBase.factory "debounce", ($timeout, $q) ->
         deferred.resolve func.apply(context, args)
         deferred = $q.defer()
       deferred.promise
+]
 
-
-ComedyBase.controller "ComedyBaseNavCtrl", ["$scope", "$http", "Venue", "$routeParams", "$location", "debounce", ($scope, $http, Venue, $routeParams, $location, debounce) ->
-
+ComedyBase.controller "ComedyBaseNavCtrl", ["$scope", "$http", "Venue", "$routeParams", "$location", ($scope, $http, Venue, $routeParams, $location) ->
   $scope.isActive = (route) ->
     route is $location.path()
 
@@ -70,226 +69,223 @@ ComedyBase.controller "ComedyBaseNavCtrl", ["$scope", "$http", "Venue", "$routeP
 
 
 ComedyBase.controller "VenuesCtrl", ["$scope", "$http", "Venue", "$routeParams", "$location", "debounce", ($scope, $http, Venue, $routeParams, $location, debounce) ->
+  $scope.debouncedSearch = -> debounce($scope.search, 3000, false)
 
-    $scope.debouncedSearch = -> debounce($scope.search, 3000, false)
+  $scope.search = ->
+    venues = Venue.query(query: $scope.query).then((venues) ->
+      $scope.venues = venues
+    )
 
-    $scope.search = ->
-      venues = Venue.query(query:$scope.query).then( (venues) ->
-        $scope.venues = venues
-      )
-
-    $scope.isActive = (route) ->
-        route is $location.path()
-    ]
+  $scope.isActive = (route) ->
+    route is $location.path()
+]
 
 ComedyBase.controller "EventsCtrl", ["$scope", "$http", "Event", "$routeParams", "$location", "debounce", ($scope, $http, Event, $routeParams, $location, debounce) ->
+  $scope.debouncedSearch = -> debounce($scope.search, 3000, false)
 
-    $scope.debouncedSearch = -> debounce($scope.search, 3000, false)
+  $scope.search = ->
+    venues = Event.query(query: $scope.query).then((events) ->
+      $scope.events = events
+    )
 
-    $scope.search = ->
-      venues = Event.query(query:$scope.query).then( (events) ->
-        $scope.events = events
-      )
-
-    $scope.isActive = (route) ->
-      route is $location.path()
-    ]
+  $scope.isActive = (route) ->
+    route is $location.path()
+]
 
 
 ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "User", "$routeParams", "$location", ($scope, $http, User, $routeParams, $location) ->
-
-  users = User.query().then( (users) ->
+  users = User.query().then((users) ->
     $scope.users = users
   )
 
   $scope.isActive = (route) ->
     route is $location.path()
-  ]
+]
 
 ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeParams", "$location", ($scope, $http, User, $routeParams, $location) ->
   $scope.slug = $routeParams.slug
-  User.get(id: $scope.slug).then( (user) ->
+  User.get(id: $scope.slug).then((user) ->
     $scope.user = user
     window.u = user
   )
-  ]
+]
 
-   
+
 ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$routeParams", "$location", ($scope, $http, User, $routeParams, $location) ->
-    $scope.slug = $routeParams.slug
+  $scope.slug = $routeParams.slug
 
-    $scope.setCurrentEvent = (event) ->
-        $scope.current_event = event
-    $scope.updateEvent = ->
-        delete $scope.current_event
-    $scope.removeCurrentEvnet = ->
-        delete $scope.current_event
-    $scope.saveForm = ->
-        $scope.user.update().then( (user) ->
-          $location.path "/#{user.slug}"
-        )
-    $scope.getVideoId = ->
-      video_id = $scope.video_link.split("v=")[1]
-      ampersandPosition = video_id.indexOf("&")
-      video_id = video_id.substring(0, ampersandPosition)  unless ampersandPosition is -1
-      $scope.user.featuredVideo = video_id
-
-    User.get(id: current_user.id).then (result) ->
-      $scope.user = result
-    $scope.pickFile = =>
-        filepicker.pick
-            mimetypes: ["image/*", "text/plain"]
-            services: ["COMPUTER", "FACEBOOK", "GMAIL"]
-        , ((FPFile) =>
-            $scope.user.cover_image_url = FPFile.url
-            $scope.user.coverImageUrl = FPFile.url
-            #window.u = $scope.user
-            $scope.$apply()
-
-        ), (FPError) ->
-            #alert "error"
-            console.log FPError.toString()
-  ]
-
-  ComedyBase.controller "ComedyBaseManageEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
-    $scope.query = {}
-    $scope.query.user_id = current_user.id
-    events = Event.query(query:$scope.query).then( (events) ->
-      $scope.events = events
+  $scope.setCurrentEvent = (event) ->
+    $scope.current_event = event
+  $scope.updateEvent = ->
+    delete $scope.current_event
+  $scope.removeCurrentEvnet = ->
+    delete $scope.current_event
+  $scope.saveForm = ->
+    $scope.user.update().then((user) ->
+      $location.path "/#{user.slug}"
     )
-    $scope.remove_event = (indx) ->
-      $http(
-        method: 'POST'
-        url: "/api/events/#{$scope.events[indx].id}/delete"
-      ).success( (data) ->
-        $scope.events.splice(indx, 1);
-      ).error( (data) ->
-        alert "some error"
-      )
-  ]
+  $scope.getVideoId = ->
+    video_id = $scope.video_link.split("v=")[1]
+    ampersandPosition = video_id.indexOf("&")
+    video_id = video_id.substring(0, ampersandPosition)  unless ampersandPosition is -1
+    $scope.user.featuredVideo = video_id
 
-  ComedyBase.controller "ComedyBaseManageVideosCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
-    $scope.query = {}
-    $scope.query.user_id = current_user.id
-    events = Event.query(query:$scope.query).then( (events) ->
-      $scope.events = events
+  User.get(id: current_user.id).then (result) ->
+    $scope.user = result
+  $scope.pickFile = =>
+    filepicker.pick
+      mimetypes: ["image/*", "text/plain"]
+      services: ["COMPUTER", "FACEBOOK", "GMAIL"]
+    , ((FPFile) =>
+      $scope.user.cover_image_url = FPFile.url
+      $scope.user.coverImageUrl = FPFile.url
+      #window.u = $scope.user
+      $scope.$apply()
+
+    ), (FPError) ->
+      #alert "error"
+      console.log FPError.toString()
+]
+
+ComedyBase.controller "ComedyBaseManageEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
+  $scope.query = {}
+  $scope.query.user_id = current_user.id
+  events = Event.query(query: $scope.query).then((events) ->
+    $scope.events = events
+  )
+  $scope.remove_event = (indx) ->
+    $http(
+      method: 'POST'
+      url: "/api/events/#{$scope.events[indx].id}/delete"
+    ).success((data) ->
+      $scope.events.splice(indx, 1)
+      ;
+    ).error((data) ->
+      alert "some error"
     )
-    $scope.remove_event = (indx) ->
-      $http(
-        method: 'POST'
-        url: "/api/events/#{$scope.events[indx].id}/delete"
-      ).success( (data) ->
-        $scope.events.splice(indx, 1);
-      ).error( (data) ->
-        alert "some error"
-      )
-  ]
+]
 
-  ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
-    $scope.val =  default_city.id
-    $scope.city = {}
-    $scope.city.name = default_city.city
+ComedyBase.controller "ComedyBaseManageVideosCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
+  $scope.query = {}
+  $scope.query.user_id = current_user.id
+  events = Event.query(query: $scope.query).then((events) ->
+    $scope.events = events
+  )
+  $scope.remove_event = (indx) ->
+    $http(
+      method: 'POST'
+      url: "/api/events/#{$scope.events[indx].id}/delete"
+    ).success((data) ->
+      $scope.events.splice(indx, 1)
+      ;
+    ).error((data) ->
+      alert "some error"
+    )
+]
 
-    $scope.set_val = (val) ->
+ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
+  $scope.val = default_city.id
+  $scope.city = {}
+  $scope.city.name = default_city.city
+
+  $scope.set_val = (val) ->
+    $("#event_venue").select2("destroy")
+    $("#event_venue").removeClass("select2-offscreen")
+    $scope.val = val
+    $scope.city.name = $("#s2id_event_city .select2-choice span").text()
+    $scope.$apply()
+    select_object("#event_venue", "Choose venue", "/api/venues", $scope.set_val, {place_id: val})
+  $scope.set_venue = (venue) ->
+    $scope.venue = venue
+    $("#event_event").select2("destroy")
+    $("#event_event").removeClass("select2-offscreen")
+    $scope.venue_name = $("#s2id_event_venue .select2-choice span").text()
+    $scope.venue = venue
+    $scope.$apply()
+    select_object("#event_event", "Choose event", "/api/events", $scope.set_event, {venue_id: $scope.venue})
+  $scope.set_event = (event) ->
+    $scope.event = event
+    $scope.$apply()
+  $scope.addEvent = ->
+    $http(
+      method: 'POST'
+      url: "/api/events/#{$scope.event}/add"
+    ).success((data) ->
+      $location.path("/profile/events")
+    ).error((data) ->
+      alert "some error"
+    )
+  $scope.create_venue = ->
+    $scope.new_venue.place_id = $scope.val
+    new_venue = new Venue($scope.new_venue)
+    new_venue.create().then((venue) ->
+      $scope.venue = $scope.new_venue.id
       $("#event_venue").select2("destroy")
       $("#event_venue").removeClass("select2-offscreen")
-      $scope.val = val
-      $scope.city.name = $("#s2id_event_city .select2-choice span").text()
-      $scope.$apply()
-      select_object("#event_venue", "Choose venue", "/api/venues", $scope.set_val, {place_id: val})
-    $scope.set_venue = (venue) ->
-      $scope.venue = venue
+      select_object("#event_venue", venue.displayName, "/api/venues", $scope.set_venue, {place_id: $scope.val})
+      #$scope.$apply()
+      $scope.set_venue(venue.id)
+      $scope.add_venue = false
+      $scope.new_venue = ""
+    )
+  $scope.create_event = ->
+    $scope.new_event.venue_id = $scope.venue
+    $scope.new_event.start = $scope.event_date
+    new_event = new Event($scope.new_event)
+    new_event.create().then((event) ->
+      $scope.event = $scope.new_event.id
       $("#event_event").select2("destroy")
       $("#event_event").removeClass("select2-offscreen")
-      $scope.venue_name = $("#s2id_event_venue .select2-choice span").text()
-      $scope.venue = venue
-      $scope.$apply()
-      select_object("#event_event", "Choose event", "/api/events", $scope.set_event, {venue_id:$scope.venue})
-    $scope.set_event = (event) ->
-      $scope.event = event
-      $scope.$apply()
-    $scope.addEvent = ->
-      $http(
-        method: 'POST'
-        url: "/api/events/#{$scope.event}/add"
-      ).success( (data) ->
-        $location.path( "/profile/events" )
-      ).error( (data) ->
-        alert "some error"
-      )
-    $scope.create_venue = ->
-      $scope.new_venue.place_id = $scope.val
-      new_venue = new Venue($scope.new_venue)
-      new_venue.create().then( (venue) ->
-        $scope.venue = $scope.new_venue.id
-        $("#event_venue").select2("destroy")
-        $("#event_venue").removeClass("select2-offscreen")
-        select_object("#event_venue", venue.display_name, "/api/venues", $scope.set_venue, {place_id:$scope.val})
-        #$scope.$apply()
-        $scope.set_venue(venue.id)
-        $scope.add_venue = false
-        $scope.new_venue = ""
-      )
-    $scope.create_event = ->
-      $scope.new_event.venue_id = $scope.venue
-      $scope.new_event.start = $scope.event_date
-      new_event = new Event($scope.new_event)
-      new_event.create().then( (event) ->
-        $scope.event = $scope.new_event.id
-        $("#event_event").select2("destroy")
-        $("#event_event").removeClass("select2-offscreen")
-        console.log event
-        select_object("#event_event", event.title, "/api/events", $scope.set_event, {venue_id:$scope.venue})
-        #$scope.$apply()
-        $scope.set_event(event.id)
-        $scope.add_event = false
-        $scope.new_event = ""
-      )
+      console.log event
+      select_object("#event_event", event.title, "/api/events", $scope.set_event, {venue_id: $scope.venue})
+      #$scope.$apply()
+      $scope.set_event(event.id)
+      $scope.add_event = false
+      $scope.new_event = ""
+    )
+
+
+  select_object("#event_city", default_city.display_name, '/api/places', $scope.set_val)
+  select_object("#event_venue", "Choose venue", "/api/venues", $scope.set_venue, {place_id: $scope.val})
+  #select_object("#event_event", "Choose event", "/api/events", $scope.set_venue, {venue_id:$scope.venue})
 
 
 
-
-    select_object("#event_city", default_city.display_name, '/api/places', $scope.set_val)
-    select_object("#event_venue", "Choose venue", "/api/venues", $scope.set_venue, {place_id: $scope.val})
-    #select_object("#event_event", "Choose event", "/api/events", $scope.set_venue, {venue_id:$scope.venue})
-
-
-
-  ]
-    #****************************************
+]
+#****************************************
 #* Router
 #****************************************
 
 ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
-    $locationProvider.html5Mode(true)
-    $routeProvider.when("/",
-        templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
-    ).when("/#_=_",
-        templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
-    ).when("/about",
-        templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
-    ).when("/type",
-        templateUrl: "<%= asset_path 'angular/partials/events/choose_event.tpl.html' %>"
-        controller: "TypeaheadCtrl"
-    ).when("/profile/me",
-        templateUrl: "<%= asset_path 'angular/partials/settings/edit_profile.tpl.html' %>"
-    ).when("/profile/events",
-      templateUrl: "<%= asset_path 'angular/partials/settings/manage_events.tpl.html' %>"
-    ).when("/profile/videos",
-      templateUrl: "<%= asset_path 'angular/partials/settings/manage_videos.tpl.html' %>"
-    ).when("/profile/events/add",
-      templateUrl: "<%= asset_path 'angular/partials/settings/add_event.tpl.html' %>"
-    ).when("/venues",
-        templateUrl: "<%= asset_path 'angular/partials/venues/list.tpl.html' %>"
-        controller: "VenuesCtrl"
-    ).when("/events",
-      templateUrl: "<%= asset_path 'angular/partials/events/list.tpl.html' %>"
-      controller: "EventsCtrl"
-    ).when("/:slug",
-        templateUrl: "<%= asset_path 'angular/partials/profile.tpl.html' %>"
-        controller: "ComedyBaseUserCtrl"
-    ).otherwise redirectTo: "/"
-  ]
+  $locationProvider.html5Mode(true)
+  $routeProvider.when("/",
+    templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
+  ).when("/#_=_",
+    templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
+  ).when("/about",
+    templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
+  ).when("/type",
+    templateUrl: "<%= asset_path 'angular/partials/events/choose_event.tpl.html' %>"
+    controller: "TypeaheadCtrl"
+  ).when("/profile/me",
+    templateUrl: "<%= asset_path 'angular/partials/settings/edit_profile.tpl.html' %>"
+  ).when("/profile/events",
+    templateUrl: "<%= asset_path 'angular/partials/settings/manage_events.tpl.html' %>"
+  ).when("/profile/videos",
+    templateUrl: "<%= asset_path 'angular/partials/settings/manage_videos.tpl.html' %>"
+  ).when("/profile/events/add",
+    templateUrl: "<%= asset_path 'angular/partials/settings/add_event.tpl.html' %>"
+  ).when("/venues",
+    templateUrl: "<%= asset_path 'angular/partials/venues/list.tpl.html' %>"
+    controller: "VenuesCtrl"
+  ).when("/events",
+    templateUrl: "<%= asset_path 'angular/partials/events/list.tpl.html' %>"
+    controller: "EventsCtrl"
+  ).when("/:slug",
+    templateUrl: "<%= asset_path 'angular/partials/profile.tpl.html' %>"
+    controller: "ComedyBaseUserCtrl"
+  ).otherwise redirectTo: "/"
+]
 
 #****************************************
 #* /Router
