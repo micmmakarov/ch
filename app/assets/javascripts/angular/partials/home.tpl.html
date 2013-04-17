@@ -14,7 +14,7 @@
 
         <div class="span4" ng-repeat="user in users">
           <figure>
-            <a href="/{{user.slug}}"><img src="{{user.coverImageUrl}}/convert?w=400" class="img-rounded"></a>
+            <a href="/{{user.slug}}"><img src="{{user.coverImageUrl}}/convert?w=400&h=250&fit=crop" class="img-rounded"></a>
             <figcaption>
               <span class="name">{{user.name}}</span>
               <span class="location">{{user.location}}</span>
