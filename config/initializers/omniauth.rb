@@ -5,7 +5,14 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
   #development
   provider :facebook, '222424071230782', '902cce4522a3185b00a9bf7fa83f5334' if Rails.env.development?
-  #production
-  provider :facebook, '460069040739570', '560cdd572efd9d5d5076c46e972a35f4' if Rails.env.production?
+  if Rails.env.production?
+    if ENV['STAGING'] == 'YES'
+      #staging
+      provider :facebook, '459708810772153', '0b11be16b1398feea828a92243afdf7a'
+    else
+      #production
+      provider :facebook, '460069040739570', '560cdd572efd9d5d5076c46e972a35f4'
+    end
+  end
 
 end
