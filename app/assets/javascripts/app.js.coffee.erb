@@ -7,6 +7,11 @@ ComedyBase.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
     url: "/api/users"
     name: "user"
 ]
+ComedyBase.factory "Home", ["railsResourceFactory", (railsResourceFactory) ->
+  railsResourceFactory
+    url: "/api/home"
+    name: "home"
+]
 ComedyBase.factory "Venue", ["railsResourceFactory", (railsResourceFactory) ->
   railsResourceFactory
     url: "/api/venues"
