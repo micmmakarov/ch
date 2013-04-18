@@ -18,8 +18,6 @@
           %li
             %form.navbar-search
               %input{:type => "text", :class => "search-query", :placeholder => "Search"}
-          %li
-            %a{:href => '/about', 'ng-class' => "{active:isActive('/about')}"} About
           -if user_signed_in?
             %li.navbar-userinfo
               %a{:href => '/profile/me'}
@@ -33,3 +31,7 @@
     %footer.footer.clearfix
       .container
         &copy; Comedy Base
+        %ul.nav.pull-right
+          %li
+            %a{:href => '/about', 'ng-class' => "{active:isActive('/about')}"} About
+

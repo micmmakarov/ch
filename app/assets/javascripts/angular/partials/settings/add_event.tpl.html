@@ -10,7 +10,8 @@
   <div class="row" ng-controller="ComedyBaseProfileEventsCtrl">
     <div class="span6">
 
-      <h3>Add New Event</h3>
+      <h3 ng-click="">Add New Event</h3>
+
 
         <div class="add_event container">
           <div>
@@ -25,7 +26,7 @@
               <div class="controls">
                 <div id="event_venue" type="text"></div>
               </div>
-              <p><a ng-click="add_venue=!add_venue" href="#">Add a new venue</a> (if the venue is not on the list) {{val}}</p>
+              <p><a ng-click="openDialog(venue_dialog_opts)" href="#">Add a new venue</a> (if the venue is not on the list) {{val}}</p>
             </div>
           </div>
 
@@ -46,7 +47,7 @@
               <div class="controls">
                 <div id="event_event" type="text"></div>
               </div>
-              <a ng-click="add_event=!add_event" href="#">register a new event(if the event is not on the list)</a>
+              <a ng-click="openDialog(event_dialog_opts)" href="#">register a new event(if the event is not on the list)</a>
             </div>
           </div>
 
@@ -65,21 +66,9 @@
       </div>
       <div class="span6">
         <div class="add_venue" ng-show="add_venue">
-          <input type="edit" ng-model="city.name" disabled>
-          <input type="edit" ng-model="new_venue.address" placeholder="Street address in {{city.name}}">
-          <input type="edit" ng-model="new_venue.name" placeholder="Name">
-          <textarea ng-model="new_venue.description" placeholder="Descriptin"></textarea>
-          <input type="edit" ng-model="new_venue.link" placeholder="Link to webpage or yelp">
-          <button ng-click="create_venue()">Add venue</button>
+
         </div>
         <div class="add_event" ng-show="add_event">
-          <input type="edit" ng-model="venue_name" disabled>
-          <input type="edit" ng-model="new_event.title" placeholder="Title of the event">
-          <textarea ng-model="new_event.description" placeholder="Description of the event">
-          </textarea>
-          <input type="edit" ui-date ng-model="event_date">
-          <input type="edit" ng-model="new_event.link" placeholder="Link if exists">
-          <button ng-click="create_event()">Add event</button>
         </div>
 
       </div>

@@ -190,7 +190,17 @@ ComedyBase.controller "ComedyBaseManageVideosCtrl", ["$scope", "$http", "Venue",
     )
 ]
 
-ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->
+ComedyBase.controller "DialogController", ["$scope",  "dialog", ($scope,  dialog) ->
+  $scope.data = dialog.options.data
+  $scope.close = (result) ->
+    dialog.close result
+]
+
+
+ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", "$dialog", ($scope, $http, Venue, Event, $routeParams, $location, $dialog) ->
+
+
+
   $scope.val = default_city.id
   $scope.city = {}
   $scope.city.name = default_city.city
@@ -220,9 +230,10 @@ ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue"
     ).success((data) ->
       $location.path("/profile/events")
     ).error((data) ->
-      alert "some error"
+      alert "some error (or maybe you already registered)"
     )
-  $scope.create_venue = ->
+  $scope.create_venue = (new_venue_data) ->
+    $scope.new_venue = new_venue_data
     $scope.new_venue.place_id = $scope.val
     new_venue = new Venue($scope.new_venue)
     new_venue.create().then((venue) ->
@@ -235,7 +246,8 @@ ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue"
       $scope.add_venue = false
       $scope.new_venue = ""
     )
-  $scope.create_event = ->
+  $scope.create_event = (new_event_data) ->
+    $scope.new_event = new_event_data
     $scope.new_event.venue_id = $scope.venue
     $scope.new_event.start = $scope.event_date
     new_event = new Event($scope.new_event)
@@ -243,9 +255,7 @@ ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue"
       $scope.event = $scope.new_event.id
       $("#event_event").select2("destroy")
       $("#event_event").removeClass("select2-offscreen")
-      console.log event
       select_object("#event_event", event.title, "/api/events", $scope.set_event, {venue_id: $scope.venue})
-      #$scope.$apply()
       $scope.set_event(event.id)
       $scope.add_event = false
       $scope.new_event = ""
@@ -256,6 +266,29 @@ ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue"
   select_object("#event_venue", "Choose venue", "/api/venues", $scope.set_venue, {place_id: $scope.val})
   #select_object("#event_event", "Choose event", "/api/events", $scope.set_venue, {venue_id:$scope.venue})
 
+  $scope.venue_dialog_opts =
+    backdrop: true
+    keyboard: true
+    backdropClick: true
+    templateUrl: "<%= asset_path 'angular/partials/venues/new.tpl.html' %>"
+    controller: "DialogController"
+    action: $scope.create_venue
+
+  $scope.event_dialog_opts =
+    backdrop: true
+    keyboard: true
+    backdropClick: true
+    templateUrl: "<%= asset_path 'angular/partials/events/new.tpl.html' %>"
+    controller: "DialogController"
+    action: $scope.create_event
+
+  $scope.openDialog = (options) ->
+    options.data = {}
+    options.data.city = $scope.city
+    options.data.venue_name = $scope.venue_name
+    d = $dialog.dialog(options)
+    d.open().then (result) ->
+      options.action(result) if result
 
 
 ]

@@ -261,6 +261,11 @@ ul.row {
 .footer {
   background: $main-blue;
   padding: 20px 0;
+  .nav {
+    a {
+      color:#333333;
+    }
+  }
 }
 
 .green-true {

@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h1>Add new venue</h1>
+</div>
+<div class="modal-body">
+  <input type="edit" ng-model="data.city.name" disabled>
+  <input type="edit" ng-model="new_venue.address" placeholder="Street address in {{city.name}}">
+  <input type="edit" ng-model="new_venue.name" placeholder="Name">
+  <textarea ng-model="new_venue.description" placeholder="Descriptin"></textarea>
+  <input type="edit" ng-model="new_venue.link" placeholder="Link to webpage or yelp">
+</div>
+<div class="modal-footer">
+  <button ng-click="close(new_venue)" class="btn btn-primary">Add venue</button>
+  <button ng-click="close()" class="btn">Close</button>
+</div>;
