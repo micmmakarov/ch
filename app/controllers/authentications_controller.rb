@@ -22,7 +22,10 @@ class AuthenticationsController < ApplicationController
         email = auth[:info][:email]
         password_length = 8
         password = Devise.friendly_token.first(password_length)
-        user = User.create!(:image_url => image_url, :name => name, :email => email, :password => password, :password_confirmation => password)
+        user = User.new(:image_url => image_url, :name => name, :email => email, :password => password, :password_confirmation => password)
+        user.tagline = "This comedian is too lazy to write his tagline"
+        user.bio = "Was born somewhere on Earth, went to school(hopefully). Loved wearing underwear and eat old yogurt. When this comedian was 14, thoughts about having relationships with the same sex species sometimes visited this comedian's mind. "
+        user.save!
         sign_in(user)
         current_user.authentications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'])
         flash[:notice] = "Account created"
