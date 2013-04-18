@@ -97,6 +97,16 @@
                 <input type="text" id="inputTwitter" ng-model="user.twitter" placeholder="Twitter">
               </div>
             </div>
+
+
+            <div class="control-group" ng-repeat="link in user.custom_links">
+              <label for="custom-link" class="control-label">Twitter Page</label>
+              <div class="controls">
+                <input type="text" id="custom-link" ng-model="user.twitter" placeholder="Twitter">
+              </div>
+            </div>
+
+
           </div>
           <div class="control-group">
             <div class="controls">
