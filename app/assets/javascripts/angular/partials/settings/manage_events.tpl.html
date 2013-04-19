@@ -3,25 +3,26 @@
     <div class="span12">
 
       <nav class="settings-nav" ng-controller="ComedyBaseNavCtrl">
-        <a href="/profile/me" ng-class="{active:isActive('/profile/me')}">Edit your profile</a>
+        <a href="/profile/me" ng-class="{active:isActive('/profile/me')}">Edit Your Profile</a>
         <a href="/profile/events" ng-class="{active:isActive('/profile/events')}">Manage Your Gigs</a>
       </nav>
 
       <div ng-controller="ComedyBaseManageEventsCtrl">
-        <h3>Your events</h3>
-        <a class="btn btn-success" href="/profile/events/add">Add new event</a>
-        <ul class="settings-event-list">
+        <div class="heading-wrap">
+          <h3>Your Events</h3>
+          <a class="btn btn-success" href="/profile/events/add">Add new event</a>
+        </div>
+        <ul class="settings-event-list form-style">
           <li ng-repeat="event in events">
             <h3>{{$index}}) {{event.title}}</h3>
             <p>{{event.description}}</p>
-            <h4>{{event.venue.name}} in {{event.venue.place.city}}, {{event.venue.place.state}}</h4>
-            {{event.start|dateFormat}}
-            <h4>Performing:</h4>
-             <div ng-repeat="user in event.users">
-               <a href="/{{user.slug}}">
-                <img src="{{user.imageUrl}}" title="{{user.name}}" width="50"/>
-               </a>
-
+            <h4>{{event.venue.name}} in {{event.venue.place.city}}, {{event.venue.place.state}} on {{event.start|dateFormat}}</h4>
+            
+            <div ng-repeat="user in event.users" class="performers-list">
+              <h4>Performing:</h4>
+              <a href="/{{user.slug}}">
+                <img src="{{user.imageUrl}}" title="{{user.name}}" />
+              </a>
             </div>
             <div class="actions">
               <a href="#" class="btn btn-mini" ng-click="edit_event($index)">Edit</a>

@@ -159,7 +159,7 @@ ul.row {
     padding-top: 40px;
     padding-bottom: 40px;
     .span2 {
-      overflow:hidden;
+      // overflow:hidden;
     }
   }
 }
@@ -262,6 +262,7 @@ ul.row {
   background: $main-blue;
   padding: 20px 0;
   .nav {
+    margin: 0;
     a {
       color:#333333;
     }
@@ -283,6 +284,7 @@ ul.row {
   border-radius: 4px;
   hr {
     margin-left: -30px;
+    margin-top: 0;
   }
 }
 
@@ -296,8 +298,6 @@ ul.row {
 
 .controls {
   margin-left: 180px;
-  input {
-  }
 }
 
 /****************************************
@@ -308,6 +308,14 @@ ul.row {
 /* Settings
 /****************************************/
 
+.heading-wrap {
+  position: relative;
+  .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
 .settings-nav {
   margin: 20px 0;
   a {
@@ -326,8 +334,8 @@ ul.row {
 }
 
 .settings-event-list {
-  margin: 0;
-  padding: 0;
+  margin: 0 0;
+  padding: 10px 20px 20px;
   li {
     list-style: none;
     margin: 0 0 10px;
@@ -337,11 +345,32 @@ ul.row {
       position: absolute;
       top: 0;
       right: 0;
+      .btn {
+        margin: 0 0 0 7px;
+      }
     }
+    &:last-child {
+      hr { display: none }
+    }
+    h4 {
+      color: #626262;
+    }
+  }
+}
+.performers-list {
+  margin-bottom: 20px;
+  h4 {
+    float: left;
+    margin: 6px 10px 0 0;
+  }
+  img {
+    width: 35px;
+    margin-right: 7px;
   }
 }
 .user-hero-img {
   max-height: 200px;
+  margin-bottom: 10px;
 }
 
 /****************************************
