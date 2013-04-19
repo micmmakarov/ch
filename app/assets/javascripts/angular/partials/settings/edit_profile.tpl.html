@@ -95,11 +95,11 @@
               </div>
             </div>
 
-
+            <h4>Custom Links</h4>
             <div class="control-group" ng-repeat="link in user.custom_links">
-              <label for="custom-link" class="control-label">Twitter Page</label>
+              <input class="control-label" type="text" ng-model="user.twitter" placeholder="Link type">
               <div class="controls">
-                <input type="text" id="custom-link" ng-model="user.twitter" placeholder="Twitter">
+                <input type="text" ng-model="user.twitter" placeholder="Web site address">
               </div>
             </div>
 
