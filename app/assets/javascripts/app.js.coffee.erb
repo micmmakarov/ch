@@ -307,7 +307,7 @@ ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue"
 #****************************************
 
 ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
-  $locationProvider.html5Mode(true)
+  $locationProvider.html5Mode(true).hashPrefix('!')
   $routeProvider.when("/",
     templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
   ).when("/_=_",
