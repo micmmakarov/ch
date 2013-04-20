@@ -11,7 +11,7 @@
     = csrf_meta_tags
   %body{'ng-app' => 'ComedyBase'}
     .navbar.navbar-inverse
-      .navbar-inner
+      .navbar-inner{'ng-controller' => 'ComedyBaseHeaderCtrl'}
         %a.brand{:href => "/", 'ng-class' => "{active:isActive('/')}"}
           Comedy Base
         %ul.nav.pull-right
@@ -20,7 +20,7 @@
               %input{:type => "text", :class => "search-query", :placeholder => "Search"}
           -if user_signed_in?
             %li.navbar-userinfo
-              %a{:href => '/profile/me'}
+              %a{:href => '{{profileLink()}}'}
                 =current_user.name
                 's Settings
                 %i.icon-pencil.icon-white
