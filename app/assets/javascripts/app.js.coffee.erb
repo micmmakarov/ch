@@ -102,7 +102,6 @@ ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "User", "$routeParam
   users = User.query().then((users) ->
     $scope.users = users
   )
-
   $scope.isActive = (route) ->
     route is $location.path()
 ]
@@ -111,7 +110,6 @@ ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeP
   $scope.slug = $routeParams.slug
   User.get(id: $scope.slug).then((user) ->
     $scope.user = user
-    window.u = user
   )
 ]
 
@@ -300,7 +298,7 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
   $locationProvider.html5Mode(true)
   $routeProvider.when("/",
     templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
-  ).when("/#_=_",
+  ).when("/_=_",
     templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
   ).when("/about",
     templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
