@@ -1,5 +1,5 @@
 <div ng-controller="ComedyBaseProfileCtrl">
-  
+
   <div class="container">
     <div class="row">
       <div class="span12">
@@ -58,6 +58,9 @@
             <div class="control-group">
               <label class="control-label">
                 <a class="btn" ng-click="pickFile()" class="btn">Change cover image</a>
+                <br>
+                <br>
+                <p>* Notice a picture with a comedian on the right</p>
               </label>
               <div class="controls">
                 <img src="{{user.coverImageUrl}}/convert?w=400" class="user-hero-img">
@@ -86,20 +89,29 @@
               <label for="inputFacebook" class="control-label">Facebook Page</label>
               <div class="controls">
                 <input type="text" id="inputFacebook" ng-model="user.facebook" placeholder="Facebook">
+                <small>Example: https://www.facebook.com/comedymichael </small>
               </div>
             </div>
             <div class="control-group">
               <label for="inputTwitter" class="control-label">Twitter Page</label>
               <div class="controls">
-                <input type="text" id="inputTwitter" ng-model="user.twitter" placeholder="Twitter">
+                <div class="input-prepend">
+                  <span class="add-on">@</span>
+                  <input class="span2" id="inputTwitter" type="text" ng-model="user.twitter" placeholder="Twitter">
+                </div>
               </div>
             </div>
 
-            <h4>Custom Links</h4>
-            <div class="control-group" ng-repeat="link in user.custom_links">
-              <input class="control-label" type="text" ng-model="user.twitter" placeholder="Link type">
+            <div class="control-group">
+              <label for="customLinkTitle" class="control-label">CustomLinks</label>
               <div class="controls">
-                <input type="text" ng-model="user.twitter" placeholder="Web site address">
+                <div ng-repeat="customLink in user.customLinks">
+                  <input type="text" ng-model="customLink.title" placeholder="Title">
+                  <input type="text" ng-model="customLink.url" placeholder="Link">
+                </div>
+                <input type="text" id="customLinkTitle" ng-model="customLink.Title" placeholder="Title">
+                <input type="text" ng-model="customLink.Url" placeholder="Link">
+                <a ng-click="addCustomLink({title: customLink.Title, url: customLink.Url})" class="btn">Add</a>
               </div>
             </div>
 

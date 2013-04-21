@@ -15,7 +15,7 @@
   <div class="container event-info">
     <div class="row" ng-show="user.nextShow">
       <div class="span10">
-        <p class="next-event"><span>Next Show:</span> {{user.nextShow.start|dateFormat}}  /  {{user.nextShow.venue.place.city}}  @  {{user.nextShow.venue.name}}</p>
+        <p class="next-event"><span>Next Show:</span> {{user.nextShow.start|dateFormat}}  /  {{user.nextShow.venue.place.city}}  @  {{user.nextShow.venue.name}}, {{user.nextShow.start|timeFormat}}</p>
       </div>
       <div class="span2">
         <a href="#" class="btn btn-large btn-info">More info</a>
@@ -27,6 +27,7 @@
         <table class="table">
           <tr ng-repeat="event in user.events">
             <td>{{event.start|dateFormat}}</td>
+            <td>{{event.start|timeFormat}}</td>
             <td>{{event.venue.place.city}}, {{event.venue.place.state}}</td>
             <td>{{event.venue.name}}</td>
             <td>

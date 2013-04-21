@@ -35,6 +35,11 @@ ComedyBase.filter "dateFormat", ->
     date = moment(dt)
     date.format("ddd, MMM Do")
 
+ComedyBase.filter "timeFormat", ->
+  (dt) ->
+    date = moment(dt)
+    date.format("h:mma")
+
 ComedyBase.filter "facebook", ->
   (fb) ->
     if typeof(fb) == 'string'
@@ -136,7 +141,6 @@ ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeP
 
 ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$routeParams", "$location", ($scope, $http, User, $routeParams, $location) ->
   $scope.slug = $routeParams.slug
-
   $scope.setCurrentEvent = (event) ->
     $scope.current_event = event
   $scope.updateEvent = ->
@@ -170,6 +174,11 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
     ), (FPError) ->
       #alert "error"
       console.log FPError.toString()
+
+  $scope.addCustomLink = (customLink) ->
+    $scope.user.customLinks.push customLink
+    $scope.customLink = {}
+
 ]
 
 ComedyBase.controller "ComedyBaseManageEventsCtrl", ["$scope", "$http", "Venue", "Event", "$routeParams", "$location", ($scope, $http, Venue, Event, $routeParams, $location) ->

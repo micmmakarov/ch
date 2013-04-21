@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
   def next_show
     self.events.where(:start => (Date.today - 1.day)..(Date.today+5.years)).order(:start).first.as_json(:include => {:venue => {:include => :place}})
   end
+  def custom_links
+    []
+  end
 
   def to_slug(str)
     str.gsub! /['`]/,""
