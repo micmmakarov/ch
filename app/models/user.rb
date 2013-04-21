@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   before_save :generate_slug
   has_many :images
   has_many :videos
+  has_many :links
 
   def generate_slug
     if self.slug.blank?
@@ -31,7 +32,7 @@ class User < ActiveRecord::Base
     self.events.where(:start => (Date.today - 1.day)..(Date.today+5.years)).order(:start).first.as_json(:include => {:venue => {:include => :place}})
   end
   def custom_links
-    []
+    self.links
   end
 
   def to_slug(str)

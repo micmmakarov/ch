@@ -17,6 +17,11 @@ ComedyBase.factory "Venue", ["railsResourceFactory", (railsResourceFactory) ->
     url: "/api/venues"
     name: "venue"
 ]
+ComedyBase.factory "Link", ["railsResourceFactory", (railsResourceFactory) ->
+  railsResourceFactory
+    url: "/api/links"
+    name: "link"
+]
 
 ComedyBase.factory "Event", ["railsResourceFactory", (railsResourceFactory) ->
   railsResourceFactory
@@ -139,7 +144,7 @@ ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeP
 ]
 
 
-ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$routeParams", "$location", ($scope, $http, User, $routeParams, $location) ->
+ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$routeParams", "$location", "Link", ($scope, $http, User, $routeParams, $location, Link) ->
   $scope.slug = $routeParams.slug
   $scope.setCurrentEvent = (event) ->
     $scope.current_event = event
@@ -157,7 +162,6 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
     video_id = video_id.substring(0, ampersandPosition)  unless ampersandPosition is -1
     $scope.user.featuredVideo = video_id
     $scope.user.featured_video = video_id
-    window.u = $scope.user
 
   User.get(id: current_user.id).then (result) ->
     $scope.user = result
@@ -176,8 +180,14 @@ ComedyBase.controller "ComedyBaseProfileCtrl", ["$scope", "$http", "User", "$rou
       console.log FPError.toString()
 
   $scope.addCustomLink = (customLink) ->
-    $scope.user.customLinks.push customLink
-    $scope.customLink = {}
+    new Link(url: customLink.url, title: customLink.title).create().then (result) ->
+      $scope.user.customLinks.push result
+      $scope.customLink = {}
+  $scope.removeLink = (customLink) ->
+    new Link(customLink).remove().then (result) ->
+      $scope.user.customLinks.splice($scope.user.customLinks.indexOf(customLink), 1)
+
+
 
 ]
 
