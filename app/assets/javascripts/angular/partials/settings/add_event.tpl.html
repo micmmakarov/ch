@@ -11,26 +11,27 @@
   <div class="row" ng-controller="ComedyBaseProfileEventsCtrl">
     <div class="span6">
 
-      <h3 ng-click="">Add New Event</h3>
+      <h3>Add New Gig</h3>
 
 
         <div class="add_event container">
-          <div>
-            <div class="control-group">
-              <label for="event_city" class="control-label">Event city</label>
-              <div class="controls">
-                <div id="event_city" type="text"></div>
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="event_venue" class="control-label">Event venue</label>
-              <div class="controls">
-                <div id="event_venue" type="text"></div>
-              </div>
-              <p><a ng-click="openDialog(venue_dialog_opts)" href="#">Add a new venue</a> (if the venue is not on the list)</p>
+          <div class="control-group">
+            <label for="event_city" class="control-label">Event city</label>
+            <div class="controls">
+              <div id="event_city" type="text"></div>
             </div>
           </div>
-
+          <div class="control-group">
+            <label for="event_venue" class="control-label">Event venue</label>
+            <div class="controls">
+              <div id="event_venue" type="text"></div>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <a ng-click="openDialog(venue_dialog_opts)" href="#">Add a new venue</a> (if the venue is not on the list)
+            </div>
+          </div>
 
           <div ng-show="venue">
             <div class="control-group">
@@ -48,9 +49,19 @@
               <div class="controls">
                 <div id="event_event" type="text"></div>
               </div>
-              <a ng-click="openDialog(event_dialog_opts)" href="#">register a new event(if the event is not on the list)</a>
+            </div>
+            <div class="control-group">
+              <div class="controls"> 
+                <a ng-click="openDialog(event_dialog_opts)" href="#">Submit a new event</a> (if the event is not on the list)
+              </div>
             </div>
           </div>
+
+            
+        </div> <!-- /container -->
+
+
+
 
 
           <div ng-show="event">

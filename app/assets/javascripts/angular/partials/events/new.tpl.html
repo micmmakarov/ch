@@ -1,13 +1,32 @@
 <div class="modal-header">
-  <h1>This is the title</h1>
+  <h1>Add New Event<br>@ {{data.venue_name}}</h1>
   </div>
 <div class="modal-body">
-  <input type="edit" ng-model="data.venue_name" disabled>
-  <input type="edit" ng-model="new_event.title" placeholder="Title of the event">
-  <textarea ng-model="new_event.description" placeholder="Description of the event">
-  </textarea>
-  <input type="edit" ui-date ng-model="event_date">
-  <input type="edit" ng-model="new_event.link" placeholder="Link if exists">
+  <div class="control-group">
+    <label for="" class="control-label">Event title</label>
+    <div class="controls">
+      <input type="text" ng-model="new_event.title" placeholder="Title of the event">
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="" class="control-label">Description</label>
+    <div class="controls">
+      <textarea ng-model="new_event.description" placeholder="Description of the event"></textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="" class="control-label">Date</label>
+    <div class="controls">
+      <input type="text" ui-date ng-model="event_date">
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="" class="control-label">Event website (optional)</label>
+    <div class="controls">
+      <input type="text" ng-model="new_event.link" placeholder="http://www...">
+    </div>
+  </div>
+
 </div>
 <div class="modal-footer">
   <button ng-click="close(new_event)" class="btn btn-primary">Add venue</button>

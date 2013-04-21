@@ -10,10 +10,14 @@
 
       <div ng-controller="ComedyBaseManageEventsCtrl">
         <div class="heading-wrap">
-          <h3>Your Events</h3>
-          <a class="btn btn-success" href="/profile/events/add">Add new event</a>
+          <h3>Your Gigs</h3>
+          <a class="btn btn-success" href="/profile/events/add"><i class="icon-plus-sign icon-white"></i> Add new gig</a>
         </div>
         <ul class="settings-event-list form-style">
+          <li ng-show="events.length == 0" class="empty text-center">
+            <h3 class="text-center">No gigs on your calendar!</h3>
+            <p>What a shame! Go ahead and add some. Go.</p>
+          </li>
           <li ng-repeat="event in events">
             <h3>{{event.title}}</h3>
             <p>{{event.description}}</p>
