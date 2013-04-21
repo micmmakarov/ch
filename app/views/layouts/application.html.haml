@@ -9,6 +9,19 @@
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
+
+
+    -u = User.find_by_slug(request.path[1..1000])
+    -if u
+      %meta{:content => "#{u.name} - ComedyBase", :property => "og:title"}/
+      %meta{:content => "website", :property => "og:type"}/
+      %meta{:content => "http://www.comedybase.net", :property => "og:url"}/
+      %meta{:content => "#{u.cover_image_url}", :property => "og:image"}/
+      %meta{:content => "www.comedybase.net", :property => "og:site_name"}/
+      %meta{:content => "100000245725293", :property => "fb:admins"}/
+      %meta{:content => "460069040739570", :property => "fb:app_id"}/
+      %meta{:content => "u.tagline", :property => "og:description"}/
+
   %body{'ng-app' => 'ComedyBase'}
     .navbar.navbar-inverse
       .navbar-inner{'ng-controller' => 'ComedyBaseHeaderCtrl'}
