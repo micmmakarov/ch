@@ -8,7 +8,7 @@ $main-blue: #00bff3;
 @import "bootstrap-responsive";
 
 body {
-  font: 20px Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
+  font: 300 20px Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
 }
 
 a {
@@ -147,10 +147,11 @@ ul.row {
 }
 
 .next-event {
-  font-size: 54px;
+  font-size: 44px;
   line-height: .9;
   span {
     color: $main-blue;
+    white-space: nowrap;
   }
 }
 
@@ -400,6 +401,14 @@ ul.row {
       input, textarea {
         width: 80%;
       }
+    }
+  }
+}
+@media (max-width: 979px) and (min-width: 768px) {
+  .next-event {
+    font-size: 40px;
+    span {
+      white-space: normal;
     }
   }
 }
