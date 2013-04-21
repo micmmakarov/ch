@@ -94,6 +94,13 @@ ComedyBase.controller "ComedyBaseRoutingCtrl", ["$location", ($location) ->
 
 ]
 
+ComedyBase.controller "ImagesDialogController", ["$scope",  "dialog", ($scope,  dialog) ->
+  $scope.images = dialog.options.data
+  console.log dialog.options.data
+  $scope.close = (result) ->
+    dialog.close result
+]
+
 
 ComedyBase.controller "ComedyBaseHeaderCtrl", ["$scope", "$http", "Venue", "$routeParams", "$location", ($scope, $http, Venue, $routeParams, $location) ->
   $scope.isActive = (route) ->
@@ -141,11 +148,25 @@ ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "User", "$routeParam
     route is $location.path()
 ]
 
-ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeParams", "$location", ($scope, $http, User, $routeParams, $location) ->
+ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeParams", "$location", "$dialog", ($scope, $http, User, $routeParams, $location, $dialog) ->
   $scope.slug = $routeParams.slug
   User.get(id: $scope.slug).then((user) ->
     $scope.user = user
   )
+  $scope.imagesDialog =
+    backdrop: true
+    keyboard: true
+    backdropClick: true
+    templateUrl: "<%= asset_path 'angular/partials/images/dialog.tpl.html' %>"
+    controller: "ImagesDialogController"
+    action: $scope.create_venue
+
+  $scope.openImagesDialog = (options) ->
+    options.data = {}
+    options.data = $scope.user.images
+    d = $dialog.dialog(options)
+    d.open().then (result) ->
+      options.action(result) if result
 ]
 
 ComedyBase.controller "ComedyBaseImagesCtrl", ["$scope", "$http", "User", "$routeParams", "$location", "Image", ($scope, $http, User, $routeParams, $location, Image) ->

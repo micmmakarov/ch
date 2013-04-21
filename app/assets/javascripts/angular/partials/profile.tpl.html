@@ -45,8 +45,12 @@
     <div class="container">
       <div class="row">
         <div class="span3 user-photo-gallery">
-          <img src="/assets/comedy-misc-01.jpg" class="img-polaroid">
-          <img src="/assets/comedy-misc-02.jpg" class="img-polaroid">
+          <a ng-click="openImagesDialog(imagesDialog)">
+            <img ng-show="user.images[0]" src="{{user.images[0].url}}/convert?w=270&h=167&fit=crop" class="img-polaroid">
+            <img ng-show="user.images[1]"  src="{{user.images[1].url}}/convert?w=270&h=167&fit=crop" class="img-polaroid">
+            <img ng-hide="user.images[0]" src="/assets/comedy-misc-01.jpg" class="img-polaroid">
+            <img ng-hide="user.images[1]" src="/assets/comedy-misc-02.jpg" class="img-polaroid">
+          </a>
         </div>
         <div class="span3">
           <ul class="contact-info">

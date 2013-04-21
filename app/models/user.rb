@@ -43,13 +43,14 @@ class User < ActiveRecord::Base
     str.gsub! /\s*&\s*/, " and "
 
     #replace all non alphanumeric, underscore or periods with underscore
-    str.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '_'
+    str.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '-'
 
     #convert double underscores to single
-    str.gsub! /_+/,"_"
+    str.gsub! /_+/,"-"
 
     #strip off leading/trailing underscore
     str.gsub! /\A[_\.]+|[_\.]+\z/,""
+    str.downcase!
 
     str
   end

@@ -1,0 +1,14 @@
+<div class="modal-body">
+  <carousel interval="myInterval">
+    <slide ng-repeat="image in images" active="slide.active">
+      <img ng-src="{{image.url}}" style="margin:auto;">
+      <div class="carousel-caption">
+        <h4>{{image.title}}</h4>
+      </div>
+    </slide>
+  </carousel>
+</div>
+<div class="modal-footer">
+  <button ng-click="close()" class="btn">Close</button>
+</div>
+<!-- openDialog(venue_dialog_opts) -->
