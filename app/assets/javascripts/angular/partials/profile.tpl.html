@@ -65,6 +65,9 @@
               <p ng-show="user.twitter"><b>Twitter: </b> <a href="http://www.twitter.com/{{user.twitter}}">{{user.twitter}}</a>
               </p>
             </li>
+            <li>
+              <p ng-repeat="link in user.customLinks"><b>{{link.title}}: </b> <a href="{{link.url}}">{{link.url}}</a></p>
+            </li>
           </ul>
         </div>
         <div class="span6">
