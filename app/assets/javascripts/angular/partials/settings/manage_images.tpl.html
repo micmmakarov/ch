@@ -14,10 +14,8 @@
         <div class="controls">
           <a ng-click="addImage()" id="chooseImage" class="btn">Add an image</a>
           <div ng-repeat="image in user.images">
-            <p>{{image.title}},
-              {{image.description}}
-              <a ng-click="removeImage(image)" class="btn">-</a></p>
-            <img src="{{image.url}}/convert?w=400&h=250&fit=crop">
+            <img src="{{image.url}}/convert?w=400&h=250&fit=crop"><a ng-click="removeImage(image)" class="btn btn-danger">Remove</a><br>
+            <input type="text" ng-model="image.title" placeholder="Don't be lazy, write title.."><a class="btn" ng-click="updateImage(image)">Save</a>
           </div>
         </div>
       </div>

@@ -22,6 +22,9 @@ class Api::ImagesController < ApplicationController
   # PUT /images/1
   # PUT /images/1.json
   def update
+    params[:image].delete :created_at
+    params[:image].delete :updated_at
+    params[:image].delete :id
     @image = Image.find(params[:id])
     if @image.update_attributes(params[:image])
       render json: @image

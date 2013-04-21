@@ -170,10 +170,10 @@ ComedyBase.controller "ComedyBaseImagesCtrl", ["$scope", "$http", "User", "$rout
       #alert "error"
       console.log FPError.toString()
 
-  $scope.saveImage = (customLink) ->
-    new Link(url: customLink.url, title: customLink.title).create().then (result) ->
-      $scope.user.customLinks.push result
-      $scope.customLink = {}
+  $scope.updateImage = (image) ->
+    new Image(image).update().then (result) ->
+      #$scope.user.customLinks.push result
+      #$scope.customLink = {}
   $scope.removeImage = (image) ->
     new Image(image).remove().then (result) ->
       $scope.user.images.splice($scope.user.images.indexOf(image), 1)
