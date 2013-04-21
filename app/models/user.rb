@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def next_show
-    self.events.where(:start => Date.today..(Date.today+5.years)).order(:start).first.as_json(:include => {:venue => {:include => :place}})
+    self.events.where(:start => (Date.today - 1.day)..(Date.today+5.years)).order(:start).first.as_json(:include => {:venue => {:include => :place}})
   end
 
   def to_slug(str)
