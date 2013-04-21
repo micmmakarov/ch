@@ -19,9 +19,9 @@
             <p>{{event.description}}</p>
             <h4>{{event.venue.name}} in {{event.venue.place.city}}, {{event.venue.place.state}} on {{event.start|dateFormat}}</h4>
             
-            <div ng-repeat="user in event.users" class="performers-list">
+            <div class="performers-list">
               <h4>Performing:</h4>
-              <a href="/{{user.slug}}">
+              <a ng-repeat="user in event.users" href="/{{user.slug}}">
                 <img src="{{user.imageUrl}}" title="{{user.name}}" />
               </a>
             </div>
