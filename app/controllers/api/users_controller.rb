@@ -19,6 +19,7 @@ class Api::UsersController < ApplicationController
     params[:user].delete :next_show
     params[:user].delete :custom_links
     params[:user].delete :events
+    params[:user].delete :images
     if params[:user]['featured_video']
       @user.videos.create(youtube_id:params[:user]['featured_video'], featured:true)
       params[:user].delete 'featured_video'
@@ -42,6 +43,6 @@ class Api::UsersController < ApplicationController
   end
 private
   def include_hash
-    {:include => {:events => {:include => {:venue => {:include => :place}}}}, :methods => [:featured_video, :next_show, :custom_links]}
+    {:include => [{:events => {:include => {:venue => {:include => :place}}}}, :images], :methods => [:featured_video, :next_show, :custom_links]}
   end
 end

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="span12">
+
+    <nav class="settings-nav" ng-controller="ComedyBaseNavCtrl">
+      <a href="/profile/me" ng-class="{active:isActive('/profile/me')}">Edit Your Profile</a>
+      <a href="/profile/events" ng-class="{active:isActive('/profile/events')}">Manage Your Gigs</a>
+      <a href="/profile/images" ng-class="{active:isActive('/profile/images')}">Manage Your Photos</a>
+    </nav>
+
+    <div ng-controller="ComedyBaseImagesCtrl">
+      <div class="control-group">
+        <label for="chooseImage" class="control-label">CustomLinks</label>
+        <div class="controls">
+          <a ng-click="addImage()" id="chooseImage" class="btn">Add an image</a>
+          <div ng-repeat="image in user.images">
+            <p>{{image.title}},
+              {{image.description}}
+              <a ng-click="removeImage(image)" class="btn">-</a></p>
+            <img src="{{image.url}}">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    </div>
+  </div>
+</div>
+
+

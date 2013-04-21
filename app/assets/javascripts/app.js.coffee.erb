@@ -22,6 +22,11 @@ ComedyBase.factory "Link", ["railsResourceFactory", (railsResourceFactory) ->
     url: "/api/links"
     name: "link"
 ]
+ComedyBase.factory "Image", ["railsResourceFactory", (railsResourceFactory) ->
+  railsResourceFactory
+    url: "/api/images"
+    name: "image"
+]
 
 ComedyBase.factory "Event", ["railsResourceFactory", (railsResourceFactory) ->
   railsResourceFactory
@@ -141,6 +146,38 @@ ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeP
   User.get(id: $scope.slug).then((user) ->
     $scope.user = user
   )
+]
+
+ComedyBase.controller "ComedyBaseImagesCtrl", ["$scope", "$http", "User", "$routeParams", "$location", "Image", ($scope, $http, User, $routeParams, $location, Image) ->
+  $scope.slug = $routeParams.slug
+  User.get(id: current_user.id).then (result) ->
+    $scope.user = result
+  $scope.addImage = =>
+    filepicker.pick
+      mimetypes: ["image/*", "text/plain"]
+      services: ["COMPUTER", "FACEBOOK", "GMAIL", "INSTAGRAM"]
+    , ((FPFile) =>
+      $scope.user.image_url = FPFile.url
+      new Image(url: FPFile.url).create().then (result) ->
+        $scope.user.images.push result
+        $scope.customLink = {}
+
+      #$scope.saveImage()
+      #window.u = $scope.user
+      $scope.$apply()
+
+    ), (FPError) ->
+      #alert "error"
+      console.log FPError.toString()
+
+  $scope.saveImage = (customLink) ->
+    new Link(url: customLink.url, title: customLink.title).create().then (result) ->
+      $scope.user.customLinks.push result
+      $scope.customLink = {}
+  $scope.removeImage = (image) ->
+    new Image(image).remove().then (result) ->
+      $scope.user.images.splice($scope.user.images.indexOf(image), 1)
+
 ]
 
 
@@ -347,6 +384,8 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
     templateUrl: "<%= asset_path 'angular/partials/settings/edit_profile.tpl.html' %>"
   ).when("/profile/events",
     templateUrl: "<%= asset_path 'angular/partials/settings/manage_events.tpl.html' %>"
+  ).when("/profile/images",
+    templateUrl: "<%= asset_path 'angular/partials/settings/manage_images.tpl.html' %>"
   ).when("/profile/videos",
     templateUrl: "<%= asset_path 'angular/partials/settings/manage_videos.tpl.html' %>"
   ).when("/profile/events/add",

@@ -11,6 +11,7 @@ class Api::ImagesController < ApplicationController
 
   def create
     @image = Image.new(params[:image])
+    @image.user_id = current_user.id
     if @image.save
       render json: @image
     else
@@ -32,7 +33,10 @@ class Api::ImagesController < ApplicationController
   # DELETE /images/1
   # DELETE /images/1.json
   def destroy
-    @image = Image.find(params[:id])
-    @image.destroy
+    image = Image.find(params[:id])
+    if image.user_id == current_user.id
+      image.destroy
+      render json:{}, status:201
+    end
   end
 end
