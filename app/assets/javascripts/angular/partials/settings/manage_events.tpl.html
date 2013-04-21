@@ -15,9 +15,9 @@
         </div>
         <ul class="settings-event-list form-style">
           <li ng-repeat="event in events">
-            <h3>{{$index}}) {{event.title}}</h3>
+            <h3>{{event.title}}</h3>
             <p>{{event.description}}</p>
-            <h4>{{event.venue.name}} in {{event.venue.place.city}}, {{event.venue.place.state}} on {{event.start|dateFormat}}</h4>
+            <p><span>{{event.venue.name}}</span> in <span>{{event.venue.place.city}}, {{event.venue.place.state}}</span> on <span class="date">{{event.start|dateFormat}}</span></p>
             
             <div class="performers-list">
               <h4>Performing:</h4>

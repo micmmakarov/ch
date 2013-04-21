@@ -7,6 +7,14 @@ $main-blue: #00bff3;
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+@mixin border-radius($topleft, $topright: $topleft, $bottomright: $topleft, $bottomleft: $topleft) {
+  -moz-border-radius: $topleft $topright $bottomright $bottomleft;
+  -ms-border-radius: $topleft $topright $bottomright $bottomleft;
+  -o-border-radius: $topleft $topright $bottomright $bottomleft;
+  -webkit-border-radius: $topleft $topright $bottomright $bottomleft;
+  border-radius: $topleft $topright $bottomright $bottomleft;
+}
+
 body {
   font: 300 20px Yanone Kaffeesatz, HelveticaNeueCondensed, Helvetica, sans-serif;
 }
@@ -356,6 +364,16 @@ ul.row {
     }
     h4 {
       color: #626262;
+    }
+    p {
+      span {
+        background: lighten($main-blue, 45%);
+        padding: 2px 4px;
+        @include border-radius(3px);
+        &.date {
+          background: #fdfaca;
+        }
+      }
     }
   }
 }
