@@ -72,6 +72,14 @@ ComedyBase.controller "ComedyBaseNavCtrl", ["$scope", "$http", "Venue", "$routeP
 
 ]
 
+ComedyBase.controller "ComedyBaseRoutingCtrl", ["$location", ($location) ->
+  if $(location).attr('href').indexOf("#_=_")!= -1
+    $location.hash("")
+    $location.path("/profile/me")
+
+]
+
+
 ComedyBase.controller "ComedyBaseHeaderCtrl", ["$scope", "$http", "Venue", "$routeParams", "$location", ($scope, $http, Venue, $routeParams, $location) ->
   $scope.isActive = (route) ->
     route is $location.path()
@@ -310,8 +318,7 @@ ComedyBase.config ["$locationProvider", "$routeProvider", ($locationProvider, $r
   $locationProvider.html5Mode(true).hashPrefix('!')
   $routeProvider.when("/",
     templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
-  ).when("/_=_",
-    templateUrl: "<%= asset_path 'angular/partials/home.tpl.html' %>"
+    controller: "ComedyBaseRoutingCtrl"
   ).when("/about",
     templateUrl: "<%= asset_path 'angular/partials/about.tpl.html' %>"
   ).when("/type",
