@@ -1,38 +1,12 @@
 class Api::HomeController < ApplicationController
   def index
-    @images = Image.all
-    render json: @images
+    offset = rand(User.count)
+    featured_users = User.all(:offset => offset, :limit => 3)
+    render json: {featured_users: featured_users.as_json(include_hash)}
+  end
+private
+  def include_hash
+    {:include => [{:events => {:include => {:venue => {:include => :place}}}}, :images], :methods => [:featured_video, :next_show, :custom_links]}
   end
 
-  def show
-    @image = Image.find(params[:id])
-    render json: @image
-  end
-
-  def create
-    @image = Image.new(params[:image])
-    if @image.save
-      render json: @image
-    else
-      render json: @image.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PUT /images/1
-  # PUT /images/1.json
-  def update
-    @image = Image.find(params[:id])
-    if @image.update_attributes(params[:image])
-      render json: @image
-    else
-      render json: @image.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /images/1
-  # DELETE /images/1.json
-  def destroy
-    @image = Image.find(params[:id])
-    @image.destroy
-  end
 end

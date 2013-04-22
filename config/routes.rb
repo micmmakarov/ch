@@ -8,6 +8,7 @@ Comedyhack::Application.routes.draw do
   match '/auth/:provider/callback' => 'authentications#create'
 
   namespace :api do
+    resources :home
     resources :venues
     resources :events
     resources :places

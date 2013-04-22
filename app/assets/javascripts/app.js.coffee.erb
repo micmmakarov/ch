@@ -12,6 +12,11 @@ ComedyBase.factory "Home", ["railsResourceFactory", (railsResourceFactory) ->
     url: "/api/home"
     name: "home"
 ]
+ComedyBase.factory "Home", ["railsResourceFactory", (railsResourceFactory) ->
+  railsResourceFactory
+    url: "/api/home"
+    name: "home"
+]
 ComedyBase.factory "Venue", ["railsResourceFactory", (railsResourceFactory) ->
   railsResourceFactory
     url: "/api/venues"
@@ -140,9 +145,9 @@ ComedyBase.controller "EventsCtrl", ["$scope", "$http", "Event", "$routeParams",
 ]
 
 
-ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "User", "$routeParams", "$location", ($scope, $http, User, $routeParams, $location) ->
-  users = User.query().then((users) ->
-    $scope.users = users
+ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "User", "$routeParams", "$location", "Home", ($scope, $http, User, $routeParams, $location, Home) ->
+  users = Home.query().then((hm) ->
+    $scope.featuredUsers = hm.featuredUsers
   )
   $scope.isActive = (route) ->
     route is $location.path()
