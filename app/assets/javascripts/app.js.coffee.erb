@@ -342,7 +342,7 @@ ComedyBase.controller "ComedyBaseProfileEventsCtrl", ["$scope", "$http", "Venue"
       method: 'POST'
       url: "/api/events/#{$scope.event}/add"
     ).success((data) ->
-      $location.path("/profile/events")
+      $location.path("/profile/gigs")
     ).error((data) ->
       alert "some error (or maybe you already registered)"
     )
