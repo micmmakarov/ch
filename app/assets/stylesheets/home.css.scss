@@ -127,8 +127,9 @@ ul.row {
 }
 
 .user-hero {
-  background-position: center center;
+  background-position: center 20%;
   background-size: 100%;
+  background-repeat: no-repeat;
   color: #fff;
   padding: 40px 0;
   h3, p {

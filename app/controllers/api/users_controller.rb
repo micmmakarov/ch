@@ -24,6 +24,7 @@ class Api::UsersController < ApplicationController
       @user.videos.create(youtube_id:params[:user]['featured_video'], featured:true)
       params[:user].delete 'featured_video'
     end
+    params[:user].delete 'featured_video'
     #@user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       render json: @user.to_json
