@@ -31,43 +31,21 @@
           <div class="span12">
             <h3>Comedians Near San Francisco, CA</h3>
           </div>
-          <div class="span3">
+
+        </div>
+        <div class="row image-list" ng-repeat="userRaw in userRaws">
+
+          <div class="span3" ng-repeat="user in userRaw">
             <figure>
-              <img src="/assets/comedian2.jpg" class="img-rounded">
+              <img src="{{user.coverImageUrl}}/convert?w=300&h=170&fit=crop" class="img-rounded">
               <figcaption>
-                <span class="name">Sara Silverman</span>
-                <span class="location">Los Angeles, CA</span>
+                <span class="name">{{user.name}}</span>
+                <span class="location">{{user.location}}</span>
               </figcaption>
             </figure>
           </div>
 
-          <div class="span3">
-            <figure>
-              <img src="/assets/comedian-ab.jpg" class="img-rounded">
-              <figcaption>
-                <span class="name">Alonzo Bodden</span>
-                <span class="location">Los Angeles, CA</span>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="span3">
-            <figure>
-              <img src="/assets/comedian-lck.jpg" class="img-rounded">
-              <figcaption>
-                <span class="name">Louis C.K.</span>
-                <span class="location">New York, NY</span>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="span3">
-            <figure>
-              <img src="/assets/comedian-kyle.jpg" class="img-rounded">
-              <figcaption>
-                <span class="name">Kyle Kinane</span>
-                <span class="location">Chicago, IL</span>
-              </figcaption>
-            </figure>
-          </div>
+
         </div>
         <hr>
 

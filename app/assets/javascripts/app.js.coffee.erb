@@ -143,9 +143,27 @@ ComedyBase.controller "EventsCtrl", ["$scope", "$http", "Event", "$routeParams",
 ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "User", "$routeParams", "$location", "Home", ($scope, $http, User, $routeParams, $location, Home) ->
   users = Home.query().then((hm) ->
     $scope.featuredUsers = hm.featuredUsers
+    $scope.allUsers = hm.allUsers
+    $scope.getUserRaws()
   )
   $scope.isActive = (route) ->
     route is $location.path()
+
+  $scope.getUserRaws = ->
+    $scope.userRaws = []
+    rawNumber = 0
+    $scope.userRaws[rawNumber] = []
+    $.each($scope.allUsers, (index, user) ->
+      $scope.userRaws[rawNumber].push(user)
+      if ((index+1) / 4) == Math.floor((index+1)/4)
+        rawNumber++
+        $scope.userRaws[rawNumber] = []
+
+    )
+    console.log $scope.userRaws
+
+
+
 ]
 
 ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeParams", "$location", "$dialog", ($scope, $http, User, $routeParams, $location, $dialog) ->

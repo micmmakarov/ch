@@ -3,7 +3,8 @@ class Api::HomeController < ApplicationController
     offset = rand(User.count)
     featured_users = User.all(:offset => offset, :limit => 3)
     featured_users = User.all(:limit => 3) if featured_users.length < 3
-    render json: {featured_users: featured_users.as_json(include_hash)}
+    all_users = User.all
+    render json: {featured_users: featured_users.as_json(include_hash), all_users: all_users.as_json(include_hash)}
   end
 private
   def include_hash
