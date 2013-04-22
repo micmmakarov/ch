@@ -315,6 +315,9 @@ ul.row {
   textarea {
     width: 90%;
   }
+  .btn {
+    margin-top: -10px;
+  }
 }
 
 /****************************************
@@ -406,6 +409,10 @@ ul.row {
   margin-bottom: 10px;
 }
 body .ui-datepicker {
+  font-size: 14px;
+}
+.hint {
+  color: #888;
   font-size: 14px;
 }
 

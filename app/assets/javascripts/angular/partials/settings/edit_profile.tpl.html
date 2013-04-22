@@ -61,7 +61,7 @@
                 <a class="btn" ng-click="pickFile()" class="btn">Change cover image</a>
                 <br>
                 <br>
-                <p>* Try to use a photo with you on the left</p>
+                <p class="hint">* Try to use a photo with you on the left. Recommended size 1600x700 pixels</p>
               </label>
               <div class="controls">
                 <img src="{{user.coverImageUrl}}/convert?w=400" class="user-hero-img">
@@ -104,16 +104,17 @@
             </div>
 
             <div class="control-group">
-              <label for="customLinkTitle" class="control-label">CustomLinks</label>
+              <label for="customLinkTitle" class="control-label">Custom Links</label>
               <div class="controls">
                 <div ng-repeat="customLink in user.customLinks">
-                  <p>{{customLink.title}},
-                  {{customLink.url}}
-                    <a ng-click="removeLink(customLink)" class="btn">-</a></p>
+                  <p>
+                    <a href="{{customLink.url}}" title="{{customLink.url}}">{{customLink.title}} &ndash; {{customLink.url}}</a>
+                    <a ng-click="removeLink(customLink)" class="btn btn-mini">Remove</a>
+                  </p>
                 </div>
                 <input type="text" id="customLinkTitle" ng-model="customLink.Title" placeholder="Title">
                 <input type="text" ng-model="customLink.Url" placeholder="Link">
-                <a ng-click="addCustomLink({title: customLink.Title, url: customLink.Url})" class="btn">Add</a>
+                <a ng-click="addCustomLink({title: customLink.Title, url: customLink.Url})" class="btn btn-mini btn-primary">Add</a>
               </div>
             </div>
 
