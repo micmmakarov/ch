@@ -1,4 +1,4 @@
-<div ng-controller="ComedyBaseCtrl">
+<div ng-controller="ComedyBaseCtrl" xmlns="http://www.w3.org/1999/html">
     <header id="#overview" class="jumbotron subhead">
       <div class="container">
         <h1>Comedy Base</h1>
@@ -37,7 +37,9 @@
 
           <div class="span3" ng-repeat="user in userRaw">
             <figure>
+              <a href="/{{user.slug}}">
               <img src="{{user.coverImageUrl}}/convert?w=300&h=170&fit=crop" class="img-rounded">
+              </a>
               <figcaption>
                 <span class="name">{{user.name}}</span>
                 <span class="location">{{user.location}}</span>
