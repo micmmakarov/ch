@@ -22,12 +22,15 @@
         <!-- {{user.nextShow.start|timeFormat}} instead of time -->
       </div>
       <div class="span2">
-        <a href="#" class="btn btn-large btn-info">More info</a>
+        <a ng-show="user.nextShow.link" href="{{user.nextShow.link}}" class="btn btn-large btn-info">More info</a>
       </div>
     </div>
     <div class="row event-list">
       <div class="span2"></div>
       <div class="span8">
+        <div ng-show="user.events.length < 1" class="empty">
+          <h3 class="text-center">The comedian's calendar is empty. It'll change. Fingers crossed.</h3>
+        </div>
         <table class="table">
           <tr ng-repeat="event in user.events">
             <td>{{event.start|dateFormat}}, 8:00pm</td>
@@ -36,7 +39,7 @@
             <td>{{event.venue.place.city}}, {{event.venue.place.state}}</td>
             <td>{{event.venue.name}}</td>
             <td>
-              <a href="{{event.link}}" class="btn btn-info">More info</a>
+              <a ng-show="event.link" href="{{event.link}}" class="btn btn-info">More info</a>
             </td>
           </tr>
         </table>

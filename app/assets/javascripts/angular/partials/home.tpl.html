@@ -1,20 +1,45 @@
-<div ng-controller="ComedyBaseCtrl" xmlns="http://www.w3.org/1999/html">
-    <header id="#overview" class="jumbotron subhead">
-      <div class="container">
-        <h1>Comedy Base</h1>
-        <p class="lead">Get the Laughs You Deserve</p>
-      </div>
-    </header>
+<div ng-controller="ComedyBaseCtrl">
+  <header id="#overview" class="jumbotron subhead">
+    <div class="container">
+      <h1>Comedy Base</h1>
+      <p class="lead">Get the Laughs You Deserve</p>
+    </div>
+  </header>
 
-    <div class="container" >
+  <div class="container" >
+    <div class="row image-list">
+      <div class="span12">
+        <h3>Featured Comedians</h3>
+      </div>
+
+      <div class="span4" ng-repeat="user in featuredUsers">
+        <figure>
+          <a href="/{{user.slug}}"><img src="{{user.coverImageUrl}}/convert?w=400&h=250&fit=crop" class="img-rounded"></a>
+          <figcaption>
+            <span class="name">{{user.name}}</span>
+            <span class="location">{{user.location}}</span>
+          </figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-inverse">
+    <div class="container">
       <div class="row image-list">
         <div class="span12">
-          <h3>Featured Comedians</h3>
+          <h3>Comedians Near San Francisco, CA</h3>
         </div>
 
-        <div class="span4" ng-repeat="user in featuredUsers">
+      </div>
+      <div class="row image-list" ng-repeat="userRaw in userRaws">
+
+        <div class="span3" ng-repeat="user in userRaw">
           <figure>
-            <a href="/{{user.slug}}"><img src="{{user.coverImageUrl}}/convert?w=400&h=250&fit=crop" class="img-rounded"></a>
+            <a href="/{{user.slug}}">
+            <img src="{{user.coverImageUrl}}/convert?w=300&h=170&fit=crop" class="img-rounded">
+            </a>
             <figcaption>
               <span class="name">{{user.name}}</span>
               <span class="location">{{user.location}}</span>
@@ -22,103 +47,78 @@
           </figure>
         </div>
 
+
       </div>
-    </div>
+      <hr>
 
-    <div class="section-inverse">
-      <div class="container">
-        <div class="row image-list">
-          <div class="span12">
-            <h3>Comedians Near San Francisco, CA</h3>
-          </div>
-
+      <div class="row image-list">
+        <div class="span12">
+          <h3>Freshly Added Comedians</h3>
         </div>
-        <div class="row image-list" ng-repeat="userRaw in userRaws">
-
-          <div class="span3" ng-repeat="user in userRaw">
-            <figure>
-              <a href="/{{user.slug}}">
-              <img src="{{user.coverImageUrl}}/convert?w=300&h=170&fit=crop" class="img-rounded">
-              </a>
-              <figcaption>
-                <span class="name">{{user.name}}</span>
-                <span class="location">{{user.location}}</span>
-              </figcaption>
-            </figure>
-          </div>
-
-
+        <div class="span3">
+          <figure>
+            <img src="/assets/comedian-kyle.jpg" class="img-rounded">
+            <figcaption>
+              <span class="name">Kyle Kinane</span>
+              <span class="location">Chicago, IL</span>
+            </figcaption>
+          </figure>
         </div>
-        <hr>
+        <div class="span3">
+          <figure>
+            <img src="/assets/comedian2.jpg" class="img-rounded">
+            <figcaption>
+              <span class="name">Sara Silverman</span>
+              <span class="location">Los Angeles, CA</span>
+            </figcaption>
+          </figure>
+        </div>
 
-        <div class="row image-list">
-          <div class="span12">
-            <h3>Freshly Added Comedians</h3>
-          </div>
-          <div class="span3">
-            <figure>
-              <img src="/assets/comedian-kyle.jpg" class="img-rounded">
-              <figcaption>
-                <span class="name">Kyle Kinane</span>
-                <span class="location">Chicago, IL</span>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="span3">
-            <figure>
-              <img src="/assets/comedian2.jpg" class="img-rounded">
-              <figcaption>
-                <span class="name">Sara Silverman</span>
-                <span class="location">Los Angeles, CA</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <div class="span3">
-            <figure>
-              <img src="/assets/comedian3.jpg" class="img-rounded">
-              <figcaption>
-                <span class="name">Rhod Gilbert</span>
-                <span class="location">London, UK</span>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="span3">
-            <figure>
-              <img src="/assets/comedian-lck.jpg" class="img-rounded">
-              <figcaption>
-                <span class="name">Louis C.K.</span>
-                <span class="location">New York, NY</span>
-              </figcaption>
-            </figure>
-          </div>
+        <div class="span3">
+          <figure>
+            <img src="/assets/comedian3.jpg" class="img-rounded">
+            <figcaption>
+              <span class="name">Rhod Gilbert</span>
+              <span class="location">London, UK</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="span3">
+          <figure>
+            <img src="/assets/comedian-lck.jpg" class="img-rounded">
+            <figcaption>
+              <span class="name">Louis C.K.</span>
+              <span class="location">New York, NY</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </div>
+  </div>
 
-    <section class="section-connect">
-      <div class="container">
-        <div class="row">
-          <div class="span1"></div>
-          <div class="span10">
-            <ul class="list-reset">
-              <li class="text-center">
-                <h3>Comedian? Register and Get Seen!</h3>
-                <a target="_self" class="connect-fb" href="/auth/facebook">Connect via Facebook</a>
-              </li>
-      <!--
-              <li class="span3">
-                <a target="_self" href="/auth/linkedin">Connect via LinkedIn</a>
-              </li>
-              <li class="span3">
-                <a target="_self" href="/auth/twitter">Connect via Twitter</a>
-              </li>
-       -->
-            </ul>
-          </div>
-          <div class="span1"></div>
+  <section class="section-connect">
+    <div class="container">
+      <div class="row">
+        <div class="span1"></div>
+        <div class="span10">
+          <ul class="list-reset">
+            <li class="text-center">
+              <h3>Comedian? Register and Get Seen!</h3>
+              <a target="_self" class="connect-fb" href="/auth/facebook">Connect via Facebook</a>
+            </li>
+    <!--
+            <li class="span3">
+              <a target="_self" href="/auth/linkedin">Connect via LinkedIn</a>
+            </li>
+            <li class="span3">
+              <a target="_self" href="/auth/twitter">Connect via Twitter</a>
+            </li>
+     -->
+          </ul>
         </div>
+        <div class="span1"></div>
       </div>
-    </section>
+    </div>
+  </section>
 
 </div>

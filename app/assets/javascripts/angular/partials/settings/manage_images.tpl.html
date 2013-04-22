@@ -8,19 +8,28 @@
         <a href="/profile/images" ng-class="{active:isActive('/profile/images')}">Manage Your Photos</a>
       </nav>
 
-    <div ng-controller="ComedyBaseImagesCtrl">
-      <div class="control-group">
-        <label for="chooseImage" class="control-label"></label>
-        <div class="controls">
-          <a ng-click="addImage()" id="chooseImage" class="btn">Add an image</a>
-          <div ng-repeat="image in user.images">
-            <img src="{{image.url}}/convert?w=400&h=250&fit=crop"><a ng-click="removeImage(image)" class="btn btn-danger">Remove</a><br>
-            <input type="text" ng-model="image.title" placeholder="Don't be lazy, write title.."><a class="btn" ng-click="updateImage(image)">Save</a>
-          </div>
-        </div>
+      <div class="heading-wrap">
+        <h3>Your Photos</h3>
       </div>
 
-    </div>
+      <div ng-controller="ComedyBaseImagesCtrl" class="form-style">
+        <div class="control-group">
+          <label for="chooseImage" class="control-label">
+            <a ng-click="addImage()" id="chooseImage" class="btn btn-success">Add an image</a>
+          </label>
+          <div class="controls">
+            <ul class="list-reset">
+              <li ng-repeat="image in user.images">
+                <p><img src="{{image.url}}/convert?h=250&fit=crop"></p>
+                <p><input type="text" ng-model="image.title" placeholder="Don't be lazy add a caption"><a class="btn" ng-click="updateImage(image)">Save</a></p>
+                <p><a ng-click="removeImage(image)" class="btn btn-mini btn-danger">Remove photo</a></p>
+                <hr>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
 
     </div>
   </div>

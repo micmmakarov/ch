@@ -50,6 +50,7 @@ p {
 .btn-large {
   font-size: 40px;
   padding: 18px 25px;
+  margin-top: -5px;
 }
 
 ul.row {
@@ -388,11 +389,13 @@ ul.row {
     }
     &.empty {
       min-height: 100px;
-      h3, p {
-        color: #888;
-      } 
     }
   }
+}
+.empty {
+  h3, p {
+    color: #888;
+  } 
 }
 .performers-list {
   margin-bottom: 20px;
