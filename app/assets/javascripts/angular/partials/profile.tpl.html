@@ -18,7 +18,8 @@
         <p class="next-event"><span>Next Show:</span></p>
       </div>
       <div class="span8">
-        <p class="next-event">{{user.nextShow.start|dateFormat}}  /  {{user.nextShow.venue.place.city}} @ {{user.nextShow.venue.name}}, {{user.nextShow.start|timeFormat}}</p>
+        <p class="next-event">{{user.nextShow.start|dateFormat}}  /  {{user.nextShow.venue.place.city}} @ {{user.nextShow.venue.name}}, 8:00pm</p>
+        <!-- {{user.nextShow.start|timeFormat}} instead of time -->
       </div>
       <div class="span2">
         <a href="#" class="btn btn-large btn-info">More info</a>
@@ -29,7 +30,9 @@
       <div class="span8">
         <table class="table">
           <tr ng-repeat="event in user.events">
-            <td>{{event.start|dateFormat}}, {{event.start|timeFormat}}</td>
+            <td>{{event.start|dateFormat}}, 8:00pm</td>
+            <!-- {{user.nextShow.start|timeFormat}} instead of time -->
+
             <td>{{event.venue.place.city}}, {{event.venue.place.state}}</td>
             <td>{{event.venue.name}}</td>
             <td>
