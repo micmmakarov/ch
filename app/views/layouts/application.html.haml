@@ -5,12 +5,21 @@
     -if u
       %meta{:content => "#{u.name} - ComedyBase", :property => "og:title"}/
       %meta{:content => "website", :property => "og:type"}/
-      %meta{:content => "http://www.comedybase.net", :property => "og:url"}/
+      %meta{:content => request.url, :property => "og:url"}/
       %meta{:content => "#{u.cover_image_url}", :property => "og:image"}/
       %meta{:content => "www.comedybase.net", :property => "og:site_name"}/
       %meta{:content => "100000245725293", :property => "fb:admins"}/
       %meta{:content => "460069040739570", :property => "fb:app_id"}/
-      %meta{:content => "u.tagline", :property => "og:description"}/
+      %meta{:content => "#{u.tagline}", :property => "og:description"}/
+    -else
+      %meta{:content => "ComedyBase", :property => "og:title"}/
+      %meta{:content => "website", :property => "og:type"}/
+      %meta{:content => "http://www.comedybase.net", :property => "og:url"}/
+      %meta{:content => "", :property => "og:image"}/
+      %meta{:content => "www.comedybase.net", :property => "og:site_name"}/
+      %meta{:content => "100000245725293", :property => "fb:admins"}/
+      %meta{:content => "460069040739570", :property => "fb:app_id"}/
+      %meta{:content => "Get the Laughs You Deserve", :property => "og:description"}/
     %title Comedy Base: Your Ultimate Comedy Resource
     = stylesheet_link_tag    'http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400'
     %meta(content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" name="viewport")/
