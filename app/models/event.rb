@@ -11,7 +11,8 @@ class Event < ActiveRecord::Base
     end
   end
   def display_name
-    "#{title} <br /><small>#{start.strftime('%a %B %d, %I:%M %p')}</small>".html_safe
+    "#{title} <br /><small>#{start.strftime('%a %B %d')}</small>".html_safe
+    #, %I:%M %p
   end
 
 
