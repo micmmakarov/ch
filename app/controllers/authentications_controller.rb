@@ -24,7 +24,7 @@ class AuthenticationsController < ApplicationController
         password = Devise.friendly_token.first(password_length)
         user = User.new(:image_url => image_url, :name => name, :email => email, :password => password, :password_confirmation => password)
         user.tagline = "This comedian is too lazy to write his tagline"
-        user.bio = "Was born somewhere on Earth, went to school(hopefully). Loved wearing underwear and eat old yogurt. When this comedian was 14, thoughts about having relationships with the same sex species sometimes visited this comedian's mind. "
+        user.bio = "Was born somewhere on Earth, went to school (hopefully). Loved wearing underwear inside-out and eating old yogurt. When this comedian was 14, thoughts of sexual relations with the same gender sometimes crossed his/her mind. Change this bio in profile settings. "
         user.cover_image_url = "https://www.filepicker.io/api/file/5ZuYi3kSbS9LtkT0MLdw"
         user.save!
         sign_in(user)
