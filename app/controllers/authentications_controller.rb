@@ -25,6 +25,7 @@ class AuthenticationsController < ApplicationController
         user = User.new(:image_url => image_url, :name => name, :email => email, :password => password, :password_confirmation => password)
         user.tagline = "This comedian is too lazy to write his tagline"
         user.bio = "Was born somewhere on Earth, went to school(hopefully). Loved wearing underwear and eat old yogurt. When this comedian was 14, thoughts about having relationships with the same sex species sometimes visited this comedian's mind. "
+        user.cover_image_url = "https://www.filepicker.io/api/file/5ZuYi3kSbS9LtkT0MLdw"
         user.save!
         sign_in(user)
         current_user.authentications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'])

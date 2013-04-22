@@ -149,6 +149,7 @@ ComedyBase.controller "ComedyBaseCtrl", ["$scope", "$http", "User", "$routeParam
 ]
 
 ComedyBase.controller "ComedyBaseUserCtrl", ["$scope", "$http", "User", "$routeParams", "$location", "$dialog", ($scope, $http, User, $routeParams, $location, $dialog) ->
+  $scope.defaultImage = "https://www.filepicker.io/api/file/5ZuYi3kSbS9LtkT0MLdw"
   $scope.slug = $routeParams.slug
   User.get(id: $scope.slug).then((user) ->
     $scope.user = user
