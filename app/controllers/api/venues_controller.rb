@@ -12,6 +12,7 @@ class Api::VenuesController < ApplicationController
         query[:city] = place.city
         query.delete 'place_id'
       end
+      query.delete 'place_id'
       @venues = Venue.all
       query.each do |key, value|
         @venues.select! {|v| v[key].upcase.include? value.upcase}
