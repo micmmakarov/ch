@@ -22,6 +22,7 @@ class Api::VenuesController < ApplicationController
       puts "#####"
       @venues = Venue.all
       query.each do |key, value|
+        puts "Ok, lets go: #{key}, #{value}"
         @venues.select! {|v| v[key].upcase.include? value.upcase}
       end
       render json: @venues.to_json(include_hash)
