@@ -6,13 +6,11 @@
         <a href="/profile/gigs" ng-class="{active:isActive('/profile/gigs')}">Manage Your Gigs</a>
         <a href="/profile/images" ng-class="{active:isActive('/profile/images')}">Manage Your Photos</a>
       </nav>
-    </div>
-  </div>
-  <div class="row" ng-controller="ComedyBaseProfileEventsCtrl">
-    <div class="span6">
 
-      <h3>Add New Gig</h3>
-
+      <div ng-controller="ComedyBaseProfileEventsCtrl">
+        <div class="heading-wrap">
+          <h3>Add New Gig</h3>
+        </div>
 
         <div class="add_event container">
           <div class="control-group">
@@ -42,7 +40,6 @@
             </div>
           </div>
 
-
           <div ng-show="event_date">
             <div class="control-group">
               <label for="event_event" class="control-label">Event</label>
@@ -56,35 +53,23 @@
               </div>
             </div>
           </div>
-
             
         </div> <!-- /container -->
 
-
-
-
-
-          <div ng-show="event">
-            <div class="control-group">
-              <label for="action" class="control-label">Add</label>
-              <div class="controls">
-                <button id="action" ng-click="addEvent()">Add event</button>
-              </div>
+        <div ng-show="event" class="container">
+          <div class="control-group">
+            <label for="action" class="control-label"></label>
+            <div class="controls">
+              <button id="action" class="btn btn-success" ng-click="addEvent()">Save</button>
             </div>
           </div>
-
         </div>
 
       </div>
-      <div class="span6">
-        <div class="add_venue" ng-show="add_venue">
-
-        </div>
-        <div class="add_event" ng-show="add_event">
-        </div>
-
-      </div>
-
+    </div>
+    <div class="span6">
+      <div class="add_venue" ng-show="add_venue"></div>
+      <div class="add_event" ng-show="add_event"></div>
     </div>
   </div>
 </div>
