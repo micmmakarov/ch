@@ -6,11 +6,11 @@ class Api::VenuesController < ApplicationController
       query = params[:query]
     end
     if query.map {|k,v| v}.join.length > 0
-      if query[:place_id].present?
-        place = Place.find(query[:place_id])
+      if query['place_id'].present?
+        place = Place.find(query['place_id'])
         query[:state] = place.state
         query[:city] = place.city
-        query.delete :place_id
+        query.delete 'place_id'
       end
       @venues = Venue.all
       query.each do |key, value|
