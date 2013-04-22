@@ -12,19 +12,11 @@ class Api::VenuesController < ApplicationController
         query[:city] = place.city
         query.delete 'place_id'
       end
-      query.delete 'place_id'
-      puts query
-      puts "#####"
-      puts "#####"
-      puts "#####"
-      query.inspect
-      puts "#####"
-      puts "#####"
       @venues = Venue.all
-      query.each do |key, value|
-        puts "Ok, lets go: #{key}, #{value}"
-        @venues.select! {|v| v[key].upcase.include? value.upcase}
-      end
+      #query.each do |key, value|
+      #  puts "Ok, lets go: #{key}, #{value}"
+      #  @venues.select! {|v| v[key].upcase.include? value.upcase}
+      #end
       render json: @venues.to_json(include_hash)
     else
       render json: []
